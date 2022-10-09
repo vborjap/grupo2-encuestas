@@ -1,11 +1,10 @@
 {
   "name": "grupo2-encuestas",
   "version": "1.0.0",
-  "type": "module",
   "description": "Este proyecto esta conformado por alumnos de IGF115 y PRN315 y tiene la finalidad de construir un sistema de encuestas.",
   "main": "src/index.js",
   "scripts": {
-    "start": "nodemon src/index.js -exec babel-node"
+    "start": "nodemon --exec babel-node src/index.js"
   },
   "repository": {
     "type": "git",

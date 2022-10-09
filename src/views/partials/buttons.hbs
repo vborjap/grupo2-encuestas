@@ -1,0 +1,19 @@
+<!-- Partial creado por: Cristian Antonio Escalante Hernandez -->
+{{#if tag}}
+
+<{{ tag }} 
+    href="{{href}}"
+    class="btn btn-{{type}} {{ class }}">
+
+    {{ message }}
+
+</{{ tag}}>
+
+{{ else }}
+<button
+    class="btn btn-{{type}} {{class }}"
+    type="{{type}}">
+    {{ message }}
+</button>
+
+{{/if}}
