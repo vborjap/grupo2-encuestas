@@ -8,12 +8,14 @@
   {{persona.apellido}}
 </p>
 
-{{#with persona}}
+{{!-- Destructurin {nombre, apellido} = persona; --}}
+{{#with persona}} 
   <p>
     {{nombre}}
     {{apellido}}
   </p>
 {{/with}}
+
 
 <ul>
   {{#each items}}
@@ -25,13 +27,13 @@
 
 <ol>
     {{#each personas}}
-        {{>items persona=.}}
+        {{> items persona=.}}
     {{/each}}
 </ol>
 
 <ul>
     {{#each personas }}
-        {{>items persona=this}}
+        {{> items persona=this}}
     {{/each}}
 </ul>
 

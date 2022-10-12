@@ -11,7 +11,10 @@ const app = express();
 //Configurando la carpeta "views"
 app.set("views", path.join(__dirname, 'views'));
 
+
+// Configuracion handlebars: https://handlebarsjs.com/guide/#what-is-handlebars
 app.engine('.hbs', engine({
+
     layoutsDir: path.join(app.get('views'), 'layouts'),
     defaultLayout: "main",
     extname: ".hbs",
@@ -20,7 +23,7 @@ app.engine('.hbs', engine({
     // Agregado por: Cristian Antonio Escalante Hernandez
     partialsDir: [
         path.join(app.get("views"), "partials")
-    ]
+    ],
     
 }));
 
