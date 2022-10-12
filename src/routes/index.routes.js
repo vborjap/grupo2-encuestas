@@ -12,6 +12,47 @@ router.get("/", (req, res) => {
 
 router.get("/about", (req, res) => {
     // res.send("about");
-    res.render("about");
+    res.render("about", {
+        // layout: "dashboard"
+    });
 });
+router.get("/handlebar", (req, res) => {
+    res.render("handlebars", {
+       nombre: "Cristian",
+       apellido: "Escalante",
+       persona: {
+        nombre: "Antonio",
+        apellido: "Hernandez"
+       },
+       items: [
+        "Uno",
+        "Dos",
+        "Tres"
+       ],
+       personas: [
+        {
+            nombre: "Natanael",
+            apellido: "Cabezas"
+        },
+        {
+            nombre: "rod",
+            apellido: "Espino"
+        },
+        {
+            nombre: "Emerson",
+            apellido: "Cueva"
+        },
+        {
+            nombre: "Rick",
+            apellido: "Sanchez"
+        },
+        
+       ],
+       progreso: 10,
+       accion: {
+        isCorrect: true,
+        nombre: "Crisanto"
+       }
+    });
+})
 export default router;
