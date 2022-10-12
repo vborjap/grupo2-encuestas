@@ -12,7 +12,7 @@ const router = Router();
  * delete
 */
 
-router.get('/crearformulario', (req, res) => {
+router.get('/crearpregunta', (req, res) => {
     // Proceso 
 
     const apellido = "Escalante";
@@ -53,6 +53,38 @@ router.get("/about", (req, res) => {
         // layout: "dashboard"
     });
 });
+
+router.get('/listaspreguntas', (req, res) => {
+
+    res.render("listarpreguntas", {
+        layout: "dashboard"
+    });
+})
+
+router.get('/editarpregunta/:id', (req, res) => {
+    const {id} = req.params;
+
+    // Solicitud a la base datos
+
+    const pregunta1 = {
+        id: id,
+        nombre: "Como utilizar handlebars",
+        respuesta: [
+            "uno",
+            "dos",
+            "tres",
+            "cuatro"
+        ],
+        correcta: "uno"
+    }
+
+    res.render("editarpregunta", {
+        layout: "dashboard",
+        pregunta1
+    })
+});
+
+
 router.get("/handlebar", (req, res) => {
     // Acceder a base datos
     // Proceso datos

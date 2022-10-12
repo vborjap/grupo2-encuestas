@@ -1,0 +1,23 @@
+<br>
+<div class="card">
+    <div class="card-body">
+        <div class="form-group">
+            <input 
+                type="text" 
+                    class="form-control" 
+                        value="{{ pregunta1.nombre }}">
+                        <br>
+            {{> buttons message="Guardar cambios" type="success" nativeType="submit"}}
+        </div>
+        <br>
+        <div class="">
+            <ul>
+                {{#each pregunta1.respuesta }}
+                <li>{{ this }} </li>
+                {{/each}}
+            </ul>
+            <br>
+            <h4 class="text-success">{{ pregunta1.correcta }}</h4>
+        </div>
+    </div>
+</div>
