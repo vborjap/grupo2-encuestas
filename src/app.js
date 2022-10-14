@@ -1,6 +1,5 @@
 import express from "express";
 import indexRoutes from "./routes/index.routes.js";
-import exampel from "./routes/preguntas.routes.js"
 import { engine } from "express-handlebars";
 import path from "path";
 import * as url from 'url';
@@ -29,6 +28,5 @@ app.set("view engine", '.hbs');
 
 //Rutas
 app.use(indexRoutes);
-app.use(exampel)
 
 export default app;
