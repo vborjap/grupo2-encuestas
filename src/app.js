@@ -24,7 +24,13 @@ app.engine('.hbs', engine({
     partialsDir: [
         path.join(app.get("views"), "partials")
     ],
-    
+    helpers: {
+        
+        // Permite imprimir un objeto javascript
+        json (context) {
+            return JSON.stringify(context);
+        }
+    }
 }));
 
 app.set("view engine", '.hbs');
