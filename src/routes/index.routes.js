@@ -12,15 +12,30 @@ router.get("/", (req, res) => {
 });
 
 //Middleware para rutas --en proceso--
-// router.use((req, res, next)=>{
-//     if(req.path==("/about")){
-//         next();
-//     }
-//     else{
-//         res.render('index');
-//         console.log("Has sido redireccionado")
-//     }
-// })
+router.use((req, res, next)=>{
+     if(req.path==("/about")){
+         next();
+     }
+     else if(req.path==("/encuestas")){
+         next();
+     }
+     else if(req.path==("/preguntas")){
+        next();
+     }
+     else if(req.path==("/respuestas")){
+        next();
+     }
+     else if(req.path==("/secciones")){
+        next();
+     }
+     else if(req.path==("/usuarios")){
+        next();
+     }
+     else{
+        res.render("index")
+        console.log("HAS SIDO REDIRECCIONADO");
+     }
+ })
 
 router.get("/about", (req, res) => {
     res.render("about");
