@@ -11,9 +11,12 @@ router.get("/", (req, res) => {
 });
 
 // Rutas Modulo 5
-router.get("/:id", (req, res) => {
+router.get("/", (req, res) => {
 	const {id} = req.params;
-	res.send("dato: " + id);
+
+	res.render("verRespuestas", {
+		layout:"Dashboard"
+	});
 });
 
 export default router;
