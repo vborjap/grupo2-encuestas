@@ -1,5 +1,5 @@
 <div class="text-center">
-    <h1>Resumen</h1>
+    <h1>Ver Respuestas de las encuestas</h1>
 </div>
 <div class="card mt-5">
   <div class="card-body">
@@ -18,6 +18,28 @@
         nativeType="subtmi"}}
     </div>
 
+    {{!-- Tabla de contenidos   --}}
+
+<h5>Encuestas realizadas</h5>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Encuestas</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th> Sistemas embebidos </th>
+      <th {{> buttons
+              message="Ver Respuesta"
+              type = "success"
+              tag = "a"
+              hreg = "b"
+        }} </th>
+    </tr>
+  </tbody>
+</table>
   </div>
 </div>
 
