@@ -2,7 +2,12 @@ import { Router} from "express";
 const router = Router();
 
 router.get("/", (req, res) => {
-	res.send("Estas en respuestas")
+	
+	// Todo el proceso de obtener los datos en la DB
+
+	res.render("listarRespuestas", {
+		layout: "Dashboard"
+	});
 });
 
 // Rutas Modulo 5
