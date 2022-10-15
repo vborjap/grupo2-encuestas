@@ -5,7 +5,6 @@ import path from "path";
 import * as url from 'url';
 
 
-//Igualando función a una constante
 const app = express();
 
 //Configurando la carpeta "views"
@@ -20,7 +19,6 @@ app.engine('.hbs', engine({
     extname: ".hbs",
 
     // Configuracion para el directorio partials
-    // Agregado por: Cristian Antonio Escalante Hernandez
     partialsDir: [
         path.join(app.get("views"), "partials")
     ],
