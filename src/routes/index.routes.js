@@ -11,7 +11,7 @@ router.get("/", (req, res) => {
     res.render('index');
 });
 
-//Middleware para rutas
+//Middleware para rutas --en proceso--
 // router.use((req, res, next)=>{
 //     if(req.path==("/about")){
 //         next();
