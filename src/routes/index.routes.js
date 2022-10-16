@@ -6,6 +6,7 @@ import seccionesRoutes from "./secciones.routes.js"
 import usuariosRoutes from "./usuarios.routes.js"
 
 const router = Router();
+//
 
 router.get("/", (req, res) => {
     res.render('index');
