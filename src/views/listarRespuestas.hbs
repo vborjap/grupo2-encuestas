@@ -24,13 +24,32 @@
 <table class="table">
   <thead>
     <tr>
-      <th scope="col">Encuestas</th>
+      <th scope="col"><p class="text-center">Encuestas</p></th>
       <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th> Sistemas embebidos </th>
+      <th><p class="text-center"> Sistemas embebidos </p></th>
+      <th {{> buttons
+              message="Ver Respuesta"
+              type = "success"
+              tag = "a"
+              hreg = "b"
+              
+        }} </th>
+    </tr>
+    <tr>
+      <th><p class="text-center"> Zonas rurales</p> </th>
+      <th {{> buttons
+              message="Ver Respuesta"
+              type = "success"
+              tag = "a"
+              hreg = "b"
+        }} </th>
+    </tr>
+    <tr>
+      <th> <p class="text-center">Zonas Urbanas</p> </th>
       <th {{> buttons
               message="Ver Respuesta"
               type = "success"
