@@ -36,4 +36,7 @@ app.set("view engine", '.hbs');
 //Rutas
 app.use(indexRoutes);
 
+//incluimos la carpeta public 
+app.use(express.static('public'));
+
 export default app;
