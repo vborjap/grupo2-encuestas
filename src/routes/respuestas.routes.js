@@ -6,6 +6,8 @@ router.get("/", (req, res) => {
 });
 
 // Rutas Modulo 5
+/* Incopatibilidad con el middleware de redireccionamiento; al estar este activo un id es tomado como una ruta no valida y por ende
+no se retorna el id como lo define esta funcion*/
 router.get("/:id", (req, res) => {
 	const {id} = req.params;
 	res.send("dato: " + id);
