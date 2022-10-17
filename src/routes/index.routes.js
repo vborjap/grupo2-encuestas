@@ -12,31 +12,18 @@ router.get("/", (req, res) => {
     res.render('index');
 });
 
-//Middleware para rutas
-router.use((req, res, next)=>{
-     if(req.path==("/about")){
-         next();
-     }
-     else if(req.path==("/encuestas")){
-         next();
-     }
-     else if(req.path==("/preguntas")){
-        next();
-     }
-     else if(req.path==("/respuestas")){
-        next();
-     }
-     else if(req.path==("/secciones")){
-        next();
-     }
-     else if(req.path==("/usuarios")){
-        next();
-     }
-     else{
-        res.render("index")
-        console.log("HAS SIDO REDIRECCIONADO");
-     }
- })
+// Habilitar cuando se implemente autenticacion
+// Nota: doy por hecho que se utilizara una variable
+// de estado llamada user y se enviara en el body de una solicitud
+// function auth(req, res, next) {
+//    const {user} = req.body;
+//    if(user) {
+//       return next();
+//    }else {
+//       return res.sendStatus(401);
+//    }
+// }
+// router.use(auth);
 
 router.get("/about", (req, res) => {
     res.render("about");
@@ -47,5 +34,11 @@ router.use('/preguntas', preguntasRoutes);
 router.use('/respuestas', respuestasRoutes);
 router.use('/secciones', seccionesRoutes);
 router.use('/usuarios', usuariosRoutes);
+
+// Esto permite redireccionar a inicio en caso que no exista la URL
+// Nota: Comunmente debe redireccionar a una vista 404, es de comentarlo a los de IGF
+router.get("*",  (req, res) => {
+   res.redirect("/");
+});
 
 export default router;
