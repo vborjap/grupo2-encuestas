@@ -3,7 +3,9 @@ const router = Router();
 
 // Rutas Modulo 5
 router.get("/", (req, res) => {
-	res.send("Estas en respuestas")
+	res.render('listarRespuestas', {
+		layout: "dashboard"
+	});
 });
 
 router.get("/:id", (req, res) => {
