@@ -2,7 +2,8 @@ import express from "express";
 import indexRoutes from "./routes/index.routes.js";
 import { engine } from "express-handlebars";
 import path from "path";
-import * as url from 'url';
+import * as helpersHandlebars from "./utils/helpers.handlebars";
+import {menuList} from "./utils/sidebar.handlebars";
 
 
 const app = express();
@@ -22,13 +23,11 @@ app.engine('.hbs', engine({
     partialsDir: [
         path.join(app.get("views"), "partials")
     ],
-    helpers: {
-        
-        // Permite imprimir un objeto javascript
-        json (context) {
-            return JSON.stringify(context);
-        }
-    }
+    helpers: helpersHandlebars,
+    compilerOptions: {
+        menuList
+    },
+    menuList
 }));
 
 app.set("view engine", '.hbs');
