@@ -4,53 +4,20 @@
     href="/"
     class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none"
   >
-    <svg class="bi me-2" width="40" height="32"><use
-        xlink:href="#bootstrap"
-      ></use></svg>
+    <i class="fas fa-quidditch"></i>
     <span class="fs-4">Encuestas UES</span>
   </a>
   <hr />
   <ul class="nav nav-pills flex-column mb-auto">
-    <li class="nav-item">
-      <a href="#" class="nav-link active" aria-current="page">
-        <svg class="bi me-2" width="16" height="16"><use
-            xlink:href="#home"
-          ></use></svg>
-        Casa
-      </a>
-    </li>
-    <li>
-      <a href="#" class="nav-link text-white">
-        <svg class="bi me-2" width="16" height="16"><use
-            xlink:href="#speedometer2"
-          ></use></svg>
-        Dashboard
-      </a>
-    </li>
-    <li>
-      <a href="#" class="nav-link text-white">
-        <svg class="bi me-2" width="16" height="16"><use
-            xlink:href="#table"
-          ></use></svg>
-        Encuestas
-      </a>
-    </li>
-    <li>
-      <a href="#" class="nav-link text-white">
-        <svg class="bi me-2" width="16" height="16"><use
-            xlink:href="#grid"
-          ></use></svg>
-        Usuarios
-      </a>
-    </li>
-    <li>
-      <a href="#" class="nav-link text-white">
-        <svg class="bi me-2" width="16" height="16"><use
-            xlink:href="#people-circle"
-          ></use></svg>
-        Stilos
-      </a>
-    </li>
+    {{#each (global "menuList")}}
+          <li class="nav-item  ">
+            <!-- <a href="{{this.url}}" class="nav-link active" aria-current="page"> -->
+            <a href="{{this.url}}" class="nav-link text-white" aria-current="page">
+              <i class="fas {{ this.icon}}"></i>
+              {{this.name}}
+            </a>
+          </li>
+    {{/each}}
   </ul>
   <hr />
   <div class="dropdown">
@@ -69,9 +36,9 @@
       class="dropdown-menu dropdown-menu-dark text-small shadow"
       aria-labelledby="dropdownUser1"
     >
-      <li><a class="dropdown-item" href="#">New project...</a></li>
-      <li><a class="dropdown-item" href="#">Settings</a></li>
-      <li><a class="dropdown-item" href="#">Profile</a></li>
+      {{#each (global "configList") }}
+      <li><a class="dropdown-item" href="{{ this.url }}">{{ this.name }}</a></li>
+      {{/each}}
       <li><hr class="dropdown-divider" /></li>
       <li><a class="dropdown-item" href="#">Sign out</a></li>
     </ul>

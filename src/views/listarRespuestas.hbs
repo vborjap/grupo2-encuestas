@@ -1,0 +1,67 @@
+<div class="text-center">
+    <h1>Ver Respuestas de las encuestas</h1>
+</div>
+<div class="card mt-5">
+  <div class="card-body">
+
+    <div class="input-group mb-3">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Recipient's username"
+        aria-label="Recipient's username"
+        aria-describedby="button-addon2"
+      />
+      {{> buttons
+        type="success"
+        message="Buscar"
+        nativeType="subtmi"}}
+    </div>
+
+    {{!-- Tabla de contenidos   --}}
+
+<h5>Encuestas realizadas</h5>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col"><p class="text-center">Encuestas</p></th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th><p class="text-center"> Sistemas embebidos </p></th>
+      <th> {{> buttons
+              message="Ver Respuesta"
+              type = "success"
+              tag = "a"
+              href = "#b"
+              
+        }} 
+      </th>
+    </tr>
+    <tr>
+      <th><p class="text-center"> Zonas rurales</p> </th>
+      <th> {{> buttons
+              message="Ver Respuesta"
+              type = "success"
+              tag = "a"
+              href = "#b"
+        }}
+        </th>
+    </tr>
+    <tr>
+      <th> <p class="text-center">Zonas Urbanas</p> </th>
+      <th>
+        {{> buttons
+              message="Ver Respuesta"
+              type = "success"
+              tag = "a"
+              href = "#b"
+        }} </th>
+    </tr>
+  </tbody>
+</table>
+  </div>
+</div>
+
