@@ -1,6 +1,13 @@
 <div class="text-center">
-    <h1>Preguntas</h1>
+    <h1>  Formulario de preguntas</h1>
 </div>
+    {{> buttons
+       message="Crear pregunta"
+        type = "primary"
+        tag = "a"
+        href = "#b"
+     }}
+
 <div class="card mt-5">
   <div class="card-body">
 
@@ -17,51 +24,66 @@
         message="Buscar"
         nativeType="subtmi"}}
     </div>
-
+  
     {{!-- Tabla de contenidos   --}}
+ <table id="grid" class="table table-striped table-bordered dt-responsive nowrap">
+            <thead>
+                <tr>
+                    <th>Pregunta</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
 
-<h5>Gestión de preguntas</h5>
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col"><p class="text-center">Crear preguntas</p></th>
-      <th scope="col"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th><p class="text-center"> Ver preguntas </p></th>
-      <th> {{> buttons
-              message="Ver Respuesta"
-              type = "success"
-              tag = "a"
-              href = "#b"
-              
-        }} 
-      </th>
-    </tr>
-    <tr>
-      <th><p class="text-center"> Modificar preguntas</p> </th>
-      <th> {{> buttons
-              message="Ver Respuesta"
-              type = "success"
-              tag = "a"
-              href = "#b"
-        }}
-        </th>
-    </tr>
-    <tr>
-      <th> <p class="text-center">Eliminar preguntas</p> </th>
-      <th>
-        {{> buttons
-              message="Ver Respuesta"
-              type = "success"
-              tag = "a"
-              href = "#b"
-        }} </th>
-    </tr>
-  </tbody>
-</table>
+            <tbody>
+                <tr>
+                    <td>Pregunta 1</td>
+                    <td>
+                    {{> buttons
+                            message="Ver"
+                            type = "success"
+                            tag = "a"
+                            href = "#b"
+                      }}
+                       {{> buttons
+                            message="Editar"
+                            type = "warning"
+                            tag = "a"
+                            href = "#b"
+                      }}
+                       {{> buttons
+                            message="Eliminar"
+                            type = "danger"
+                            tag = "a"
+                            href = "#b"
+                      }}
+                   </th> </td>
+                </tr>
+                <tr>
+                    <td>Pregunta 2</td>
+                    <td>
+                    {{> buttons
+                            message="Ver"
+                            type = "success"
+                            tag = "a"
+                            href = "#b"
+                      }}
+                       {{> buttons
+                            message="Editar"
+                            type = "warning"
+                            tag = "a"
+                            href = "#b"
+                      }}
+                       {{> buttons
+                            message="Eliminar"
+                            type = "danger"
+                            tag = "a"
+                            href = "#b"
+                      }}
+                   </th> </td>
+                </tr>
+            </tbody>
+
+        </table>
   </div>
 </div>
 
