@@ -8,5 +8,7 @@ console.log('DB connected to', db.connection.name)
 }
 catch(error){
 console.error(error);
+//
+
 }
 })();
