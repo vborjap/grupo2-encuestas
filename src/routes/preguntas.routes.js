@@ -9,8 +9,10 @@ router.get("/add", (req, res) => {
 });
 
 //Ruta para recibir datos
-router.post("/preguntas/nuevaPregunta", (req, res) => {
-	console.log(req.body);
+router.post("/nuevaPregunta", (req, res) => {
+console.log(req.body);
+//const { title, description}=req.body;
+
 	res.send('ok');
 });
 
