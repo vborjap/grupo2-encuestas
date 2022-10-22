@@ -1,5 +1,4 @@
 import { Router} from "express";
-import questions from "./../models/question.js"
 const router = Router();
 
 router.get("/", (req, res) => {
@@ -8,20 +7,20 @@ router.get("/", (req, res) => {
     });
 });
 
-router.post("/",async (req, res) => {
-    let qust = new questions({
-        name: req.body.name,
-        age: req.body.age,
-        sex: req.body.sex
-})
+// router.post("/",async (req, res) => {
+//     let qust = new questions({
+//         name: req.body.name,
+//         age: req.body.age,
+//         sex: req.body.sex
+// })
  
-try {
-    let savedDocument = await qust.save()
-    res.status(201).json(savedDocument)
-    }
-    catch (err) {
-        res.status(420).send("Error")
-    }
-})
+// try {
+//     let savedDocument = await qust.save()
+//     res.status(201).json(savedDocument)
+//     }
+//     catch (err) {
+//         res.status(420).send("Error")
+//     }
+// })
 
 export default router;
