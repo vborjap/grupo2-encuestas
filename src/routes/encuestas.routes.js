@@ -2,12 +2,16 @@ import { Router} from "express";
 const router = Router();
 
 router.get("/", (req, res) => {
-    res.render('crearEncuesta', {
+    res.render('index', {
         layout: "dashboard"
     });
 });
 
-
+router.get("/crear",(req, res) => {
+    res.render('crearEncuesta' , {
+        layout: "dashboard"
+    });
+})
 
 /*
 router.post("/",async (req, res) => { S
