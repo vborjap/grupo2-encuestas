@@ -12,7 +12,7 @@ router.get("/add", (req, res) => {
 router.post("/nuevaPregunta", (req, res) => {
 console.log(req.body);
 //const { title, description}=req.body;
-
+	console.log(req.body);
 	res.send('ok');
 });
 
@@ -26,9 +26,8 @@ router.get("/", (req, res) => {
 	});
 });
 
-router.get("/", (req, res) => {
-	res.send("Estas en preguntas")
-});
-*/
+// router.get("/", (req, res) => {
+// 	res.send("Estas en preguntas")
+// });
 
 export default router;
