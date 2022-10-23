@@ -1,13 +1,13 @@
 export const menuList = [
     {
         name: "Inicio",
-        url: "#inicio",
+        url: "/",
         icon: "fa-home",
         child: []
     }, 
     {
         name: "Encuestas",
-        url: "#encuestas",
+        url: "/encuestas",
         icon: "fa-poll",
         child: []
     },
@@ -19,19 +19,19 @@ export const menuList = [
     },
     {
         name: "Secciones",
-        url: "#secciones",
+        url: "/secciones",
         icon: "fa-puzzle-piece",
         child: []
     },
     {
         name: "Preguntas",
-        url: "#preguntas",
+        url: "/preguntas",
         icon: "fa-question",
         child: []
     },
     {
         name: "Usuarios",
-        url: "#usuarios",
+        url: "/usuarios",
         icon: "fa-users",
         child: []
     }
