@@ -5,9 +5,16 @@ const router = Router();
 	res.send("Estas en secciones")
 }); */
 
-//ruta de vista listar
+//ruta de vista listar secciones
 router.get("/", (req, res) => {
-	res.render('listarSecciones', {
+	res.render('secciones/listarSecciones', {
+		layout: "dashboard"
+	});
+});
+
+//ruta de vista crear seccion
+router.get("/addSeccion", (req, res) => {
+	res.render('secciones/crearSeccion', {
 		layout: "dashboard"
 	});
 });
