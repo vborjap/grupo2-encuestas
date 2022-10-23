@@ -4,13 +4,20 @@ import { engine } from "express-handlebars";
 import path from "path";
 import * as helpersHandlebars from "./utils/helpers.handlebars";
 import {menuList} from "./utils/sidebar.handlebars";
+import morgan from "morgan";
 
 
 const app = express();
 
+morgan.token('host', (req, res) => {
+    return req.hostname;
+});
+
+// Morgan configuration: https://expressjs.com/en/resources/middleware/morgan.html
+app.use(morgan(":method / :host / :status / :res[content-length] / :response-time ms"));
+
 //Configurando la carpeta "views"
 app.set("views", path.join(__dirname, 'views'));
-
 
 // Configuracion handlebars: https://handlebarsjs.com/guide/#what-is-handlebars
 app.engine('.hbs', engine({
