@@ -7,13 +7,21 @@ router.get("/", (req, res) => {
     });
 });
 
-// router.post("/",async (req, res) => {
-//     let qust = new questions({
-//         name: req.body.name,
-//         age: req.body.age,
-//         sex: req.body.sex
-// })
- 
+router.get("/crear",(req, res) => {
+    res.render('crearEncuesta' , {
+        layout: "dashboard"
+    });
+})
+
+/*
+router.post("/",async (req, res) => { S
+    let qust = new questions({
+        name: req.body.name,
+        age: req.body.age,
+        sex: req.body.sex
+    
+})
+ */
 // try {
 //     let savedDocument = await qust.save()
 //     res.status(201).json(savedDocument)
