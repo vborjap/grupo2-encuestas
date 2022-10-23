@@ -26,7 +26,6 @@ router.get("/", (req, res) => {
 	});
 });
 
-/*
 router.get("/", (req, res) => {
 	res.send("Estas en preguntas")
 });
