@@ -39,6 +39,7 @@ app.engine('.hbs', engine({
 
 app.set("view engine", '.hbs');
 
+
 //Rutas
 app.use(express.json())
 app.use(indexRoutes);
