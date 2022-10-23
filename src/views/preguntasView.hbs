@@ -1,0 +1,89 @@
+<div class="text-center">
+    <h1>  Formulario de preguntas</h1>
+</div>
+    {{> buttons
+       message="Crear pregunta"
+        type = "primary"
+        tag = "a"
+        href = "#b"
+     }}
+
+<div class="card mt-5">
+  <div class="card-body">
+
+    <div class="input-group mb-3">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Recipient's username"
+        aria-label="Recipient's username"
+        aria-describedby="button-addon2"
+      />
+      {{> buttons
+        type="success"
+        message="Buscar"
+        nativeType="subtmi"}}
+    </div>
+  
+    {{!-- Tabla de contenidos   --}}
+ <table id="grid" class="table table-striped table-bordered dt-responsive nowrap">
+            <thead>
+                <tr>
+                    <th width="50%">Pregunta</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>Pregunta 1</td>
+                    <td>
+                    {{> buttons
+                            message="Ver"
+                            type = "success"
+                            tag = "a"
+                            href = "http://localhost:3000/preguntas/1"
+                      }}
+                       {{> buttons
+                            message="Editar"
+                            type = "warning"
+                            tag = "a"
+                            href = "#b"
+                      }}
+                       {{> buttons
+                            message="Eliminar"
+                            type = "danger"
+                            tag = "a"
+                            href = "#b"
+                      }}
+                   </th> </td>
+                </tr>
+                <tr>
+                    <td>Pregunta 2</td>
+                    <td>
+                    {{> buttons
+                            message="Ver"
+                            type = "success"
+                            tag = "a"
+                            href = "http://localhost:3000/preguntas/2"
+                      }}
+                       {{> buttons
+                            message="Editar"
+                            type = "warning"
+                            tag = "a"
+                            href = "#b"
+                      }}
+                       {{> buttons
+                            message="Eliminar"
+                            type = "danger"
+                            tag = "a"
+                            href = "#b"
+                      }}
+                   </th> </td>
+                </tr>
+            </tbody>
+
+        </table>
+  </div>
+</div>
+

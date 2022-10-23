@@ -2,15 +2,22 @@ import express from "express";
 import indexRoutes from "./routes/index.routes.js";
 import { engine } from "express-handlebars";
 import path from "path";
-import * as url from 'url';
+import * as helpersHandlebars from "./utils/helpers.handlebars";
+import {menuList} from "./utils/sidebar.handlebars";
+import morgan from "morgan";
 
 
-//Igualando función a una constante
 const app = express();
+
+morgan.token('host', (req, res) => {
+    return req.hostname;
+});
+
+// Morgan configuration: https://expressjs.com/en/resources/middleware/morgan.html
+app.use(morgan(":method / :host / :status / :res[content-length] / :response-time ms"));
 
 //Configurando la carpeta "views"
 app.set("views", path.join(__dirname, 'views'));
-
 
 // Configuracion handlebars: https://handlebarsjs.com/guide/#what-is-handlebars
 app.engine('.hbs', engine({
@@ -20,22 +27,20 @@ app.engine('.hbs', engine({
     extname: ".hbs",
 
     // Configuracion para el directorio partials
-    // Agregado por: Cristian Antonio Escalante Hernandez
     partialsDir: [
         path.join(app.get("views"), "partials")
     ],
-    helpers: {
-        
-        // Permite imprimir un objeto javascript
-        json (context) {
-            return JSON.stringify(context);
-        }
-    }
+    helpers: helpersHandlebars,
+    compilerOptions: {
+        menuList
+    },
+    menuList
 }));
 
 app.set("view engine", '.hbs');
 
 //Rutas
+app.use(express.json())
 app.use(indexRoutes);
 
 export default app;
