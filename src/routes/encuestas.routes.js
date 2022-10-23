@@ -4,12 +4,12 @@ import url from 'url';
 const router = Router();
 
 router.get("/", (req, res) => {
-    // res.render('index', {
-    //     layout: "dashboard"
-    // });
-    res.send(fullURL(req));
+    res.render('index', {
+        layout: "dashboard"
+    });
 });
 
+// Función para obtener la URL completa
 function fullURL(req) {
     return url.format({
         protocol: req.protocol,
@@ -23,23 +23,5 @@ router.get("/crear", (req, res) => {
         layout: "dashboard"
     });
 })
-
-/*
-router.post("/",async (req, res) => { S
-    let qust = new questions({
-        name: req.body.name,
-        age: req.body.age,
-        sex: req.body.sex
-    
-})
- */
-// try {
-//     let savedDocument = await qust.save()
-//     res.status(201).json(savedDocument)
-//     }
-//     catch (err) {
-//         res.status(420).send("Error")
-//     }
-// })
 
 export default router;
