@@ -1,0 +1,74 @@
+<div class="row">
+    <div class="col-12">
+        <h1 class="text-center">Editar encuesta</h1>
+    </div>
+</div>
+<!--Form-->
+<form action="/" method="POST">
+        <div class="row me-1">
+    <div class="col-12 text-end ">
+         <button  type="submit" class="btn btn-success mt-2" >Actualizar Encuesta</button>
+   </div>
+</div>
+<div class="container bg-bg-light">
+     <!--Nombre encuesta-->
+    <div class="row mt-3">
+    <div class="col-4 text-end">
+        <p>Ingresa el nombre de la encuesta:</p>
+    </div>
+    <div class="col-8">
+        <input class="w-75"type="text" name="nomEncuesta" required >
+    </div>
+    </div>
+    <!--Descripcion-->
+    <div class="row">
+        <div class="col-4 text-end">
+            Descripción:
+        </div>
+        <div class="col-8">
+            <textarea name="descripcion" cols="30" rows="10" class="w-75"></textarea>
+        </div>
+    </div>
+     <!--Secciones-->
+     <div class="row mt-5 d-flex justify-content-end">
+        <div class="col-3">
+            <select class="form-select" aria-label="Default select example">
+                <option selected>Selecciona una sección...</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+            </select>
+        </div>
+</form>
+
+        <div class="col-8">
+             <!--Tabla-->
+        <table class="table w-75 text-center">
+         <thead>
+                 <tr>
+                    <th scope="col">Secciones</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+         </thead>
+         <tbody>
+                 <tr>
+                     <th scope="row">1</th>
+                     <td>Mark</td>
+                     <td><button type="button" class="btn btn-success">Ver Preguntas</button></td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td><button type="button" class="btn btn-success">Ver Preguntas</button></td>
+                </tr>
+                <tr>
+                     <th scope="row">3</th>
+                     <td>Larry the Bird</td>
+                     <td><button type="button" class="btn btn-success">Ver Preguntas</button></td>
+                </tr>
+          </tbody>
+       </table>
+        </div>
+     </div>
+</div>

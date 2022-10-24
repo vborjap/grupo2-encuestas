@@ -24,4 +24,10 @@ router.get("/crear", (req, res) => {
     });
 })
 
+router.get("/editar", (req, res) => {
+    res.render('editarEncuesta', {
+        layout: "dashboard"
+    });
+})
+
 export default router;
