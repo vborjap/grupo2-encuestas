@@ -4,7 +4,7 @@ import url from 'url';
 const router = Router();
 
 router.get("/", (req, res) => {
-    res.render('index', {
+    res.render('verPlantillas', {
         layout: "dashboard"
     });
 });
