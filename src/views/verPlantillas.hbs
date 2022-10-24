@@ -1,0 +1,94 @@
+<br></br>
+<div class="text-center">
+    <h1>Ver Encuestas</h1>
+</div>
+<br></br>
+<div >
+    {{> buttons
+    message="Crear Encuesta"
+    type = "success"
+    tag = "a"
+    href = "http://localhost:3000/encuestas/crear"
+    }}
+</div>
+
+<div class="card mt-5">
+    <div class="card-body">
+        <div class="input-group mb-3">
+            <input 
+                type="text" 
+                class="form-control" 
+                placeholder="Nombre de la encuesta o encuestador" 
+                aria-label="Nombre de la encuesta o encuestador"
+                aria-describedby="button-addon2" />
+            {{> buttons
+            type="success"
+            message="Buscar"
+            nativeType="submit"
+            }}
+        </div>
+
+        {{!-- Tabla de contenidos --}}
+        <!--<table id="grid" class="table table-striped table-bordered dt-responsive nowrap">/-->
+        <table class="table">
+            <thead class="thead-light">
+                <tr>
+                    <th width="35%">Nombre de la encuesta</th>
+                    <th width="35%">Encuestador</th>
+                    <th width="30%">Acciones</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>Sistemas Embebidos</td>
+                    <td>Prof. Juan Perez</td>
+                    <td>
+                    {{> buttons
+                            message="Ver"
+                            type = "success"
+                            tag = "a"
+                            href = "#b"
+                      }}
+                    {{> buttons
+                            message="Editar"
+                            type = "warning"
+                            tag = "a"
+                            href = "http://localhost:3000/encuestas/editar"
+                      }}
+                    {{> buttons
+                            message="Eliminar"
+                            type = "danger"
+                            tag = "a"
+                            href = "#b"
+                      }}
+                   </th> </td>
+                </tr>
+                <tr>
+                    <td>Zonas Rurales</td>
+                    <td>Andrea Aparicio</td>
+                    <td>
+                    {{> buttons
+                            message="Ver"
+                            type = "success"
+                            tag = "a"
+                            href = "#b"
+                      }}
+                    {{> buttons
+                            message="Editar"
+                            type = "warning"
+                            tag = "a"
+                            href = "http://localhost:3000/encuestas/editar"
+                      }}
+                    {{> buttons
+                            message="Eliminar"
+                            type = "danger"
+                            tag = "a"
+                            href = "#b"
+                      }}
+                   </th> </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
