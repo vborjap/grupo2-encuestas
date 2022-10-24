@@ -10,7 +10,11 @@ router.get("/", (req, res) => {
 
 router.get("/:id", (req, res) => {
 	const {id} = req.params;
-	res.send("dato: " + id);
+
+	res.render("verRespuesta", {
+		layout:"Dashboard",
+		id
+	});
 });
 
 export default router;

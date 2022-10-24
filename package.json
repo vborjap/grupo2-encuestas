@@ -21,7 +21,13 @@
     "chart.js": "^3.9.1",
     "express": "^4.18.2",
     "express-handlebars": "^6.0.6",
+<<<<<<< HEAD
     "mongoose": "^6.6.5",
+=======
+    "jquery": "^3.6.1",
+    "mongodb": "^4.11.0",
+    "mongoose": "^6.6.7",
+>>>>>>> b55aa416ef1c9e255fadb0d0b2a401c0c85b6985
     "morgan": "^1.10.0"
   },
   "devDependencies": {
