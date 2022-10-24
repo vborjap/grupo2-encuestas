@@ -1,6 +1,15 @@
 import { Router} from "express";
 const router = Router();
 
+// Llamamos ruta de preguntas
+router.get("/", (req, res) => {
+	res.render('preguntasView', {
+		layout: "dashboard"
+	});
+});
+
+//----------------------------------------------
+
 //Cambio hecho por: Rebeca Barrientos
 router.get("/add", (req, res) => {
 	res.render('preguntas/nuevaPregunta', {
@@ -15,16 +24,7 @@ console.log(req.body);
 	console.log(req.body);
 	res.send('ok');
 });
-
-
 //Fin de cambio hecho por: Rebeca Barrientos
-
-// Llamamos ruta de preguntas
-router.get("/", (req, res) => {
-	res.render('preguntasView', {
-		layout: "dashboard"
-	});
-});
 
 // router.get("/", (req, res) => {
 // 	res.send("Estas en preguntas")
