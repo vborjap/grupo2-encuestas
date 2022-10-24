@@ -12,4 +12,4 @@ const seccionesSchema = new Schema(
         }
 )
 
-export default model('secciones', seccionesSchema)
+export default model('Secciones', seccionesSchema)

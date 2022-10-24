@@ -1,4 +1,6 @@
 import { Router} from "express";
+import Secciones from "../models/Secciones";
+
 const router = Router();
 
 
@@ -21,18 +23,16 @@ router.get("/addSeccion", (req, res) => {
 	});
 });
 
-router.post('/add', (req, res)=>{
-	let nombre=req.body.inputNombreSeccion;
+router.post("/add", async (req, res) => {
 
-	let prn1 = req.body.idPrn;
-
-	nombre=nombre
+	const seccion = Secciones(req.body);
 	
-	//let nombre = crearSeccion.getElementById("inputNombreSeccion").value;
-	console.log(nombre);
-	console.log(prn1);
-	res.send('Recibido')
-	console.log("recibido")
+	const seccionSave = await seccion.save()
+
+	console.log(seccionSave);
+	
+	
+	res.send("Guardado");
 })
 
 export default router;

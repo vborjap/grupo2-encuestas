@@ -1,5 +1,5 @@
 <div class="container">
-        <form method="POST" action="/secciones/add">
+        
         <div class="row mt-3">
                 <div class="col ">
                         {{> buttons
@@ -13,23 +13,26 @@
                 <h1>Crear Nueva Seccion</h1>
                 </div>
                 <div class="col text-end">
-                        <button type="submit" class="btn btn-primary" >Registrar</button>
+                        <button class="btn btn-primary" >Registrar</button>
                 </div>
         </div>
         <div class="row mt-3">
-                
+                <form action="/secciones/add" method="post">
                         <div class="form-group row">
                                 <label for="inputNombreSeccion" class="col-sm-2 col-form-label">Nombre de la sección</label>
                                 <div class="col-10">
-                                        <input type="text" class="form-control" id="inputNombreSeccion" placeholder="Escriba un nombre">
+                                        <input name="nombre" type="text" class="form-control" id="inputNombreSeccion" placeholder="Escriba un nombre">
                                 </div>
                         </div>
                         <div class="form-group row mt-3">
-                                <label for="textArea" class="col-sm-2 col-form-label">Descripción</label>
+                                <label for="inputDescripcion" class="col-sm-2 col-form-label">Descripción</label>
                                 <div class="col-10">
-                                            <textarea class="form-control" id="textArea" placeholder="Escriba una descripción"></textarea>
+                                            <textarea name="descripcion" class="form-control" id="inputDescripcion" placeholder="Escriba una descripción"></textarea>
                                 </div>
                         </div>
+                 <button type="submit" class="btn btn-primary" >Registrar</button>
+
+                </form>
 
                         <div class="form-group row mt-4">
                                 <div class="col-5 mb-3">
@@ -76,9 +79,7 @@
 
                         </div>
                           
-
-
-                </form>
+                       
         </div>
 
 </div>
