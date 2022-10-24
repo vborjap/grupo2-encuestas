@@ -12,30 +12,6 @@ router.get("/", (req, res) => {
     });
 });
 
-
-
-/*
-router.post("/",async (req, res) => { 
-    let qust = new questions({
-        name: req.body.name,
-        age: req.body.age,
-        sex: req.body.sex,
-        
-    
-})
-res.send('ok')
-});
-*/
-
-// try {
-//     let savedDocument = await qust.save()
-//     res.status(201).json(savedDocument)
-//     }
-//     catch (err) {
-//         res.status(420).send("Error")
-//     }
-// })
-
  //Función para obtener la URL completa
 function fullURL(req) {
     return url.format({
@@ -54,8 +30,9 @@ router.get("/crear", async (req, res) => {
         layout: "dashboard"
     });
 })
+
 //Método para recibir y guardar en la base de datos
-router.post("/crear",async (req, res) => { 
+router.post("/crear",async (req, res) => {
     const{nomEncuesta, descripcion, secciones }=req.body;
     const nuevaEncuesta=new registroEncuesta({nomEncuesta,descripcion,secciones})
     console.log(nuevaEncuesta);
