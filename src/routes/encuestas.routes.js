@@ -8,7 +8,6 @@ const registroEncuesta = require('../models/encuesta');
 
 router.get("/", (req, res) => {
     res.render('verPlantillas', {
->>>>>>> 21815a02ab665e1077b219b2d250543023411a6e
         layout: "dashboard"
     });
 });
@@ -36,6 +35,7 @@ res.send('ok')
 //         res.status(420).send("Error")
 //     }
 // })
+
  //Función para obtener la URL completa
 function fullURL(req) {
     return url.format({
@@ -44,30 +44,25 @@ function fullURL(req) {
         pathname: req.originalUrl
     })
 }
-/*
-router.get("/", async(req, res) => {
-    const registros = await registroEncuesta.find({});
-    console.log(registros);
-    res.render('crearEncuesta',{
-    });
-    
-});
-*/
+
+//Método que renderiza el formulario para crear encuesta
 router.get("/crear", async (req, res) => {
     const registros = await registroEncuesta.find({});
+    //mostramos en consola los registros traidos de la BDD.
     console.log(registros);
     res.render('crearEncuesta', {
         layout: "dashboard"
     });
 })
 //Método para recibir y guardar en la base de datos
-
 router.post("/crear",async (req, res) => { 
     const{nomEncuesta, descripcion, secciones }=req.body;
     const nuevaEncuesta=new registroEncuesta({nomEncuesta,descripcion,secciones})
     console.log(nuevaEncuesta);
     await nuevaEncuesta.save();
-    res.send('ok');
+    res.render('verPlantillas',{
+        layout: "dashboard"
+    });
 });
 
 router.get("/editar", (req, res) => {
