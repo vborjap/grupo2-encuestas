@@ -8,6 +8,15 @@ router.get("/", (req, res) => {
 	});
 });
 
+router.get("/:id", (req, res) => {
+	const {id} = req.params;
+
+	res.render("verRespuesta", {
+		layout:"Dashboard",
+		id
+	});
+});
+
 /*
 router.get("/", (req, res) => {
 	res.send("Estas en preguntas")
