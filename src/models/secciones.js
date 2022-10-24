@@ -2,9 +2,9 @@ import {Schema, model} from 'mongoose'
 
 const seccionesSchema = new Schema(
         {
-         nombre: String,
-         descripcion: String,
-         preguntas: [{}],
+         nombre: {type: String, required: true},
+         descripcion: {type: String, required: true},
+         preguntas: [{type: Schema.Types.ObjectId, required: true, ref: 'preguntas'}],
         },
         {
          timestamps: true,

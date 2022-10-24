@@ -9,6 +9,8 @@ import morgan from "morgan";
 
 const app = express();
 
+
+
 morgan.token('host', (req, res) => {
     return req.hostname;
 });
