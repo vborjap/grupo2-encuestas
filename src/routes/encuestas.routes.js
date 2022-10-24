@@ -1,10 +1,8 @@
 import { Router } from "express";
+import registroEncuesta from "../models/encuesta.js"
 import url from 'url';
 
 const router = Router();
-
-
-const registroEncuesta = require('../models/encuesta');
 
 router.get("/", (req, res) => {
     res.render('verPlantillas', {

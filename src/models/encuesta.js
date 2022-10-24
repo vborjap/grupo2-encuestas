@@ -1,4 +1,4 @@
-const {Schema,model}=require('mongoose');
+import {Schema, model} from 'mongoose';
 
 const Schemaencuesta=new Schema({
 
@@ -19,4 +19,5 @@ const Schemaencuesta=new Schema({
     timestamps: true
 })
 
-module.exports=model('registroEncuesta',Schemaencuesta);
+export default model('registroEncuesta',Schemaencuesta);
+
