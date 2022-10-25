@@ -18,18 +18,20 @@
   },
   "homepage": "https://github.com/vborjap/grupo2-encuestas#readme",
   "dependencies": {
+    "bootstrap": "^5.2.2",
     "chart.js": "^3.9.1",
     "express": "^4.18.2",
     "express-handlebars": "^6.0.6",
+    "handlebars": "^4.7.7",
     "jquery": "^3.6.1",
-    "mongoose": "^6.6.5",
+    "mongoose": "^6.6.7",
     "morgan": "^1.10.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.19.3",
-    "@babel/core": "^7.19.3",
+    "@babel/core": "^7.19.6",
     "@babel/node": "^7.19.1",
-    "@babel/preset-env": "^7.19.3",
+    "@babel/preset-env": "^7.19.4",
     "nodemon": "^2.0.20"
   }
 }
