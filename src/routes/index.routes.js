@@ -7,6 +7,9 @@ import usuariosRoutes from "./usuarios.routes.js"
 
 const router = Router();
 //
+router.use(urlencoded({
+    extended: true
+}));
 
 router.get("/", (req, res) => {
     res.render('index');

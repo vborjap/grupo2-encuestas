@@ -11,8 +11,16 @@
     <link href="./css/bootstrap.min.css" rel="stylesheet">
 
 </head>
+    
+    <div class="d-flex align-items-center justify-content-center flex-column">
+        {{#each pregunta}}
+            <h1>{{title}}</h1>
+            <p>{{ _id }}</p> 
+            <p>{{ tipoR }}</p> 
+        {{/each}}
+    </div>
 
-    <body>
+    {{!-- <body>
 
         <nav class="navbar navbar-light bg-light">
 
@@ -20,7 +28,7 @@
             <div class="container"> 
     
     
-              <button type="button" class="btn btn-primary" onclick="window.location.href='http://localhost:3000/preguntas';">Atras</button>
+              <button type="button" class="btn btn-primary" onclick="window.location.href='http://localhost:3000/preguntas/listarPreguntas';">Atras</button>
 
               <span>CREAR PREGUNTA</span>
 
@@ -52,22 +60,13 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-sm">Pregunta: </span>
                 </div>
-             <input type="text" class="form-control" name="title" aria-label="Small" 
-             aria-describedby="inputGroup-sizing-sm" placeholder="Title" autofocus>
+             <label>dfmdkfm</label> 
          </div>
     <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <label class="input-group-text" for="inputGroupSelect01">Tipo respuesta: </label>
             </div>
-            <select class="custom-select" id="inputGroupSelect01" name="tipoR">
-                <option selected>Seleccionar una opción</option>
-                <option value="1">Respuesta corta</option>
-                <option value="2">Respuesta larga</option>
-                <option value="3">Opcion</option>
-                <option value="4">Opción varias respuestas</option>
-                <option value="5">Fecha</option>
-                <option value="6">Hora</option>
-            </select>
+            <label>dfmdkfm</label> 
     </div>
 
 
@@ -79,9 +78,10 @@
         </form>
     </div>
 </div>
-</div>
+</div> --}}
 <!-- Fin de cambio hecho por: Rebeca Barrientos -->
 
+{{ pregunta }}
 
 
 
