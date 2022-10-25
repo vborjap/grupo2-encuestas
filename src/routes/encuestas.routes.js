@@ -10,12 +10,21 @@ router.get("/", (req, res) => {
     });
 });
 
- //Función para obtener la URL completa
+//Funcion para eliminar registros
+router.delete("/", async (req, res) => {
+    let { nomEncuesta } = req.body;
+    await registroEncuesta.deleteOne(
+        { nomEncuesta },
+    )
+})
+
+//Función para obtener la URL completa
 function fullURL(req) {
+    let { nomEncuesta } = req.body;
     return url.format({
         protocol: req.protocol,
         host: req.get('host'),
-        pathname: req.originalUrl
+        pathname: `${req.url}/encuestas/${nomEncuesta}`
     })
 }
 
@@ -30,12 +39,13 @@ router.get("/crear", async (req, res) => {
 })
 
 //Método para recibir y guardar en la base de datos
-router.post("/crear",async (req, res) => {
-    const{nomEncuesta, descripcion, secciones }=req.body;
-    const nuevaEncuesta=new registroEncuesta({nomEncuesta,descripcion,secciones})
+router.post("/crear", async (req, res) => {
+    const { nomEncuesta, descripcion, secciones } = req.body;
+    const nuevaEncuesta = new registroEncuesta({ nomEncuesta, descripcion, secciones })
     console.log(nuevaEncuesta);
+    console.log(fullURL(req));
     await nuevaEncuesta.save();
-    res.render('verPlantillas',{
+    res.render('verPlantillas', {
         layout: "dashboard"
     });
 });

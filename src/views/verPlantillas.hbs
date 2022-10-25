@@ -20,6 +20,7 @@
                 class="form-control" 
                 placeholder="Nombre de la encuesta o encuestador" 
                 aria-label="Nombre de la encuesta o encuestador"
+                name="identificadorEncuesta"
                 aria-describedby="button-addon2" />
             {{> buttons
             type="success"
@@ -58,7 +59,8 @@
                       }}
                     {{> buttons
                             message="Eliminar"
-                            type = "danger"
+                            method="DELETE"
+                            type="danger"
                             tag = "a"
                             href = "#b"
                       }}
