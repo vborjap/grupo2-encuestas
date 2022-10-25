@@ -23,7 +23,7 @@
                     &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                     &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                     &nbsp&nbsp&nbsp&nbsp
-                    VER PREGUNTA</h3></div>
+                    EDITAR PREGUNTA</h3></div>
             <br><br><br>
         </nav>
 {{!--#each erorrs}}
@@ -51,7 +51,15 @@
             <div class="input-group-prepend">
                 <label class="input-group-text" for="inputGroupSelect01">Tipo respuesta: </label>
             </div>
-            <label>&nbsp&nbsp&nbsp&nbsp{{ tipoR }}</label> 
+            <select class="custom-select" id="inputGroupSelect01" name="tipoR">
+                <option selected>{{tipoR}}</option>
+                <option value="Respuesta corta">Respuesta corta</option>
+                <option value="Respuesta larga">Respuesta larga</option>
+                <option value="Opcion">Opcion</option>
+                <option value="Opción varias respuestas">Opción varias respuestas</option>
+                <option value="Fecha">Fecha</option>
+                <option value="Hora">Hora</option>
+            </select>
     </div>
     {{/each}}
     </div>

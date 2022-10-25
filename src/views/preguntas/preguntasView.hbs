@@ -39,25 +39,10 @@
                     <td>{{title}}</td>
                     <td>
                       <a class="btn btn-success" href="/preguntas/{{_id}}" >Ver</a>
-                    {{> buttons
-                            message="Ver"
-                            type = "success"
-                            tag = "a"
-                            href = "#"
-                            
-                      }}
-                       {{> buttons
-                            message="Editar"
-                            type = "warning"
-                            tag = "a"
-                            href = "#b"
-                      }}
-                       {{> buttons
-                            message="Eliminar"
-                            type = "danger"
-                            tag = "a"
-                            href = "#b"
-                      }}
+                   
+                      <a class="btn btn-warning" href="/preguntas/{{_id}}" >Editar</a>
+
+                        <a class="btn btn-danger" href="/preguntas/{{_id}}" >Eliminar</a>
                    </th> </td>
                 </tr>
                 {{/each}}

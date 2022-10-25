@@ -56,7 +56,7 @@ router.get('/', async (req, res) => {
 
 
 
-
+//para poder ver registros de base de datos pasando id
 router.get("/:id", async (req, res) => {
 
 	const {id} = req.params;
@@ -71,8 +71,27 @@ router.get("/:id", async (req, res) => {
 		pregunta,
 		layout: "dashboard"
 	});
-	
-	
 });
+
+//para poder ver registros de base de datos pasando id
+router.get("editar/:id", async (req, res) => {
+
+	const {id} = req.params;
+	// // res.send("dato: " + id);
+	// const pr = Pregunta.find({'_id': ObjectId('63576c5e8ef98bade9aef2f4')});
+	var pregunta = await Pregunta.find({_id: id}).lean();
+
+	
+    console.log(pregunta);
+	res.render('preguntas/editarPregunta', {
+		id,
+		pregunta,
+		layout: "dashboard"
+	});
+});
+
+
+
+
 
 export default router;
