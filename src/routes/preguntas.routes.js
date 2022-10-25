@@ -1,32 +1,78 @@
 import { Router} from "express";
 const router = Router();
 
-// Llamamos ruta de preguntas
-router.get("/", (req, res) => {
-	res.render('preguntasView', {
+//Cambio hecho por: Rebeca Barrientos
+const Pregunta = require('../models/Pregunta');
+
+
+router.get("/add", (req, res) => {
+	res.render('preguntas/nuevaPregunta', {
+		layout: "dashboard"
+	});
+});
+router.get("/ver", (req, res) => {
+	res.render('preguntas/verPregunta', {
 		layout: "dashboard"
 	});
 });
 
-router.get("/:id", (req, res) => {
+//Ruta para recibir datos
+router.post("/nuevaPregunta", async(req, res) => {
+	const { title, tipoR}=req.body;
+
+	/*const errors = [];
+	//Arreglar la validacion
+	if(!title){
+		errors.push({text: 'Please write a title'});
+	}
+	if (errors.lenght > 0){
+		res.render('/preguntas/nuevaPregunta', {
+			errors,
+			title,
+			description
+		}); 
+	} else{
+	*/	
+		//Almacenando en la base de datos
+		const newPregunta = new Pregunta({title, tipoR});
+		await newPregunta.save();
+		res.redirect('/preguntas');
+
+		//Mostrando mensaje
+		//console.log(newPregunta);
+		//res.send('ok');
+	//}
+});
+
+//ruta a la que se redirecciona
+router.get('/', async (req, res) => {
+	//res.send('Preguntas desde la base de datos');
+	const pregunta = await Pregunta.find().lean();
+	res.render('preguntas/preguntasView', {pregunta, layout: "dashboard"});
+	
+});
+
+//Fin de cambio hecho por: Rebeca Barrientos
+
+
+
+
+router.get("/:id", async (req, res) => {
+
 	const {id} = req.params;
+	// // res.send("dato: " + id);
+	// const pr = Pregunta.find({'_id': ObjectId('63576c5e8ef98bade9aef2f4')});
+	var pregunta = await Pregunta.find({_id: id}).lean();
 
-	res.render("verRespuesta", {
-		layout:"Dashboard",
-		id
+	
+    console.log(pregunta);
+	res.render('preguntas/verPregunta', {
+		id,
+		pregunta,
+		layout: "dashboard"
 	});
+	
+	
 });
-
-/*
-router.get("/", (req, res) => {
-	res.send("Estas en preguntas")
-});
-*/
-
-
-// router.get("/", (req, res) => {
-// 	res.send("Estas en preguntas")
-// });
-
 
 export default router;

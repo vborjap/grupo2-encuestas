@@ -1,14 +1,13 @@
 <div class="text-center">
-    <h1>Formularion de Preguntas</h1>
+    <h1>Formulario de Preguntas</h1>
 </div>
 {{> buttons
        message="Crear pregunta"
         type = "primary"
         tag = "a"
-        href = "#b"
+        href = "http://localhost:3000/preguntas/add"
      }}
-<div class="card mt-5">
-  <div class="card-body">
+    <br><br><br>
 
     <div class="input-group mb-3">
       <input
@@ -34,16 +33,18 @@
                     <th>Acciones</th>
                 </tr>
             </thead>
+              {{#each pregunta}}
 
-            <tbody>
                 <tr>
-                    <td>Pregunta 1</td>
+                    <td>{{title}}</td>
                     <td>
+                      <a class="btn btn-success" href="/preguntas/{{_id}}" >Ver</a>
                     {{> buttons
                             message="Ver"
                             type = "success"
                             tag = "a"
-                            href = "#b"
+                            href = "#"
+                            
                       }}
                        {{> buttons
                             message="Editar"
@@ -59,30 +60,7 @@
                       }}
                    </th> </td>
                 </tr>
-                <tr>
-                    <td>Pregunta 2</td>
-                    <td>
-                    {{> buttons
-                            message="Ver"
-                            type = "success"
-                            tag = "a"
-                            href = "#b"
-                      }}
-                       {{> buttons
-                            message="Editar"
-                            type = "warning"
-                            tag = "a"
-                            href = "#b"
-                      }}
-                       {{> buttons
-                            message="Eliminar"
-                            type = "danger"
-                            tag = "a"
-                            href = "#b"
-                      }}
-                   </th> </td>
-                </tr>
-            </tbody>
+                {{/each}}
+</table>     
   </div>
 </div>
-
