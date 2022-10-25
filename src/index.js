@@ -2,6 +2,8 @@
 //import express from 'express';
 import app from "./app.js";
 import "./database.js";
+import methodOverride from "method-override";
+
 
 //Inicializando
 //const app = express();
@@ -10,3 +12,4 @@ import "./database.js";
 app.listen(3000);
 console.log('Server on port',3000);
 
+app.use(methodOverride('_method'));

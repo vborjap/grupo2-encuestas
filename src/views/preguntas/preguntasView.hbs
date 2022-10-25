@@ -40,9 +40,14 @@
                     <td>
                       <a class="btn btn-success" href="/preguntas/{{_id}}" >Ver</a>
                    
-                      <a class="btn btn-warning" href="/preguntas/{{_id}}" >Editar</a>
+                      <a class="btn btn-warning"  href="/preguntas/editar/{{_id}}" >Editar</a>
 
-                        <a class="btn btn-danger" href="/preguntas/{{_id}}" >Eliminar</a>
+                      <form action="/preguntas/delete/{{_id}}?_method=DELETE" method="POST">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <div class="form-group">
+                          <button class="btn btn-danger" type="submit">Eliminar</button>
+                        </div>
+                      </form>
                    </th> </td>
                 </tr>
                 {{/each}}

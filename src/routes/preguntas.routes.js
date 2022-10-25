@@ -64,7 +64,6 @@ router.get("/:id", async (req, res) => {
 	// const pr = Pregunta.find({'_id': ObjectId('63576c5e8ef98bade9aef2f4')});
 	var pregunta = await Pregunta.find({_id: id}).lean();
 
-	
     console.log(pregunta);
 	res.render('preguntas/verPregunta', {
 		id,
@@ -73,16 +72,12 @@ router.get("/:id", async (req, res) => {
 	});
 });
 
-//para poder ver registros de base de datos pasando id
-router.get("editar/:id", async (req, res) => {
+//para editar vista
+router.get("/editar/:id", async (req, res) => {
 
 	const {id} = req.params;
-	// // res.send("dato: " + id);
-	// const pr = Pregunta.find({'_id': ObjectId('63576c5e8ef98bade9aef2f4')});
 	var pregunta = await Pregunta.find({_id: id}).lean();
-
-	
-    console.log(pregunta);
+	  console.log(pregunta);
 	res.render('preguntas/editarPregunta', {
 		id,
 		pregunta,
@@ -90,7 +85,14 @@ router.get("editar/:id", async (req, res) => {
 	});
 });
 
-
+//para elimanar registros de db
+router.post("/delete/:id", async (req, res) => {
+	console.log(req.params.id);
+	const {id} = req.params;
+	//await Pregunta.findByIdAndDelete({_id: id});
+	await Pregunta.findByIdAndDelete(req.params.id);
+	res.redirect('/preguntas');
+});
 
 
 
