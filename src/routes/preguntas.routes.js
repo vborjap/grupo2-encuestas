@@ -72,7 +72,7 @@ router.get("/:id", async (req, res) => {
 	});
 });
 
-//para editar vista
+/*//para editar vista
 router.get("/editar/:id", async (req, res) => {
 
 	const {id} = req.params;
@@ -82,8 +82,22 @@ router.get("/editar/:id", async (req, res) => {
 		id,
 		pregunta,
 		layout: "dashboard"
-	});
+	}); 
+});*/
+//para editar vista por metodo GET
+router.get('/editar/:id', async (req, res) =>{
+	const pregunta = await Pregunta.findById(req.params.id).lean();
+	res.render('preguntas/editarPregunta', {pregunta, layout: "dashboard"});
 });
+
+//para editar vista por metodo PUT
+router.put("/editar/:id", async (req, res) => {
+	const{title, tipoR}=req.body;
+	await Pregunta.findByIdAndUpdate(req.params.id, {title,tipoR});
+	res.redirect('preguntas/preguntasView')
+});
+
+
 
 //para elimanar registros de db
 router.post("/delete/:id", async (req, res) => {

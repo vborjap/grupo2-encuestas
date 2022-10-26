@@ -32,7 +32,7 @@
             <br><br><br><br><br>
 
     <!-- Cambio hecho por: Rebeca Barrientos -->
-{{#each erorrs}}
+{{!--#each erorrs}}
 <div class="alert alert-danger alert-dismissible fade show" role="alert">
   {{text}}
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
@@ -40,55 +40,49 @@
     </span>  
     </button>
 </div>
-{{/each}}
+{{/each--}}
 
 
 <div class="col-md-10 mx-auto">
     <div class = "card">
+        <div class = "card-body">
+       
 
-    <div class = "card-body">
-        {{#each pregunta}}
-
-        <form action="/preguntas/editarPregunta/{{_id}}" method="POST">
-        <div class="input-group input-group-sm mb-3">
-                <div class="input-group-prepend"> 
-                    <span class="input-group-text" id="inputGroup-sizing-sm">Id </span>
-                </div>
-             <input type="hidden" name="_method" autofocus value="PUT">
-         </div>
+        <form action="/preguntas/editarPregunta/{{pregunta._id}}?_method=PUT" method="POST">
+        <input type="hidden" name="_method" value="PUT">
 
         <div class="input-group input-group-sm mb-3">
                 <div class="input-group-prepend"> 
                     <span class="input-group-text" id="inputGroup-sizing-sm">Pregunta: </span>
                 </div>
              <input type="text" class="form-control" name="title" aria-label="Small" 
-             aria-describedby="inputGroup-sizing-sm" autofocus value="{{title}}">
+             aria-describedby="inputGroup-sizing-sm" autofocus value="{{pregunta.title}}">
          </div>
-    <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <label class="input-group-text" for="inputGroupSelect01">Tipo respuesta: </label>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="inputGroupSelect01">Tipo respuesta: </label>
+                </div>
+                    <select class="custom-select" id="inputGroupSelect01" name="tipoR">
+                        <option selected>{{pregunta.tipoR}}</option>
+                        <option value="Respuesta corta">Respuesta corta</option>
+                        <option value="Respuesta larga">Respuesta larga</option>
+                        <option value="Opcion">Opcion</option>
+                        <option value="Opción varias respuestas">Opción varias respuestas</option>
+                        <option value="Fecha">Fecha</option>
+                        <option value="Hora">Hora</option>
+                    </select>
+       
             </div>
-            <select class="custom-select" id="inputGroupSelect01" name="tipoR">
-                <option selected>Seleccionar una opción</option>
-                <option value="Respuesta corta">Respuesta corta</option>
-                <option value="Respuesta larga">Respuesta larga</option>
-                <option value="Opcion">Opcion</option>
-                <option value="Opción varias respuestas">Opción varias respuestas</option>
-                <option value="Fecha">Fecha</option>
-                <option value="Hora">Hora</option>
-            </select>
-            {{/each}}
-    </div>
 
 
             <div class="form-group">
-                <button class="btn btn-primary btn-block" type="submit">
-                    Save
+                <button class="btn btn-success btn-block" type="submit">
+                    Guardar cambios
                 </button>
             </div>
-        </form>
+            </form>
+        </div>
     </div>
-</div>
 </div>
 <!-- Fin de cambio hecho por: Rebeca Barrientos -->
 

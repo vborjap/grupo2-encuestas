@@ -5,6 +5,7 @@ import path from "path";
 import * as helpersHandlebars from "./utils/helpers.handlebars";
 import {menuList} from "./utils/sidebar.handlebars";
 import morgan from "morgan";
+import methodOverride from "method-override";
 
 
 const app = express();
@@ -42,6 +43,6 @@ app.set("view engine", '.hbs');
 //Rutas
 app.use(express.json())
 app.use(indexRoutes);
-
+app.use(methodOverride('_method'));
 
 export default app;
