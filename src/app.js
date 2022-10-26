@@ -42,7 +42,7 @@ app.set("view engine", '.hbs');
 
 //Rutas
 app.use(express.json())
-app.use(methodOverride('_method'));
+app.use(methodOverride("_method"));
 app.use(indexRoutes);
 
 
