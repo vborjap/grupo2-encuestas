@@ -42,8 +42,7 @@
                    
                       <a class="btn btn-warning"  href="/preguntas/editar/{{_id}}" >Editar</a>
 
-                      <form action="/preguntas/delete/{{_id}}?_method=DELETE" method="POST">
-                        <input type="hidden" name="_method" value="DELETE">
+                      <form action="/preguntas/delete/{{_id}}?_method=post" method="POST">
                         <div class="form-group">
                           <button class="btn btn-danger" type="submit">Eliminar</button>
                         </div>
