@@ -27,28 +27,38 @@
 
 <h5>Gestión de preguntas</h5>
 <table id="grid" class="table table-striped table-bordered dt-responsive nowrap">
-            <thead>
+            
+              {{#each pregunta}}
+              <thead>
                 <tr>
                     <th width="50%">Pregunta</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
-              {{#each pregunta}}
-
                 <tr>
                     <td>{{title}}</td>
                     <td>
-                      <a class="btn btn-success" href="/preguntas/{{_id}}" >Ver</a>
+                      <div class="d-flex justify-content-center">
+                        <a class="btn btn-success" href="/preguntas/{{_id}}" >Ver</a>
                    
-                      <a class="btn btn-warning"  href="/preguntas/editar/{{_id}}" >Editar</a>
+                        <a class="btn btn-warning"  href="/preguntas/editar/{{_id}}" >Editar</a>
 
-                      <form action="/preguntas/delete/{{_id}}?_method=post" method="POST">
-                        <div class="form-group">
-                          <button class="btn btn-danger" type="submit">Eliminar</button>
-                        </div>
-                      </form>
+                        <form action="/preguntas/delete/{{_id}}?_method=post" method="POST">
+                          <div class="form-group">
+                            <button class="btn btn-danger" type="submit">Eliminar</button>
+                          </div>
+                        </form>
+                      </div>
                    </th> </td>
                 </tr>
+                {{else}}
+                 <div class="card mx-auto">
+                    <div class="lead  d-flex flex-column align-items-center">
+                      <p>No hay preguntas ingresadas aún</p>
+                      <a href="/preguntas/add" class="btn btn-success btn-block">Crear una</a>
+                    </div>
+                 </div>
+
                 {{/each}}
 </table>     
   </div>
