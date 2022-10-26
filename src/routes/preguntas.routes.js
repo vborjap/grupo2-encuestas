@@ -4,7 +4,7 @@ const router = Router();
 //Cambio hecho por: Rebeca Barrientos
 const Pregunta = require('../models/Pregunta');
 
-
+//vista de agregar pregunta
 router.get("/add", (req, res) => {
 	res.render('preguntas/nuevaPregunta', {
 		layout: "dashboard"
@@ -16,7 +16,7 @@ router.get("/ver", (req, res) => {
 	});
 });
 
-//Ruta para recibir datos
+//Ruta para recibir datos crear pregunta
 router.post("/nuevaPregunta", async(req, res) => {
 	const { title, tipoR}=req.body;
 
@@ -56,12 +56,11 @@ router.get('/', async (req, res) => {
 
 
 
-//para poder ver registros de base de datos pasando id
+//para poder ver registros de base de datos según id
 router.get("/:id", async (req, res) => {
 
 	const {id} = req.params;
-	// // res.send("dato: " + id);
-	// const pr = Pregunta.find({'_id': ObjectId('63576c5e8ef98bade9aef2f4')});
+
 	var pregunta = await Pregunta.find({_id: id}).lean();
 
     console.log(pregunta);
@@ -72,29 +71,17 @@ router.get("/:id", async (req, res) => {
 	});
 });
 
-/*//para editar vista
-router.get("/editar/:id", async (req, res) => {
-
-	const {id} = req.params;
-	var pregunta = await Pregunta.find({_id: id}).lean();
-	  console.log(pregunta);
-	res.render('preguntas/editarPregunta', {
-		id,
-		pregunta,
-		layout: "dashboard"
-	}); 
-});*/
-//para editar vista por metodo GET
+//Ira vista de editar por metodo GET 
 router.get('/editar/:id', async (req, res) =>{
 	const pregunta = await Pregunta.findById(req.params.id).lean();
 	res.render('preguntas/editarPregunta', {pregunta, layout: "dashboard"});
 });
 
 //para editar vista por metodo PUT
-router.put("/editar/:id", async (req, res) => {
-	const{title, tipoR}=req.body;
-	await Pregunta.findByIdAndUpdate(req.params.id, {title,tipoR});
-	res.redirect('preguntas/preguntasView')
+router.put('/editarPreguntas/:id', async (req, res) => {
+	const {title, tipoR} = req.body;
+	await Pregunta.findByIdAndUpdate(req.params.id, {title,tipoR}).lean();
+	res.redirect('/preguntas')
 });
 
 
