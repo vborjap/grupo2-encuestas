@@ -12,7 +12,7 @@ const Schemaencuesta=new Schema({
         required: false
     },
     secciones:{
-        type: Number,
+        type: String,
         required: true
     }
 },{

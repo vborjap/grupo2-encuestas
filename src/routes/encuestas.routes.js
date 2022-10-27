@@ -30,11 +30,12 @@ function fullURL(req) {
 
 //Método que renderiza el formulario para crear encuesta
 router.get("/crear", async (req, res) => {
-    const registros = await registroEncuesta.find({});
+    const registros = await registroEncuesta.find({}).lean();
     //mostramos en consola los registros traidos de la BDD.
     console.log(registros);
     res.render('crearEncuesta', {
-        layout: "dashboard"
+        layout: "dashboard",
+        registros
     });
 })
 
@@ -45,9 +46,7 @@ router.post("/crear", async (req, res) => {
     console.log(nuevaEncuesta);
     console.log(fullURL(req));
     await nuevaEncuesta.save();
-    res.render('verPlantillas', {
-        layout: "dashboard"
-    });
+    res.redirect("/encuestas");
 });
 
 router.get("/editar", (req, res) => {
