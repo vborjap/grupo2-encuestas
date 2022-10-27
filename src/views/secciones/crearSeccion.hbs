@@ -1,3 +1,4 @@
+
 <div class="container">
         
         <div class="row mt-3">
@@ -10,14 +11,16 @@
                         }}
                 </div>
                 <div class="col-6 text-center">
-                <h1>Crear Nueva Seccion</h1>
+                        <h1>Crear Nueva Seccion</h1>
                 </div>
+                
                 <div class="col text-end">
-                        <button class="btn btn-primary" >Registrar</button>
+                        <form action="/secciones/add" method="post">
+                        <button type="submit" class="btn btn-primary" >Registrar</button>
                 </div>
         </div>
         <div class="row mt-3">
-                <form action="/secciones/add" method="post">
+                
                         <div class="form-group row">
                                 <label for="inputNombreSeccion" class="col-sm-2 col-form-label">Nombre de la sección</label>
                                 <div class="col-10">
@@ -30,7 +33,12 @@
                                             <textarea name="descripcion" class="form-control" id="inputDescripcion" placeholder="Escriba una descripción"></textarea>
                                 </div>
                         </div>
-                 <button type="submit" class="btn btn-primary" >Registrar</button>
+                 
+                        <div>
+                                {{#each preguntas}}
+                                        <input name="preguntas" class="form-check-input" type="checkbox" value="{{_id}}" id="flexCheckDefault">
+                                {{/each}}
+                        </div>
 
                 </form>
 
@@ -38,11 +46,14 @@
                                 <div class="col-5 mb-3">
                                         <label for="addPreguntas">Agregar preguntas</label>
                                         <select class="form-control mt-3" id="addPreguntas">
-                                                <option value="">Pregunta #1</option>
-                                                <option value="">Pregunta #2</option>
-                                                <option value="">Pregunta #3</option>
+                                                <option value=""></option>
+                                                {{#each preguntas}}
+                                                <option value="{{_id}}">{{pregunta}}</option>
+                                                {{/each}}
                                                 
                                         </select>
+                                        
+                                        {{secciones}}
                                         
                                 </div>
 
@@ -83,3 +94,6 @@
         </div>
 
 </div>
+<script>
+        alert("Texto a mostrar");
+</script>

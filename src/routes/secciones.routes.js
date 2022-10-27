@@ -1,5 +1,6 @@
 import { Router} from "express";
 import Secciones from "../models/Secciones";
+import Pregunta from "../models/Preguntas";
 
 const router = Router();
 
@@ -17,9 +18,14 @@ router.get("/", (req, res) => {
 });
 
 //ruta de vista crear seccion
-router.get("/addSeccion", (req, res) => {
+router.get("/addSeccion", async (req, res) => {
+	const pregunta = await Pregunta.find().lean()
+	const seccion = await Secciones.find().populate('preguntas')
+	//console.log(pregunta)
 	res.render('secciones/crearSeccion', {
-		layout: "dashboard"
+		layout: "dashboard",
+		preguntas: pregunta,
+		secciones: seccion
 	});
 });
 
@@ -32,7 +38,7 @@ router.post("/add", async (req, res) => {
 	console.log(seccionSave);
 	
 	
-	res.send("Guardado");
+	res.redirect("/secciones")
 })
 
 export default router;

@@ -4,7 +4,7 @@ const seccionesSchema = new Schema(
         {
          nombre: {type: String, required: true},
          descripcion: {type: String, required: true},
-         preguntas: [{type: Schema.Types.ObjectId, required: true, ref: 'preguntas'}],
+         preguntas: [{type: Schema.Types.ObjectId, required: true, ref: 'Pregunta'}],
         },
         {
          timestamps: true,
@@ -12,4 +12,4 @@ const seccionesSchema = new Schema(
         }
 )
 
-export default model('Secciones', seccionesSchema)
+export default model('Secciones', seccionesSchema);
