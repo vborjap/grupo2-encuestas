@@ -56,4 +56,11 @@ router.get("/editar", (req, res) => {
     });
 })
 
+//metodo para mostrar vista de encuestas generada por usuario
+router.get("/ver", (req, res) => {
+    res.render('verEncuesta', {
+        layout: "dashboard"
+    });
+});
+
 export default router;
