@@ -20,7 +20,7 @@
                 class="form-control" 
                 placeholder="Nombre de la encuesta o encuestador" 
                 aria-label="Nombre de la encuesta o encuestador"
-                name="identificadorEncuesta"
+                name="nomEncuesta"
                 aria-describedby="button-addon2" />
             {{> buttons
             type="success"
@@ -57,13 +57,18 @@
                             tag = "a"
                             href = "http://localhost:3000/encuestas/editar"
                       }}
-                    {{> buttons
+                    {{!{{> buttons
                             message="Eliminar"
                             method="DELETE"
                             type="danger"
                             tag = "a"
                             href = "#b"
                       }}
+                          <form method="POST">
+                          <div class="form-group">
+                            <button class="btn btn-danger" name="a" type="submit" value={{data}} >{{data}}</button>
+                          </div>
+                        </form>
                    </th> </td>
                 </tr>
                 <tr>

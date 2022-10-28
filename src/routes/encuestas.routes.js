@@ -4,19 +4,38 @@ import url from 'url';
 
 const router = Router();
 
+async function getElements(req, res) {
+    let value = await registroEncuesta.aggregate([{ $sample: { size: 1 } }])
+    console.log(value)
+    return value;
+}
+
+function anotherData(){
+    return "635b55753b718493acaf30ea"
+}
+
 router.get("/", (req, res) => {
     res.render('verPlantillas', {
-        layout: "dashboard"
+        layout: "dashboard", data: getElements(), e: anotherData()
     });
 });
 
-//Funcion para eliminar registros
-router.delete("/", async (req, res) => {
-    let { nomEncuesta } = req.body;
-    await registroEncuesta.deleteOne(
-        { nomEncuesta },
-    )
+router.post("/" , async (req, res) => {
+    let {a} = req.body;
+    console.log(`Registro: ${a}`);
+    console.log(`URL: ${fullURL(req)}`);
+    await registroEncuesta.findOneAndDelete(a);
+    console.log(`Registro eliminado ${a}`);
+    res.redirect("/encuestas");
 })
+
+//Funcion para eliminar registros
+// router.delete("/", async (req, res) => {
+//     let { nomEncuesta } = req.body;
+//     await registroEncuesta.deleteOne(
+//         { nomEncuesta },
+//     )
+// })
 
 //Función para obtener la URL completa
 function fullURL(req) {
@@ -43,11 +62,8 @@ router.post("/crear", async (req, res) => {
     const { nomEncuesta, descripcion, secciones } = req.body;
     const nuevaEncuesta = new registroEncuesta({ nomEncuesta, descripcion, secciones })
     console.log(nuevaEncuesta);
-    console.log(fullURL(req));
     await nuevaEncuesta.save();
-    res.render('verPlantillas', {
-        layout: "dashboard"
-    });
+    res.redirect("/encuestas")
 });
 
 router.get("/editar", (req, res) => {
