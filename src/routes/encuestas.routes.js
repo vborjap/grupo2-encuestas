@@ -4,9 +4,9 @@ import url from 'url';
 
 const router = Router();
 
-async function getElements(req, res) {
+//async function getElements(req, res) {
     // let value = await registroEncuesta.aggregate([{ $sample: { size: 1 } }])
-    let value = await registroEncuesta.find().lean()
+    //let value = await registroEncuesta.find().lean()
     // console.log(`Valor de value: ${value[1].nomEncuesta}`)
     // let elements = []
     // let counttt = await registroEncuesta.countDocuments()
@@ -14,24 +14,29 @@ async function getElements(req, res) {
     //     let value = await registroEncuesta.find({}).lean()
     //     elements.push(value[i])
         // console.log(`Valor de value: ${value[i].nomEncuesta}`)
-    return value
-}
+    //return value
+//}
 
-async function arregloJson(){
-    let arregloBase = []
-    for await (const docJson of registroEncuesta.find().lean()) {
+//async function arregloJson(){
+    //let arregloBase = []
+    //for await (const docJson of registroEncuesta.find().lean()) {
         // console.log(doc); // Prints documents one at a time
-        arregloBase.push(docJson)
-      }
-    console.log(arregloBase);
-    return arregloBase
-}
+        //arregloBase.push(docJson)
+      //}
+    //console.log(arregloBase);
+    //return arregloBase
+//}
 
-router.get("/", (req, res) => {
+router.get("/", async (req, res) => {
+
+    const encuestas = await registroEncuesta.find({}).lean();
+    console.log(encuestas);
+
     res.render('verPlantillas', {
-        layout: "dashboard", data: arregloJson()
+        layout: "dashboard",
+        encuestas //data: arregloJson()
     });
-});
+})
 
 router.post("/" , async (req, res) => {
     let {a} = req.body;
