@@ -13,29 +13,6 @@ function fullURL(req, value) {
     })
 }
 
-//async function getElements(req, res) {
-    // let value = await registroEncuesta.aggregate([{ $sample: { size: 1 } }])
-    //let value = await registroEncuesta.find().lean()
-    // console.log(`Valor de value: ${value[1].nomEncuesta}`)
-    // let elements = []
-    // let counttt = await registroEncuesta.countDocuments()
-    // for (let i = 0; i < counttt; i++) {
-    //     let value = await registroEncuesta.find({}).lean()
-    //     elements.push(value[i])
-        // console.log(`Valor de value: ${value[i].nomEncuesta}`)
-    //return value
-//}
-
-//async function arregloJson(){
-    //let arregloBase = []
-    //for await (const docJson of registroEncuesta.find().lean()) {
-        // console.log(doc); // Prints documents one at a time
-        //arregloBase.push(docJson)
-      //}
-    //console.log(arregloBase);
-    //return arregloBase
-//}
-
 router.get("/", async (req, res) => {
 
     const encuestas = await registroEncuesta.find({}).lean();
@@ -43,7 +20,7 @@ router.get("/", async (req, res) => {
 
     res.render('verPlantillas', {
         layout: "dashboard",
-        encuestas //data: arregloJson()
+        encuestas 
     });
 })
 
