@@ -4,6 +4,15 @@ import url from 'url';
 
 const router = Router();
 
+//Función para obtener la URL completa
+function fullURL(req, value) {
+    return url.format({
+        protocol: req.protocol,
+        host: req.get('host'),
+        pathname: `${req.url}/encuestas/${value}`
+    })
+}
+
 //async function getElements(req, res) {
     // let value = await registroEncuesta.aggregate([{ $sample: { size: 1 } }])
     //let value = await registroEncuesta.find().lean()
@@ -39,31 +48,13 @@ router.get("/", async (req, res) => {
 })
 
 router.post("/" , async (req, res) => {
-    let {a} = req.body;
-    console.log(`Registro: ${a}`);
-    console.log(`URL: ${fullURL(req)}`);
-    await registroEncuesta.findOneAndDelete(a);
-    console.log(`Registro eliminado ${a}`);
+    let {identificador} = req.body;
+    console.log(`Registro: ${identificador}`);
+    console.log(`URL: ${fullURL(req,identificador)}`);
+    await registroEncuesta.findByIdAndDelete(identificador);
+    console.log(`Registro eliminado ${identificador}`);
     res.redirect("/encuestas");
 })
-
-//Funcion para eliminar registros
-// router.delete("/", async (req, res) => {
-//     let { nomEncuesta } = req.body;
-//     await registroEncuesta.deleteOne(
-//         { nomEncuesta },
-//     )
-// })
-
-//Función para obtener la URL completa
-function fullURL(req) {
-    let { nomEncuesta } = req.body;
-    return url.format({
-        protocol: req.protocol,
-        host: req.get('host'),
-        pathname: `${req.url}/encuestas/${nomEncuesta}`
-    })
-}
 
 //Método que renderiza el formulario para crear encuesta
 router.get("/crear", async (req, res) => {

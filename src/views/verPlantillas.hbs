@@ -40,17 +40,17 @@
                 </tr>
             </thead>
 
-            <tbody>
+            <tbody >
                 {{#each encuestas}}
-                    <tr>
+                    <tr >
                         <td>{{this.nomEncuesta}}</td>
                         <td>{{this.nomEncuesta}}</td>
                         <td>
                             <button type="button" class="btn btn-success" href="http://localhost:3000/encuestas/ver/{{_id}}">Ver</button>
                             <button type="button" class="btn btn-warning" href="http://localhost:3000/encuestas/editar/{{_id}}">Editar</button>
-                            <form action="/encuestas/delete/{{_id}}?_method=post" method="POST">
+                            <form action="" method="POST">
                                 <div class="form-group">
-                                    <button class="btn btn-danger" type="submit">Eliminar</button>
+                                    <button class="btn btn-danger" type="submit" value={{this._id}} name="identificador">Eliminar</button>
                                 </div>
                             </form>
                         </td>
