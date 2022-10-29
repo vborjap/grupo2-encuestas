@@ -43,8 +43,8 @@
             <tbody>
                 {{#each data}}
                 <tr>
-                    <td>{{nomEncuesta}}</td>
-                    <h1>{{nomEncuesta}}</h1>
+                    <td>{{this.nomEncuesta}}</td>
+                    <td>{{this.nomEncuesta}}</td>
                     <td>
                         <button type="button" class="btn btn-success" href="http://localhost:3000/encuestas/ver/{{_id}}">Ver</button>
                         <button type="button" class="btn btn-warning" href="http://localhost:3000/encuestas/editar/{{_id}}">Editar</button>
