@@ -70,7 +70,7 @@ router.get("/encuestas/:nomEncuesta", async (req, res) => {
     const { nomEncuesta } = req.params;
     const registro = await registroEncuesta.findOne({ nomEncuesta });
     console.log(registro);
-    res.render('verPlantilla', {
+    res.render('verPlantillas', {
         layout: "dashboard", data: registro
     });
 })
