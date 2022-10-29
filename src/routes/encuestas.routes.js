@@ -5,18 +5,32 @@ import url from 'url';
 const router = Router();
 
 async function getElements(req, res) {
-    let value = await registroEncuesta.aggregate([{ $sample: { size: 1 } }])
-    console.log(value)
-    return value;
+    // let value = await registroEncuesta.aggregate([{ $sample: { size: 1 } }])
+    let value = await registroEncuesta.find().lean()
+    // console.log(`Valor de value: ${value[1].nomEncuesta}`)
+    // let elements = []
+    // let counttt = await registroEncuesta.countDocuments()
+    // for (let i = 0; i < counttt; i++) {
+    //     let value = await registroEncuesta.find({}).lean()
+    //     elements.push(value[i])
+        // console.log(`Valor de value: ${value[i].nomEncuesta}`)
+    return value
 }
 
-function anotherData(){
-    return "635b55753b718493acaf30ea"
+async function all(){
+    let a = []
+    for await (const doc of registroEncuesta.find()) {
+        // console.log(doc); // Prints documents one at a time
+        a.push(doc)
+      }
+    console.log(a);
+    return a
 }
+
 
 router.get("/", (req, res) => {
     res.render('verPlantillas', {
-        layout: "dashboard", data: getElements(), e: anotherData()
+        layout: "dashboard", data: all()
     });
 });
 
