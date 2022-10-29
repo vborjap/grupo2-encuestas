@@ -49,17 +49,19 @@
                         <button type="button" class="btn btn-success" href="http://localhost:3000/encuestas/ver/{{this._id}}">Ver</button>
                         <button type="button" class="btn btn-warning" href="http://localhost:3000/encuestas/editar/{{this._id}}">Editar</button>
                         <form action="/encuestas/delete/{{_id}}?_method=post" method="POST">
-                          <div class="form-group">
-                            <button class="btn btn-danger" type="submit">Eliminar</button>
-                          </div>
+                            <div class="form-group">
+                                <button class="btn btn-danger" type="submit">Eliminar</button>
+                            </div>
                         </form>
                     </td>
                 </tr>
                 {{else}}
                 <div class="card mx-auto">
                     <div class="lead  d-flex flex-column align-items-center">
-                      <p>No hay encuestas ingresadas aún</p>
-                      <a href="/encuestas/crear" class="btn btn-success btn-block">Crear una</a>
+                        <br></br>
+                        <p>No hay encuestas ingresadas aún</p>
+                        <a href="/encuestas/crear" class="btn btn-success btn-block">Crear una</a>
+                        <br></br>
                     </div>
                 </div>
                 {{/each}}
