@@ -4,28 +4,14 @@ import url from 'url';
 
 const router = Router();
 
-//async function getElements(req, res) {
-    // let value = await registroEncuesta.aggregate([{ $sample: { size: 1 } }])
-    //let value = await registroEncuesta.find().lean()
-    // console.log(`Valor de value: ${value[1].nomEncuesta}`)
-    // let elements = []
-    // let counttt = await registroEncuesta.countDocuments()
-    // for (let i = 0; i < counttt; i++) {
-    //     let value = await registroEncuesta.find({}).lean()
-    //     elements.push(value[i])
-        // console.log(`Valor de value: ${value[i].nomEncuesta}`)
-    //return value
-//}
-
-//async function arregloJson(){
-    //let arregloBase = []
-    //for await (const docJson of registroEncuesta.find().lean()) {
-        // console.log(doc); // Prints documents one at a time
-        //arregloBase.push(docJson)
-      //}
-    //console.log(arregloBase);
-    //return arregloBase
-//}
+//Función para obtener la URL completa
+function fullURL(req, value) {
+    return url.format({
+        protocol: req.protocol,
+        host: req.get('host'),
+        pathname: `${req.url}/encuestas/${value}`
+    })
+}
 
 router.get("/", async (req, res) => {
 
@@ -34,16 +20,16 @@ router.get("/", async (req, res) => {
 
     res.render('verPlantillas', {
         layout: "dashboard",
-        encuestas //data: arregloJson()
+        encuestas 
     });
 })
 
+//eliminar encuesta logicamente
 router.post("/" , async (req, res) => {
-    let {a} = req.body;
-    console.log(`Registro: ${a}`);
-    console.log(`URL: ${fullURL(req)}`);
-    await registroEncuesta.findOneAndDelete(a);
-    console.log(`Registro eliminado ${a}`);
+    let {identificador} = req.body;
+    console.log(`URL: ${fullURL(req,identificador)}`);
+    // await registroEncuesta.findByIdAndDelete(identificador);
+    await registroEncuesta.updateOne({_id: identificador}, {activa: false});
     res.redirect("/encuestas");
 })
 
@@ -55,17 +41,8 @@ router.post("/" , async (req, res) => {
 //     )
 // })
 
-//Función para obtener la URL completa
-function fullURL(req) {
-    let { nomEncuesta } = req.body;
-    return url.format({
-        protocol: req.protocol,
-        host: req.get('host'),
-        pathname: `${req.url}/encuestas/${nomEncuesta}`
-    })
-}
-
 //crear encuesta
+//Método que renderiza el formulario para crear encuesta
 router.get("/crear", async (req, res) => {
     const registros = await registroEncuesta.find({}).lean();
     //mostramos en consola los registros traidos de la BDD.
