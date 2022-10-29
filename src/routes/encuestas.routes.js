@@ -19,7 +19,7 @@ async function getElements(req, res) {
 
 async function arregloJson(){
     let arregloBase = []
-    for await (const docJson of registroEncuesta.find()) {
+    for await (const docJson of registroEncuesta.find().lean()) {
         // console.log(doc); // Prints documents one at a time
         arregloBase.push(docJson)
       }
