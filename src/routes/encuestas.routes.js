@@ -80,6 +80,16 @@ router.post("/crear", async (req, res) => {
     res.redirect("/encuestas")
 });
 
+router.get("/encuestas/:nomEncuesta", async (req, res) => {
+    const { nomEncuesta } = req.params;
+    const registro = await registroEncuesta.findOne({ nomEncuesta });
+    console.log(registro);
+    res.render('verPlantillas', {
+        layout: "dashboard", data: registro
+    });
+})
+
+
 router.get("/editar", (req, res) => {
     res.render('editarEncuesta', {
         layout: "dashboard"
