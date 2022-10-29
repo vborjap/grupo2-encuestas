@@ -17,20 +17,19 @@ async function getElements(req, res) {
     return value
 }
 
-async function all(){
-    let a = []
-    for await (const doc of registroEncuesta.find()) {
+async function arregloJson(){
+    let arregloBase = []
+    for await (const docJson of registroEncuesta.find()) {
         // console.log(doc); // Prints documents one at a time
-        a.push(doc)
+        arregloBase.push(docJson)
       }
-    console.log(a);
-    return a
+    console.log(arregloBase);
+    return arregloBase
 }
-
 
 router.get("/", (req, res) => {
     res.render('verPlantillas', {
-        layout: "dashboard", data: all()
+        layout: "dashboard", data: arregloJson()
     });
 });
 
@@ -79,15 +78,6 @@ router.post("/crear", async (req, res) => {
     await nuevaEncuesta.save();
     res.redirect("/encuestas")
 });
-
-router.get("/encuestas/:nomEncuesta", async (req, res) => {
-    const { nomEncuesta } = req.params;
-    const registro = await registroEncuesta.findOne({ nomEncuesta });
-    console.log(registro);
-    res.render('verPlantillas', {
-        layout: "dashboard", data: registro
-    });
-})
 
 
 router.get("/editar", (req, res) => {
