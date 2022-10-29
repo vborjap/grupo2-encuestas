@@ -11,6 +11,11 @@ const Schemaencuesta=new Schema({
         type: String,
         required: false
     },
+    activa:{
+        type: Boolean,
+        default: true,
+        required: false
+    },
     secciones:{
         type: Number,
         required: true
