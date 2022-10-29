@@ -41,60 +41,28 @@
             </thead>
 
             <tbody>
+                {{#each encuestas}}
                 <tr>
-                    <td>Sistemas Embebidos</td>
-                    <td>Prof. Juan Perez</td>
+                    <td>{{this.nombre}}</td>
+                    <td>{{this.encuestador}}</td>
                     <td>
-                    {{> buttons
-                            message="Ver"
-                            type = "success"
-                            tag = "a"
-                            href = "http://localhost:3000/encuestas/ver"
-                      }}
-                    {{> buttons
-                            message="Editar"
-                            type = "warning"
-                            tag = "a"
-                            href = "http://localhost:3000/encuestas/editar"
-                      }}
-                    {{!{{> buttons
-                            message="Eliminar"
-                            method="DELETE"
-                            type="danger"
-                            tag = "a"
-                            href = "#b"
-                      }}
-                          <form method="POST">
+                        <button type="button" class="btn btn-success" href="http://localhost:3000/encuestas/ver/{{this._id}}">Ver</button>
+                        <button type="button" class="btn btn-warning" href="http://localhost:3000/encuestas/editar/{{this._id}}">Editar</button>
+                        <form action="/encuestas/delete/{{_id}}?_method=post" method="POST">
                           <div class="form-group">
-                            <button class="btn btn-danger" name="a" type="submit" value={{data}} >{{data}}</button>
+                            <button class="btn btn-danger" type="submit">Eliminar</button>
                           </div>
                         </form>
-                   </th> </td>
+                    </td>
                 </tr>
-                <tr>
-                    <td>Zonas Rurales</td>
-                    <td>Andrea Aparicio</td>
-                    <td>
-                    {{> buttons
-                            message="Ver"
-                            type = "success"
-                            tag = "a"
-                            href = "http://localhost:3000/encuestas/ver"
-                      }}
-                    {{> buttons
-                            message="Editar"
-                            type = "warning"
-                            tag = "a"
-                            href = "http://localhost:3000/encuestas/editar"
-                      }}
-                    {{> buttons
-                            message="Eliminar"
-                            type = "danger"
-                            tag = "a"
-                            href = "#b"
-                      }}
-                   </th> </td>
-                </tr>
+                {{else}}
+                <div class="card mx-auto">
+                    <div class="lead  d-flex flex-column align-items-center">
+                      <p>No hay encuestas ingresadas aún</p>
+                      <a href="/encuestas/crear" class="btn btn-success btn-block">Crear una</a>
+                    </div>
+                </div>
+                {{/each}}
             </tbody>
         </table>
     </div>
