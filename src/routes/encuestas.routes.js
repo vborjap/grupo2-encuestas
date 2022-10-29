@@ -65,7 +65,7 @@ function fullURL(req) {
     })
 }
 
-//Método que renderiza el formulario para crear encuesta
+//crear encuesta
 router.get("/crear", async (req, res) => {
     const registros = await registroEncuesta.find({}).lean();
     //mostramos en consola los registros traidos de la BDD.
@@ -84,34 +84,27 @@ router.post("/crear", async (req, res) => {
     await nuevaEncuesta.save();
     res.redirect("/encuestas");
 });
+
 //Vista Editar
 router.get("/editar/:id", async (req, res) => {
     //llenar tabla
     const registros = await registroEncuesta.find({}).lean();
     //obtener registro a editar
     const editar=await registroEncuesta.findById(req.params.id).lean();
-    //console.log("Registro a editar:")
-    //console.log(editar);
-    //mostramos en consola los registros traidos de la BDD.
-    console.log(registros);
-    res.redirect("/encuestas")
-});
-
-
-router.get("/editar/:id", (req, res) => {
+    //console.log(registros);
     res.render('editarEncuesta', {
         layout: "dashboard",
         registros,
         editar
     });
-})
+});
+
+
 router.post("/editar/:id", async (req, res) => {
     const { nomEncuesta,descripcion,secciones} = req.body;
     await registroEncuesta.findByIdAndUpdate(req.params.id,{nomEncuesta,descripcion,secciones});
     res.redirect("/encuestas");
-    console.log(req.body);
-    console.log(req.params.id);
-    console.log("ACTUALIZADO.........-------")
+    console.log("ACTUALIZADO.........")
 });
 
 //metodo para mostrar vista de encuestas generada por usuario

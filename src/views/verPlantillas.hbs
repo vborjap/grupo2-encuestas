@@ -34,9 +34,9 @@
         <table class="table">
             <thead class="thead-light">
                 <tr>
-                    <th width="35%">Nombre de la encuesta</th>
-                    <th width="35%">Encuestador</th>
-                    <th width="30%">Acciones</th>
+                    <th >Nombre de la encuesta</th>
+                    <th >Encuestador</th>
+                    <th >Acciones</th>
                 </tr>
             </thead>
 
@@ -46,17 +46,16 @@
                     <tr>
                         <td>{{this.nomEncuesta}}</td>
                         <td>{{this.nomEncuesta}}</td>
-                        <td>
-                            
-                            <button type="button" class="btn btn-success" href="http://localhost:3000/encuestas/ver/{{_id}}">Ver</button>
-                            
-                            <form action="/editar/{{_id}}?_method=post" method="POST">
-                                 <button type="button" class="btn btn-warning" href="http://localhost:3000/encuestas/editar/{{_id}}">Editar</button>
-                            </form>
-                           
+                        <!--Ver-->
+                        <td class="d-flex">     
+                            <button type="button" class="btn btn-success me-5 ms-5 " href="http://localhost:3000/encuestas/ver/{{_id}}">Ver</button>  
+                        
+                         <!--Editar-->
+                         <a href="http://localhost:3000/encuestas/editar/{{_id}}"><button type="submit" class="btn btn-warning me-5 " >Editar</button></a>
+                         <!--Eliminar-->
                             <form action="/encuestas/delete/{{_id}}?_method=post" method="POST">
                                 <div class="form-group">
-                                    <button class="btn btn-danger" type="submit">Eliminar</button>
+                                    <button class="btn btn-danger me-5" type="submit">Eliminar</button>
                                 </div>
                             </form>
                         </td>
