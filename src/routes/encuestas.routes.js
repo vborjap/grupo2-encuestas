@@ -48,11 +48,28 @@ router.post("/crear", async (req, res) => {
     await nuevaEncuesta.save();
     res.redirect("/encuestas");
 });
-
-router.get("/editar", (req, res) => {
+//Vista Editar
+router.get("/editar/:id", async (req, res) => {
+    //llenar tabla
+    const registros = await registroEncuesta.find({}).lean();
+    //obtener registro a editar
+    const editar=await registroEncuesta.findById(req.params.id).lean();
+    //console.log("Registro a editar:")
+    //console.log(editar);
+    //mostramos en consola los registros traidos de la BDD.
+    console.log(registros);
     res.render('editarEncuesta', {
-        layout: "dashboard"
+        layout: "dashboard",
+        registros,
+        editar
     });
 })
-
+router.post("/editar/:id", async (req, res) => {
+    const { nomEncuesta,descripcion,secciones} = req.body;
+    await registroEncuesta.findByIdAndUpdate(req.params.id,{nomEncuesta,descripcion,secciones});
+    res.redirect("/encuestas");
+    console.log(req.body);
+    console.log(req.params.id);
+    console.log("ACTUALIXADO.........-------")
+});
 export default router;
