@@ -4,19 +4,56 @@ import url from 'url';
 
 const router = Router();
 
-router.get("/", (req, res) => {
+//async function getElements(req, res) {
+    // let value = await registroEncuesta.aggregate([{ $sample: { size: 1 } }])
+    //let value = await registroEncuesta.find().lean()
+    // console.log(`Valor de value: ${value[1].nomEncuesta}`)
+    // let elements = []
+    // let counttt = await registroEncuesta.countDocuments()
+    // for (let i = 0; i < counttt; i++) {
+    //     let value = await registroEncuesta.find({}).lean()
+    //     elements.push(value[i])
+        // console.log(`Valor de value: ${value[i].nomEncuesta}`)
+    //return value
+//}
+
+//async function arregloJson(){
+    //let arregloBase = []
+    //for await (const docJson of registroEncuesta.find().lean()) {
+        // console.log(doc); // Prints documents one at a time
+        //arregloBase.push(docJson)
+      //}
+    //console.log(arregloBase);
+    //return arregloBase
+//}
+
+router.get("/", async (req, res) => {
+
+    const encuestas = await registroEncuesta.find({}).lean();
+    console.log(encuestas);
+
     res.render('verPlantillas', {
-        layout: "dashboard"
+        layout: "dashboard",
+        encuestas //data: arregloJson()
     });
-});
+})
+
+router.post("/" , async (req, res) => {
+    let {a} = req.body;
+    console.log(`Registro: ${a}`);
+    console.log(`URL: ${fullURL(req)}`);
+    await registroEncuesta.findOneAndDelete(a);
+    console.log(`Registro eliminado ${a}`);
+    res.redirect("/encuestas");
+})
 
 //Funcion para eliminar registros
-router.delete("/", async (req, res) => {
-    let { nomEncuesta } = req.body;
-    await registroEncuesta.deleteOne(
-        { nomEncuesta },
-    )
-})
+// router.delete("/", async (req, res) => {
+//     let { nomEncuesta } = req.body;
+//     await registroEncuesta.deleteOne(
+//         { nomEncuesta },
+//     )
+// })
 
 //Función para obtener la URL completa
 function fullURL(req) {
@@ -44,7 +81,6 @@ router.post("/crear", async (req, res) => {
     const { nomEncuesta, descripcion, secciones } = req.body;
     const nuevaEncuesta = new registroEncuesta({ nomEncuesta, descripcion, secciones })
     console.log(nuevaEncuesta);
-    console.log(fullURL(req));
     await nuevaEncuesta.save();
     res.redirect("/encuestas");
 });
@@ -58,6 +94,11 @@ router.get("/editar/:id", async (req, res) => {
     //console.log(editar);
     //mostramos en consola los registros traidos de la BDD.
     console.log(registros);
+    res.redirect("/encuestas")
+});
+
+
+router.get("/editar/:id", (req, res) => {
     res.render('editarEncuesta', {
         layout: "dashboard",
         registros,
@@ -70,6 +111,14 @@ router.post("/editar/:id", async (req, res) => {
     res.redirect("/encuestas");
     console.log(req.body);
     console.log(req.params.id);
-    console.log("ACTUALIXADO.........-------")
+    console.log("ACTUALIZADO.........-------")
 });
+
+//metodo para mostrar vista de encuestas generada por usuario
+router.get("/ver", (req, res) => {
+    res.render('verEncuesta', {
+        layout: "dashboard"
+    });
+});
+
 export default router;

@@ -20,7 +20,7 @@
                 class="form-control" 
                 placeholder="Nombre de la encuesta o encuestador" 
                 aria-label="Nombre de la encuesta o encuestador"
-                name="identificadorEncuesta"
+                name="nomEncuesta"
                 aria-describedby="button-addon2" />
             {{> buttons
             type="success"
@@ -41,57 +41,36 @@
             </thead>
 
             <tbody>
-                <tr>
-                    <td>Sistemas Embebidos</td>
-                    <td>Prof. Juan Perez</td>
-                    <td>
-                    {{> buttons
-                            message="Ver"
-                            type = "success"
-                            tag = "a"
-                            href = "#b"
-                      }}
-                   {{> buttons
-                            message="Eliminar"
-                            method="DELETE"
-                            type="warning"
-                            tag = "a"
-                            href = "#b"
-                      }}
-                   
-                    {{> buttons
-                            message="Eliminar"
-                            method="DELETE"
-                            type="danger"
-                            tag = "a"
-                            href = "#b"
-                      }}
-                   </th> </td>
-                </tr>
-                <tr>
-                    <td>Zonas Rurales</td>
-                    <td>Andrea Aparicio</td>
-                    <td>
-                    {{> buttons
-                            message="Ver"
-                            type = "success"
-                            tag = "a"
-                            href = "#b"
-                      }}
-                    {{> buttons
-                            message="Editar"
-                            type = "warning"
-                            tag = "a"
-                            href = "http://localhost:3000/encuestas/editar/635d84a22394832f07dcc344"
-                      }}
-                    {{> buttons
-                            message="Eliminar"
-                            type = "danger"
-                            tag = "a"
-                            href = "#b"
-                      }}
-                   </th> </td>
-                </tr>
+              
+                {{#each encuestas}}
+                    <tr>
+                        <td>{{this.nomEncuesta}}</td>
+                        <td>{{this.nomEncuesta}}</td>
+                        <td>
+                            
+                            <button type="button" class="btn btn-success" href="http://localhost:3000/encuestas/ver/{{_id}}">Ver</button>
+                            
+                            <form action="/editar/{{_id}}?_method=post" method="POST">
+                                 <button type="button" class="btn btn-warning" href="http://localhost:3000/encuestas/editar/{{_id}}">Editar</button>
+                            </form>
+                           
+                            <form action="/encuestas/delete/{{_id}}?_method=post" method="POST">
+                                <div class="form-group">
+                                    <button class="btn btn-danger" type="submit">Eliminar</button>
+                                </div>
+                            </form>
+                        </td>
+                    </tr>
+                    {{else}}
+                        <div class="card mx-auto">
+                            <div class="lead  d-flex flex-column align-items-center">
+                                <br></br>
+                                <p>No hay encuestas ingresadas aún</p>
+                                <a href="/encuestas/crear" class="btn btn-success btn-block">Crear una</a>
+                                <br></br>
+                            </div>
+                        </div>
+                {{/each}}
             </tbody>
         </table>
     </div>
