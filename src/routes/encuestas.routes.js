@@ -66,6 +66,12 @@ router.post("/crear", async (req, res) => {
     res.redirect("/encuestas")
 });
 
+router.get('/', async (req, res) => {
+	//res.send('encuestas desde la base de datos');
+	const encuesta = await registroEncuesta.find().lean();
+	res.render('/encuestas', {encuesta, layout: "dashboard"});
+});
+
 router.get("/editar", (req, res) => {
     res.render('editarEncuesta', {
         layout: "dashboard"
