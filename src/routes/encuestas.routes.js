@@ -27,11 +27,9 @@ router.get("/", async (req, res) => {
 //eliminar encuesta logicamente
 router.post("/" , async (req, res) => {
     let {identificador} = req.body;
-    console.log(`Registro: ${identificador}`);
     console.log(`URL: ${fullURL(req,identificador)}`);
     // await registroEncuesta.findByIdAndDelete(identificador);
     await registroEncuesta.updateOne({_id: identificador}, {activa: false});
-    console.log(`Registro eliminado ${identificador}`);
     res.redirect("/encuestas");
 })
 

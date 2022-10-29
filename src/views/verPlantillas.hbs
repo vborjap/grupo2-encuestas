@@ -42,28 +42,30 @@
 
             <tbody >
                 {{#each encuestas}}
-                    <tr >
-                        <td>{{this.nomEncuesta}}</td>
-                        <td>{{this.nomEncuesta}}</td>
-                        <td>
-                            <button type="button" class="btn btn-success" href="http://localhost:3000/encuestas/ver/{{_id}}">Ver</button>
-                            <button type="button" class="btn btn-warning" href="http://localhost:3000/encuestas/editar/{{_id}}">Editar</button>
-                            <form action="" method="POST">
-                                <div class="form-group">
-                                    <button class="btn btn-danger" type="submit" value={{this._id}} name="identificador">Eliminar</button>
-                                </div>
-                            </form>
-                        </td>
-                    </tr>
-                    {{else}}
-                        <div class="card mx-auto">
-                            <div class="lead  d-flex flex-column align-items-center">
-                                <br></br>
-                                <p>No hay encuestas ingresadas aún</p>
-                                <a href="/encuestas/crear" class="btn btn-success btn-block">Crear una</a>
-                                <br></br>
-                            </div>
+                    {{#if this.activa}}
+                        <tr>
+                            <td>{{this.nomEncuesta}}</td>
+                            <td>{{this.nomEncuesta}}</td>
+                            <td>
+                                <button type="button" class="btn btn-success" href="http://localhost:3000/encuestas/ver/{{_id}}">Ver</button>
+                                <button type="button" class="btn btn-warning" href="http://localhost:3000/encuestas/editar/{{_id}}">Editar</button>
+                                <form action="" method="POST">
+                                    <div class="form-group">
+                                        <button class="btn btn-danger" type="submit" value={{this._id}} name="identificador">Eliminar</button>
+                                    </div>
+                                </form>
+                            </td>
+                        </tr>
+                    {{/if}}
+                 {{else}}
+                    <div class="card mx-auto">
+                        <div class="lead  d-flex flex-column align-items-center">
+                            <br></br>
+                            <p>No hay encuestas ingresadas aún</p>
+                            <a href="/encuestas/crear" class="btn btn-success btn-block">Crear una</a>
+                            <br></br>
                         </div>
+                    </div>
                 {{/each}}
             </tbody>
         </table>
