@@ -1,13 +1,14 @@
 <div class="row">
     <div class="col-12">
-        <h1 class="text-center">Nueva encuesta</h1>
+        <h1 class="text-center">Editar encuesta</h1>
     </div>
 </div>
 <!--Form-->
 <form action="" method="POST">
-        <div class="row me-1">
+    
+    <div class="row me-1">
     <div class="col-12 text-end ">
-         <button  type="submit" class="btn btn-success mt-2" >Generar Encuesta</button>
+         <button  type="submit" class="btn btn-success mt-2" >Actualizar Encuesta</button>
    </div>
 </div>
 <div class="container bg-bg-light">
@@ -17,7 +18,7 @@
         <p>Ingresa el nombre de la encuesta:</p>
     </div>
     <div class="col-8">
-        <input class="w-75"type="text" name="nomEncuesta" required >
+        <input class="w-75"type="text" name="nomEncuesta" value="{{editar.nomEncuesta}}" required >
     </div>
     </div>
     <!--Descripcion-->
@@ -26,14 +27,14 @@
             Descripción:
         </div>
         <div class="col-8">
-            <textarea name="descripcion" cols="30" rows="10" class="w-75" placeholder="(Opcional)"></textarea>
+            <textarea name="descripcion" cols="30" rows="10" class="w-75">{{editar.descripcion}}</textarea>
         </div>
     </div>
      <!--Secciones-->
      <div class="row mt-5 d-flex justify-content-end">
-        <div class="col-12 col-md-3">
+        <div class="col-3">
             <select class="form-select" aria-label="Default select example" name="secciones">
-                <option selected value="N/A">Selecciona una sección...</option>
+                <option selected value="{{editar.secciones}}">{{editar.secciones}}</option>
                 <option value="Uno">One</option>
                 <option value="Dos">Two</option>
                 <option value="Tres">Three</option>
@@ -41,18 +42,18 @@
         </div>
 </form>
 
-        <div class="col-12 col-md-8 d-flex justify-content-center mt-2">
+        <div class="col-8">
              <!--Tabla-->
         <table class="table w-75 text-center">
          <thead>
                  <tr>
-                    <th scope="col">Sección</th>
-                    <th scope="col">Nombre</th>
+                    <th scope="col">Secciones</th>
+                    <th scope="col"></th>
                     <th scope="col"></th>
                 </tr>
          </thead>
          <tbody>
-             {{#each registros}}
+               {{#each registros}}
                 <!--<li>{{this}}</li>-->
            
                  <tr>
@@ -66,4 +67,3 @@
         </div>
      </div>
 </div>
-

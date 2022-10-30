@@ -31,7 +31,7 @@
               <div>
                 <thead>
                 <tr>
-                    <th width="50%">Pregunta</th>
+                    <th width="75%">Pregunta</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -41,7 +41,7 @@
                 <tr>
                     <td>{{title}}</td>
                     <td>
-                      <div class="d-flex justify-content-center">
+                      <div class="d-flex justify-content-around">
                         <a class="btn btn-success" href="/preguntas/{{_id}}" >Ver</a>
                    
                         <a class="btn btn-warning"  href="/preguntas/editar/{{_id}}" >Editar</a>
@@ -64,5 +64,6 @@
 
                 {{/each}}
 </table>     
+
   </div>
 </div>

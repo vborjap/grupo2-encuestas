@@ -23,7 +23,9 @@
                     &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                     &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                     &nbsp&nbsp&nbsp&nbsp
-                    VER PREGUNTA</h3></div>
+                    VER PREGUNTA
+                </h3>
+                </div>
             <br><br><br>
         </nav>
 {{!--#each erorrs}}
@@ -51,19 +53,48 @@
             <div class="input-group-prepend">
                 <label class="input-group-text" for="inputGroupSelect01">Tipo respuesta: </label>
             </div>
-            <label>&nbsp&nbsp&nbsp&nbsp{{ tipoR }}</label> 
+            <label>&nbsp&nbsp&nbsp&nbsp{{tipoR}}</label> 
     </div>
-    {{/each}}
+    
+       <div id="RDOM" class="px-6 py-12">
+            {{#if (equalString tipoR "opcion-unica")}}
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="inputGroupSelect01">Opciones únicas: </label>
+                    </div>
+                 </div>
+                <div id="radio">
+                    {{#each respuestas as |respuesta|}}
+                        <div class="my-3 flex g-1">
+                        <input type="radio" value="valor" name="respuesta" disabled="disabled"/>
+                        <input class="ml-3 p-2 border block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" type="text" name="respuestaText" value="{{ respuesta }}" placeholder="Valor del radiobutton" disabled="disabled" >
+                    </div>
+                    
+                    {{/each}}        
+                </div>
+            {{/if}}
+            {{#if (equalString tipoR "opcion-multiple")}}
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="inputGroupSelect01">Opciones múltiples: </label>
+                    </div>
+                 </div>
+                <div id="check">
+                    {{#each respuestas as |respuesta|}}
+                        <div class="my-3 flex g-1">
+                        <input type="checkbox" value="valor" name="respuesta" disabled="disabled"/>
+                        <input class="ml-3 p-2 border block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" type="text" name="respuestaText" value="{{ respuesta }}" placeholder="Valor del checkbox" aria-readonly="true" readonly >
+                    </div>
+                    
+                    {{/each}}        
+                </div>
+                        {{/if}}
+            {{/each}}
+
+
+        </div>
     </div>
 </div></div>
-
-   <!--div class="d-flex align-items-center justify-content-center flex-column">
-        {{#each pregunta}}
-            <h1>{{title}}</h1>
-            <p>{{ _id }}</p> 
-            <p>{{ tipoR }}</p> 
-        {{/each}}
-    </div-->
 </html>
-
+<script src="/static/preguntas.js"></script>
 
