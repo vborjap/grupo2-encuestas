@@ -13,6 +13,21 @@ function fullURL(req, value) {
     })
 }
 
+// function copyToClipboard(req, valor){
+//     let elemento = document.getElementsByClassName('btn-copy') 
+//     elemento.addEventListener('click', () => {
+//         let enlace = fullURL(req, valor);
+//         enlace.select();
+//         document.execCommand('copy');
+//     }
+// )}
+
+function copyToClipboard(req, valor){
+    console.log("Aloha")
+    navigator.clipboard.writeText(fullURL(req, valor))
+    console.log("Copiado")
+}
+
 router.get("/", async (req, res) => {
 
     const encuestas = await registroEncuesta.find({}).lean();
@@ -81,5 +96,11 @@ router.get("/ver", (req, res) => {
         layout: "dashboard"
     });
 });
+
+router.post("/ver", (req,res) => {
+    let {portapapeles} = req.body;
+    copyToClipboard(req, portapapeles);
+    res.redirect("/encuestas/ver");
+})
 
 export default router;
