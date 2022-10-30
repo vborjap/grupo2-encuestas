@@ -3,7 +3,7 @@
     <h1>Listado de Secciones</h1>
 </div>
 <br></br>
-<div >
+<div>
     {{> buttons
     message="Crear seccion"
     type = "success"
@@ -26,95 +26,45 @@
 
         {{!-- Tabla de contenidos --}}
 
-        <table class="table">
-            <thead class="thead-light">
-                <tr>
-                    <th scope="col">
-                        <p class="text-center">Secciones</p>
+        <table id="grid" class="table table-striped table-bordered dt-responsive nowrap">
+
+            <div>
+                <thead>
+                    <tr>
+                        <th width="75%">Pregunta</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+            </div>
+
+            {{#each Seccion}}
+            <tr>
+                <td>{{nombre}}</td>
+                <td>
+                    <div class="d-flex justify-content-around">
+                        <a class="btn btn-success" href="">Ver</a>
+
+                        <a class="btn btn-warning" href="">Editar</a>
+
+                        <form action="" method="POST">
+                            <div class="form-group">
+                                <button class="btn btn-danger" type="submit">Eliminar</button>
+                            </div>
+                        </form>
+                    </div>
                     </th>
-                    <th scope="col"></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th class="col-7">
-                        <p class="text-right"> Datos Personales </p>
-                    </th>
-                    <th>
-                        {{> buttons
-                        message="Ver Seccion"
-                        type = "success"
-                        tag = "a"
-                        href = "#b"
-                        }}
+                </td>
+            </tr>
+            {{else}}
+            <div class="card mx-auto">
+                <div class="lead  d-flex flex-column align-items-center">
+                    <p>No hay secciones ingresadas aún</p>
+                    <a href="secciones/addSeccion" class="btn btn-success btn-block">Crear una</a>
+                </div>
+            </div>
 
-                        {{> buttons
-                        message="Editar"
-                        type = "primary"
-                        tag = "b"
-                        href = "#b"
-                        }}
-
-                        {{> buttons
-                        message="Eliminar"
-                        type = "danger"
-                        tag = "c"
-                        href = "#b"
-                        }} </th>
-                </tr>
-                <tr>
-                    <th class="col-7">
-                        <p class="text-right">Educacion</p>
-                    </th>
-                    <th>
-                        {{> buttons
-                        message="Ver Seccion"
-                        type = "success"
-                        tag = "a"
-                        href = "#b"
-                        }}
-
-                        {{> buttons
-                        message="Editar"
-                        type = "primary"
-                        tag = "b"
-                        href = "#b"
-                        }}
-
-                        {{> buttons
-                        message="Eliminar"
-                        type = "danger"
-                        tag = "c"
-                        href = "#b"
-                        }} </th>
-                </tr>
-                <tr>
-                    <th class="col-7">
-                        <p class="text-right">Datos Familiares</p>
-                    </th>
-                    <th>
-                        {{> buttons
-                        message="Ver Seccion"
-                        type = "success"
-                        tag = "a"
-                        href = "#b"
-                        }}
-
-                        {{> buttons
-                        message="Editar"
-                        type = "primary"
-                        tag = "b"
-                        href = "#b"
-                        }}
-
-                        {{> buttons
-                        message="Eliminar"
-                        type = "danger"
-                        tag = "c"
-                        href = "#b"
-                        }} </th>
-                </tr>
-            </tbody>
+            {{/each}}
         </table>
     </div>
+
 </div>

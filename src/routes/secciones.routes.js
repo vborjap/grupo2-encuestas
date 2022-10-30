@@ -4,7 +4,7 @@ import Pregunta from "../models/Pregunta";
 
 const router = Router();
 
-
+const seccion = require('../models/Secciones');
 
 /* router.get("/", (req, res) => {
 	res.send("Estas en secciones")
@@ -27,6 +27,13 @@ router.get("/addSeccion", async (req, res) => {
 		preguntas: pregunta,
 		//secciones: seccion
 	});
+});
+
+router.get('/', async (req, res) => {
+	//res.send('Preguntas desde la base de datos');
+	const secciones = await Secciones.find().lean();
+	res.render('secciones/listarSecciones', {secciones, layout: "dashboard"});
+	
 });
 
 router.post("/add", async (req, res) => {
