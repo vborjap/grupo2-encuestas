@@ -41,8 +41,8 @@
             </thead>
 
             <tbody>
-              
                 {{#each encuestas}}
+                {{#if this.activa}}
                     <tr>
                         <td>{{this.nomEncuesta}}</td>
                         <td>{{this.nomEncuesta}}</td>
@@ -53,13 +53,14 @@
                          <!--Editar-->
                          <a href="http://localhost:3000/encuestas/editar/{{_id}}"><button type="submit" class="btn btn-warning me-5 " >Editar</button></a>
                          <!--Eliminar-->
-                            <form action="/encuestas/delete/{{_id}}?_method=post" method="POST">
+                            <form action="" method="POST">
                                 <div class="form-group">
-                                    <button class="btn btn-danger me-5" type="submit">Eliminar</button>
+                                    <button class="btn btn-danger me-5" type="submit" name="identificador" value={{this._id}}>Eliminar</button>
                                 </div>
                             </form>
                         </td>
                     </tr>
+                    {{/if}}
                     {{else}}
                         <div class="card mx-auto">
                             <div class="lead  d-flex flex-column align-items-center">
