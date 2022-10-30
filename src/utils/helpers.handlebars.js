@@ -10,3 +10,9 @@ export function json (context) {
 export function global(key) {
     return globalData[key];
 }
+
+export function link(prefix, ...dynamic) {
+    dynamic.pop();
+    let posfix = dynamic.join("/");
+    return `${prefix}/${posfix}`;
+}
