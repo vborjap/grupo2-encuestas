@@ -4,17 +4,20 @@ import Pregunta from "../models/Pregunta";
 
 const router = Router();
 
-const seccion = require('../models/Secciones');
-
 /* router.get("/", (req, res) => {
 	res.send("Estas en secciones")
 }); */
 
 //ruta de vista listar secciones
-router.get("/", (req, res) => {
-	res.render('secciones/listarSecciones', {
-		layout: "dashboard"
-	});
+router.get("/", async (req, res) => {
+
+	const seccion = await Secciones.find().lean()
+
+	res.render('secciones/listarSecciones' ,{
+		layout: "dashboard",
+		seccion: seccion
+	})
+	
 });
 
 //ruta de vista crear seccion
