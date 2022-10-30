@@ -33,14 +33,6 @@ router.post("/" , async (req, res) => {
     res.redirect("/encuestas");
 })
 
-//Funcion para eliminar registros
-// router.delete("/", async (req, res) => {
-//     let { nomEncuesta } = req.body;
-//     await registroEncuesta.deleteOne(
-//         { nomEncuesta },
-//     )
-// })
-
 //crear encuesta
 //Método que renderiza el formulario para crear encuesta
 router.get("/crear", async (req, res) => {
@@ -75,7 +67,6 @@ router.get("/editar/:id", async (req, res) => {
         editar
     });
 });
-
 
 router.post("/editar/:id", async (req, res) => {
     const { nomEncuesta,descripcion,secciones} = req.body;
