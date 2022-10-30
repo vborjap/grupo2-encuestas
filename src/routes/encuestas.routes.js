@@ -1,7 +1,8 @@
 import { Router } from "express";
 import registroEncuesta from "../models/encuesta.js"
 import url from 'url';
-import clipboard from 'clipboardy';
+// let ncp = require("copy-paste");
+import ncp from 'copy-paste';
 
 const router = Router();
 
@@ -10,24 +11,16 @@ function fullURL(req, value) {
     return url.format({
         protocol: req.protocol,
         host: req.get('host'),
-        pathname: `${req.url}/encuestas/${value}`
+        pathname: `${req.originalUrl}/${value}`
     })
 }
 
-// function copyToClipboard(req, valor){
-//     let elemento = document.getElementsByClassName('btn-copy') 
-//     elemento.addEventListener('click', () => {
-//         let enlace = fullURL(req, valor);
-//         enlace.select();
-//         document.execCommand('copy');
-//     }
-// )}
-
-function copyToClipboard(req, valor){
-    let {portapapeles} = req.body;
-    let link = fullURL(req, portapapeles);
+//Función para compartir un enlace 
+function copyToClipboard(req, valor) {
+    console.log(`Baia baia ${valor}`);
+    let link = fullURL(req, valor);
     console.log(link);
-    clipboard.writeSync(link);
+    ncp.copy(link, () => "Copiado al portapapeles");
 }
 
 router.get("/", async (req, res) => {
@@ -37,20 +30,19 @@ router.get("/", async (req, res) => {
 
     res.render('verPlantillas', {
         layout: "dashboard",
-        encuestas 
+        encuestas
     });
 })
 
 //eliminar encuesta logicamente
-router.post("/" , async (req, res) => {
-    let {identificador} = req.body;
-    console.log(`URL: ${fullURL(req,identificador)}`);
+router.post("/", async (req, res) => {
+    let { identificador } = req.body;
+    console.log(`URL: ${fullURL(req, identificador)}`);
     // await registroEncuesta.findByIdAndDelete(identificador);
-    await registroEncuesta.updateOne({_id: identificador}, {activa: false});
+    await registroEncuesta.updateOne({ _id: identificador }, { activa: false });
     res.redirect("/encuestas");
 })
 
-//crear encuesta
 //Método que renderiza el formulario para crear encuesta
 router.get("/crear", async (req, res) => {
     const registros = await registroEncuesta.find({}).lean();
@@ -76,7 +68,7 @@ router.get("/editar/:id", async (req, res) => {
     //llenar tabla
     const registros = await registroEncuesta.find({}).lean();
     //obtener registro a editar
-    const editar=await registroEncuesta.findById(req.params.id).lean();
+    const editar = await registroEncuesta.findById(req.params.id).lean();
     //console.log(registros);
     res.render('editarEncuesta', {
         layout: "dashboard",
@@ -86,8 +78,8 @@ router.get("/editar/:id", async (req, res) => {
 });
 
 router.post("/editar/:id", async (req, res) => {
-    const { nomEncuesta,descripcion,secciones} = req.body;
-    await registroEncuesta.findByIdAndUpdate(req.params.id,{nomEncuesta,descripcion,secciones});
+    const { nomEncuesta, descripcion, secciones } = req.body;
+    await registroEncuesta.findByIdAndUpdate(req.params.id, { nomEncuesta, descripcion, secciones });
     res.redirect("/encuestas");
     console.log("ACTUALIZADO.........")
 });
@@ -99,8 +91,8 @@ router.get("/ver", (req, res) => {
     });
 });
 
-router.post("/ver", (req,res) => {
-    let {portapapeles} = req.body;
+router.post("/ver", (req, res) => {
+    let { portapapeles } = req.body;
     copyToClipboard(req, portapapeles);
     res.redirect("/encuestas/ver");
 })
