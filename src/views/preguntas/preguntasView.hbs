@@ -1,0 +1,69 @@
+<div class="text-center">
+    <h1>Formulario de Preguntas</h1>
+</div>
+{{> buttons
+       message="Crear pregunta"
+        type = "primary"
+        tag = "a"
+        href = "http://localhost:3000/preguntas/add"
+     }}
+    <br><br><br>
+
+    <div class="input-group mb-3">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Recipient's username"
+        aria-label="Recipient's username"
+        aria-describedby="button-addon2"
+      />
+      {{> buttons
+        type="success"
+        message="Buscar"
+        nativeType="subtmi"}}
+    </div>
+
+    {{!-- Tabla de contenidos   --}}
+
+<h5>Gestión de preguntas</h5>
+<table id="grid" class="table table-striped table-bordered dt-responsive nowrap">
+            
+              <div>
+                <thead>
+                <tr>
+                    <th width="75%">Pregunta</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+              </div>
+          
+            {{#each pregunta}}
+                <tr>
+                    <td>{{title}}</td>
+                    <td>
+                      <div class="d-flex justify-content-around">
+                        <a class="btn btn-success" href="/preguntas/{{_id}}" >Ver</a>
+                   
+                        <a class="btn btn-warning"  href="/preguntas/editar/{{_id}}" >Editar</a>
+
+                        <form action="/preguntas/delete/{{_id}}?_method=post" method="POST">
+                          <div class="form-group">
+                            <button class="btn btn-danger" type="submit">Eliminar</button>
+                          </div>
+                        </form>
+                      </div>
+                   </th> </td>
+                </tr>
+                {{else}}
+                 <div class="card mx-auto">
+                    <div class="lead  d-flex flex-column align-items-center">
+                      <p>No hay preguntas ingresadas aún</p>
+                      <a href="/preguntas/add" class="btn btn-success btn-block">Crear una</a>
+                    </div>
+                 </div>
+
+                {{/each}}
+</table>     
+
+  </div>
+</div>

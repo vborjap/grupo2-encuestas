@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+ 
+    <meta charset="uft-8">
+    <meta name="viewport" content="width-device-width, initial-scale-1">
+    
+
+    <!-- Bootstrap -->
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+
+        <nav class="navbar navbar-light bg-light">
+
+
+            <div class="container"> 
+              <button type="button" class="btn btn-primary" onclick="window.location.href='/preguntas';">Atras</button>
+            </div >
+            <br><br>
+               <div class="d-flex align-items-center justify-content-center ">
+                <h3>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                    &nbsp&nbsp&nbsp&nbsp
+                    EDITAR PREGUNTA
+                </h3>
+                </div>
+            <br><br><br>
+        </nav>
+
+    <!-- Cambio hecho por: Rebeca Barrientos -->
+{{!--#each erorrs}}
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+  {{text}}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+    </span>  
+    </button>
+</div>
+{{/each--}}
+
+
+<div class="col-md-10 mx-auto">
+    <div class = "card">
+        <div class = "card-body">
+       
+
+        <form action="/preguntas/editarPreguntas/{{pregunta._id}}?_method=put" method="POST">
+        <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend"> 
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Pregunta: </span>
+                </div>
+             <input type="text" class="form-control" name="title" aria-label="Small" 
+             aria-describedby="inputGroup-sizing-sm" autofocus value="{{pregunta.title}}">
+         </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label class="form-control" for="inputGroupSelect01">Tipo respuesta: </label>
+                </div>
+                    <select class="custom-select form-control" readonly id="inputGroupSelect01" name="tipoR">
+                        <option selected>{{pregunta.tipoR}}</option>
+                    </select>
+
+            </div>
+                <div id="RDOM" class="px-6 py-12">
+            {{#if (equalString pregunta.tipoR "opcion-unica")}}
+                <div id="radio">
+                    {{#each pregunta.respuestas as |respuesta|}}
+                        <div class="my-3 flex g-1">
+                        <input type="radio" value="valor" name="respuesta" disabled />
+                        <input class="ml-3 p-2 border block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" type="text" name="respuestaText" value="{{ respuesta }}" placeholder="Valor del radiobutton" >
+                    </div>
+                    
+                    {{/each}}
+                    <!--div class="cursor-pointer inline-block px-3 py-2 bg-blue-500 text-white rounded shadow" onclick="resetRadio()"><button class="btn btn-primary btn-block">Reset</button></div-->
+                    <div class="cursor-pointer inline-block px-3 py-2 ml-5 bg-green-500 text-white rounded shadow" onclick="insertRadio()"><button class="btn btn-primary btn-block">Agregar opción</button></div>        
+                </div>
+            {{/if}}
+            {{#if (equalString pregunta.tipoR "opcion-multiple")}}
+                <div id="check">
+                    {{#each pregunta.respuestas as |respuesta|}}
+                        <div class="my-3 flex g-1">
+                        <input type="checkbox" value="valor" name="respuesta" disabled />
+                        <input class="ml-3 p-2 border block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" type="text" name="respuestaText" value="{{ respuesta }}" placeholder="Valor del checkbox" >
+                        <!--div class="cursor-pointer inline-block px-3 py-2 bg-blue-500 text-white rounded shadow" onclick="resetRadio2()">Reset</div-->
+                        <div class="cursor-pointer inline-block px-3 py-2 ml-5 bg-green-500 text-white rounded shadow" onclick="insertRadio2()">Agregar</div>
+                    </div>
+                    
+                    {{/each}}        
+                </div>
+            {{/if}}
+
+
+        </div>
+
+            <div class="form-group">
+                <button class="btn btn-success btn-block" type="submit">
+                    Guardar cambios
+                </button>
+            </div>
+            <div id="RDOM" class="px-6 py-12">
+
+        </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Fin de cambio hecho por: Rebeca Barrientos -->
+</html>
+<script src="/static/preguntas.js"></script>

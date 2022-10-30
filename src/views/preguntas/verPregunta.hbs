@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+ 
+    <meta charset="uft-8">
+    <meta name="viewport" content="width-device-width, initial-scale-1">
+    
+
+    <!-- Bootstrap -->
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+        <nav class="navbar navbar-light bg-light">
+
+
+            <div class="container"> 
+              <button type="button" class="btn btn-primary" onclick="window.location.href='/preguntas';">Atras</button>
+            </div >
+            <br><br>
+               <div class="d-flex align-items-center justify-content-center ">
+                <h3>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                    &nbsp&nbsp&nbsp&nbsp
+                    VER PREGUNTA
+                </h3>
+                </div>
+            <br><br><br>
+        </nav>
+{{!--#each erorrs}}
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+  {{text}}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+    </span>  
+    </button>
+</div>
+{{/each--}}
+
+<br>
+<div class="col-md-6 mx-auto">
+    <div class = "card">
+    <div class = "card-body">
+             {{#each pregunta}}
+        <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Pregunta: </span>
+                </div>
+             <label>&nbsp&nbsp&nbsp&nbsp{{title}}</label> 
+         </div>
+    <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01">Tipo respuesta: </label>
+            </div>
+            <label>&nbsp&nbsp&nbsp&nbsp{{tipoR}}</label> 
+    </div>
+    
+       <div id="RDOM" class="px-6 py-12">
+            {{#if (equalString tipoR "opcion-unica")}}
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="inputGroupSelect01">Opciones únicas: </label>
+                    </div>
+                 </div>
+                <div id="radio">
+                    {{#each respuestas as |respuesta|}}
+                        <div class="my-3 flex g-1">
+                        <input type="radio" value="valor" name="respuesta" disabled="disabled"/>
+                        <input class="ml-3 p-2 border block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" type="text" name="respuestaText" value="{{ respuesta }}" placeholder="Valor del radiobutton" disabled="disabled" >
+                    </div>
+                    
+                    {{/each}}        
+                </div>
+            {{/if}}
+            {{#if (equalString tipoR "opcion-multiple")}}
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="inputGroupSelect01">Opciones múltiples: </label>
+                    </div>
+                 </div>
+                <div id="check">
+                    {{#each respuestas as |respuesta|}}
+                        <div class="my-3 flex g-1">
+                        <input type="checkbox" value="valor" name="respuesta" disabled="disabled"/>
+                        <input class="ml-3 p-2 border block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" type="text" name="respuestaText" value="{{ respuesta }}" placeholder="Valor del checkbox" aria-readonly="true" readonly >
+                    </div>
+                    
+                    {{/each}}        
+                </div>
+                        {{/if}}
+            {{/each}}
+
+
+        </div>
+    </div>
+</div></div>
+</html>
+<script src="/static/preguntas.js"></script>
+
