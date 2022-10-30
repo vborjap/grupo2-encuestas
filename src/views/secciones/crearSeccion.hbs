@@ -15,7 +15,7 @@
                 </div>
                 
                 <div class="col text-end">
-                        <form action="/secciones/add" method="post">
+                        <form name="f1" action="/secciones/add" method="post" autocomplete="off">
                         <button type="submit" class="btn btn-primary" >Registrar</button>
                 </div>
         </div>
@@ -34,27 +34,36 @@
                                 </div>
                         </div>
                  
-                        <div>
+                        <div class="d-none">
                                 {{#each preguntas}}
-                                        <input name="preguntas" class="form-check-input" type="checkbox" value="{{_id}}" id="flexCheckDefault">
+                                
+                                        <input name="preguntas" class="form-check-input" type="checkbox" value="{{_id}}" id="{{_id}}" onchange="cha('{{_id}}');">
+                                        <label>{{pregunta}}</label>
+                                        
+                                        
                                 {{/each}}
                         </div>
+                        
 
                 </form>
 
                         <div class="form-group row mt-4">
-                                <div class="col-5 mb-3">
+                                <div class="col-5 mb-3 ">
                                         <label for="addPreguntas">Agregar preguntas</label>
                                         <select class="form-control mt-3" id="addPreguntas">
-                                                <option value=""></option>
+                                                
                                                 {{#each preguntas}}
                                                 <option value="{{_id}}">{{pregunta}}</option>
                                                 {{/each}}
                                                 
                                         </select>
-                                        
-                                        {{secciones}}
-                                        
+                                        <div class="mt-3 mb-3 text-end">
+                                                <button class="btn btn-outline-primary btn-sm" onclick="chec();">Agregar >></button>
+                                                <p id="msg"></p>
+                                        </div>
+                                       
+
+
                                 </div>
 
                                 <div class="col-7 mb-3">
@@ -62,26 +71,59 @@
                                         <table class="table table-bordered table-sm mt-3">
                                                 <thead class="table-dark">
                                                         <tr class="text-center">
-                                                                <th scope="col">N°</th>
+                                                                
                                                                 <th scope="col">Preguntas</th>
                                                                 <th scope="col">Opciones</th>
                                                         </tr>
                                                 </thead>
-                                                <tbody class="table-group-divider">
-                                                        <tr>
-                                                                <th id="idPrn" class="text-center" scope="row">1</th>
-                                                                <td>Pregunta #1</td>
-                                                                <td class="text-center">
-                                                                        <button class="btn btn-primary">Ver tipo de respuesta</button>
-                                                                </td>
-                                                        </tr>
-                                                        <tr>
-                                                                <th class="text-center" scope="row">2</th>
-                                                                <td>Pregunta #2</td>
-                                                                <td class="text-center">
-                                                                        <button class="btn btn-primary">Ver tipo de respuesta</button>
-                                                                </td>
-                                                        </tr>
+                                                <tbody class="table-group-divider" id="bTabla">
+                                                        {{#each preguntas}}
+                                                        <div >
+                                                                <tr class="{{_id}} d-none" id="">
+                                                                        
+                                                                        <td>{{pregunta}}</td>
+                                                                        <td class="text-center">
+                                                                                <button class="btn btn-primary" id="abrirDetails{{_id}}">Ver tipo de respuesta</button>
+                                                                                <button class="btn btn-danger" onclick="out('{{_id}}');">Quitar</button>
+                                                                        </td>
+                                                                </tr>
+                                                        </div>
+
+                                                        <dialog id="favDialog{{_id}}">
+                                                        
+                                                                <section class="text-center">
+                                                                        <h3>{{pregunta}}</h3><br>
+                                                                        <p>{{tipo_pregunta}}</p>
+                                                                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptate aut voluptates sint error pariatur saepe nulla assumenda at repudiandae. Dignissimos laborum quaerat aliquam corrupti dolorem nesciunt. Aperiam nihil quibusdam error!</p>
+                                                                        <p>Respuesta 1</p>
+                                                                        <p>Respuesta 2</p>
+                                                        
+                                                                </section>
+                                                                <menu class="text-center">
+                                                                        <button class="btn btn-danger" id="salir{{_id}}" type="reset">Salir</button>
+                                                                        
+                                                                </menu>
+                                                        
+                                                        </dialog>
+                                                        <script>
+                                                        (function() {
+                                                                var abrirButton = document.getElementById('abrirDetails'+'{{_id}}');
+                                                                var salirButton = document.getElementById('salir'+'{{_id}}');
+                                                                var favDialog = document.getElementById('favDialog'+'{{_id}}');
+
+                                                                abrirButton.addEventListener('click', function() {
+                                                                        favDialog.showModal();
+                                                                });
+                                                                salirButton.addEventListener('click', function() {
+                                                                        favDialog.close();
+                                                                });
+
+                                                        })();
+                                                        </script>
+
+                                                        {{/each}}
+                                                        
+                                                        
                                                         
                                                 </tbody>
                                         </table>
@@ -89,11 +131,107 @@
                                 </div>
 
                         </div>
+                        <div class="">
+                                 <ul>
+                                                {{#each secciones}}
+                                                <li>{{nombre}}</li>
+                                                <li>{{descripcion}}</li>
+                                                <li>
+                                                        <ul>
+                                                        {{#each preguntas}}
+                                                        <li>{{pregunta}}</li>
+                                                        <li>{{tipo_pregunta}}</li>
+                                                        {{/each}}
+                                                                
+                                                        </ul>
+                                                
+                                                       
+                                                </li>
+                                                {{/each}}
+                                                
+                                        </ul>
+                                        
+                                <!-- Simple pop-up dialog box, containing a form -->
+                                <dialog id="favDialog">
+                                <form method="dialog">
+                                <section>
+                                <label for="favAnimal">¿Desea eliminar el registro?</label>
+                                
+                                </section>
+                                <menu>
+                                <button id="cancelar" type="reset">Cancelar</button>
+                                <button id="confirmar">Confirmar</button>
+                                </menu>
+                                </form>
+                                </dialog>
+
+                                <menu>
+                                <button id="updateDetails">Update details</button>
+                                </menu>
+
+                                <script>
+                                (function() {
+                                var updateButton = document.getElementById('updateDetails');
+                                var cancelButton = document.getElementById('cancelar');
+                                var confirButton = document.getElementById('confirmar');
+                                var favDialog = document.getElementById('favDialog');
+
+                                // Update button opens a modal dialog
+                                updateButton.addEventListener('click', function() {
+                                favDialog.showModal();
+                                });
+
+                                // Form cancel button closes the dialog box
+                                cancelButton.addEventListener('click', function() {
+                                favDialog.close();
+                                });
+
+                                confirButton.addEventListener('click', function() {
+                                        alert("Eliminado");
+                                        reload();
+                                favDialog.close();
+                                
+                                });
+
+                                })();
+                                </script>
+                        </div>
                           
                        
         </div>
 
 </div>
 <script>
-        alert("Texto a mostrar");
+        //alert("Texto a mostrar");
+        function out(id){
+                
+
+                var elemen = document.getElementsByClassName(id)[0];
+                elemen.classList.add('d-none');
+
+                var a = document.getElementById(id);
+                console.log(a);
+                a.checked = false;
+                                
+        }
+        
+        function cha(id){
+
+                var element = document.getElementsByClassName(id)[0];
+                element.classList.remove('d-none');
+        }
+
+        function chec(){
+                var b = document.getElementById("addPreguntas").value;
+                console.log(b);
+
+                var c = document.getElementById(b);
+                cha(b);
+                console.log(c);
+                c.checked = true;
+        }
+
+
+        
+
 </script>
