@@ -46,7 +46,7 @@
     <div class = "card">
 
     <div class = "card-body">
-        <form action="/preguntas/nuevaPregunta" method="POST">
+        <form action="/preguntas" method="POST">
         <div class="input-group input-group-sm mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-sm">Pregunta: </span>
@@ -58,32 +58,35 @@
             <div class="input-group-prepend">
                 <label class="input-group-text" for="inputGroupSelect01">Tipo respuesta: </label>
             </div>
-            <select class="custom-select" id="inputGroupSelect01" name="tipoR">
-                <option selected>Seleccionar una opción</option>
-                <option value="Respuesta corta">Respuesta corta</option>
-                <option value="Respuesta larga">Respuesta larga</option>
-                <option value="Opcion">Opcion</option>
-                <option value="Opción varias respuestas">Opción varias respuestas</option>
-                <option value="Fecha">Fecha</option>
-                <option value="Hora">Hora</option>
+            <select 
+                class="p-2 border relative block w-full rounded border-gray-300 bg-transparent focus:z-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                name="tipoR" id="tipo"
+                onchange="cambiarPregunta(this)">
+                <option value="*" selected>Seleccionar opcion</option>
+                <option value="fecha">Fecha</option>
+                <option value="hora">Hora</option>
+                <option value="respuesta-corta">Respuesta corta</option>
+                <option value="respuesta-larga">Respuesta larga</option>
+                <option value="opcion-unica">Opcion unica</option>
+                <option value="opcion-multiple">Opcion multiple</option>
             </select>
     </div>
-
 
             <div class="form-group">
                 <button class="btn btn-primary btn-block" type="submit">
                     Save
                 </button>
             </div>
+            <br>
+            <div id="RDOM" class="px-6 py-12">
+
+        </div>
         </form>
     </div>
 </div>
 </div>
 <!-- Fin de cambio hecho por: Rebeca Barrientos -->
-
-
-
-
 </html>
+<script src="/static/preguntas.js"></script>
 
 

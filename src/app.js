@@ -38,6 +38,7 @@ app.engine('.hbs', engine({
     menuList
 }));
 
+app.use("/static", express.static(path.join(__dirname, "static")));
 app.set("view engine", '.hbs');
 
 //Rutas

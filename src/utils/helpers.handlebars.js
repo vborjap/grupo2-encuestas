@@ -10,3 +10,7 @@ export function json (context) {
 export function global(key) {
     return globalData[key];
 }
+
+export function equalString(cad1, cad2) {
+    return cad1 == cad2;
+}

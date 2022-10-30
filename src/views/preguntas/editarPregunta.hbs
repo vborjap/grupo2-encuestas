@@ -58,33 +58,56 @@
          </div>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <label class="input-group-text" for="inputGroupSelect01">Tipo respuesta: </label>
+                    <label class="form-control" for="inputGroupSelect01">Tipo respuesta: </label>
                 </div>
-                    <select class="custom-select" id="inputGroupSelect01" name="tipoR">
+                    <select class="custom-select form-control" readonly id="inputGroupSelect01" name="tipoR">
                         <option selected>{{pregunta.tipoR}}</option>
-                        <option value="Respuesta corta">Respuesta corta</option>
-                        <option value="Respuesta larga">Respuesta larga</option>
-                        <option value="Opcion">Opcion</option>
-                        <option value="Opción varias respuestas">Opción varias respuestas</option>
-                        <option value="Fecha">Fecha</option>
-                        <option value="Hora">Hora</option>
                     </select>
-       
-            </div>
 
+            </div>
+                <div id="RDOM" class="px-6 py-12">
+            {{#if (equalString pregunta.tipoR "opcion-unica")}}
+                <div id="radio">
+                    {{#each pregunta.respuestas as |respuesta|}}
+                        <div class="my-3 flex g-1">
+                        <input type="radio" value="valor" name="respuesta" disabled />
+                        <input class="ml-3 p-2 border block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" type="text" name="respuestaText" value="{{ respuesta }}" placeholder="Valor del radiobutton" >
+                    </div>
+                    
+                    {{/each}}
+                    <!--div class="cursor-pointer inline-block px-3 py-2 bg-blue-500 text-white rounded shadow" onclick="resetRadio()"><button class="btn btn-primary btn-block">Reset</button></div-->
+                    <div class="cursor-pointer inline-block px-3 py-2 ml-5 bg-green-500 text-white rounded shadow" onclick="insertRadio()"><button class="btn btn-primary btn-block">Agregar opción</button></div>        
+                </div>
+            {{/if}}
+            {{#if (equalString pregunta.tipoR "opcion-multiple")}}
+                <div id="check">
+                    {{#each pregunta.respuestas as |respuesta|}}
+                        <div class="my-3 flex g-1">
+                        <input type="checkbox" value="valor" name="respuesta" disabled />
+                        <input class="ml-3 p-2 border block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" type="text" name="respuestaText" value="{{ respuesta }}" placeholder="Valor del checkbox" >
+                        <!--div class="cursor-pointer inline-block px-3 py-2 bg-blue-500 text-white rounded shadow" onclick="resetRadio2()">Reset</div-->
+                        <div class="cursor-pointer inline-block px-3 py-2 ml-5 bg-green-500 text-white rounded shadow" onclick="insertRadio2()">Agregar</div>
+                    </div>
+                    
+                    {{/each}}        
+                </div>
+            {{/if}}
+
+
+        </div>
 
             <div class="form-group">
                 <button class="btn btn-success btn-block" type="submit">
                     Guardar cambios
                 </button>
             </div>
+            <div id="RDOM" class="px-6 py-12">
+
+        </div>
             </form>
         </div>
     </div>
 </div>
 <!-- Fin de cambio hecho por: Rebeca Barrientos -->
-
-
-
-
 </html>
+<script src="/static/preguntas.js"></script>
