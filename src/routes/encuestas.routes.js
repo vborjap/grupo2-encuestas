@@ -1,7 +1,6 @@
 import { Router } from "express";
 import registroEncuesta from "../models/encuesta.js"
 import url from 'url';
-// let ncp = require("copy-paste");
 import ncp from 'copy-paste';
 
 const router = Router();
@@ -17,8 +16,8 @@ function fullURL(req, value) {
 
 //Función para compartir un enlace 
 function copyToClipboard(req, valor) {
-    console.log(`Baia baia ${valor}`);
     let link = fullURL(req, valor);
+
     console.log(link);
     ncp.copy(link, () => "Copiado al portapapeles");
 }
@@ -38,7 +37,6 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
     let { identificador } = req.body;
     console.log(`URL: ${fullURL(req, identificador)}`);
-    // await registroEncuesta.findByIdAndDelete(identificador);
     await registroEncuesta.updateOne({ _id: identificador }, { activa: false });
     res.redirect("/encuestas");
 })
@@ -58,6 +56,7 @@ router.get("/crear", async (req, res) => {
 router.post("/crear", async (req, res) => {
     const { nomEncuesta, descripcion, secciones } = req.body;
     const nuevaEncuesta = new registroEncuesta({ nomEncuesta, descripcion, secciones })
+
     console.log(nuevaEncuesta);
     await nuevaEncuesta.save();
     res.redirect("/encuestas");
