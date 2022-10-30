@@ -1,6 +1,6 @@
 import { Router} from "express";
 import Secciones from "../models/Secciones";
-import Pregunta from "../models/Preguntas";
+import Pregunta from "../models/Pregunta";
 
 const router = Router();
 
@@ -20,12 +20,12 @@ router.get("/", (req, res) => {
 //ruta de vista crear seccion
 router.get("/addSeccion", async (req, res) => {
 	const pregunta = await Pregunta.find().lean()
-	const seccion = await Secciones.find({}).populate('preguntas').lean()
+	//const seccion = await Secciones.find({}).populate('preguntas').lean()
 	//console.log(seccion)
 	res.render('secciones/crearSeccion', {
 		layout: "dashboard",
 		preguntas: pregunta,
-		secciones: seccion
+		//secciones: seccion
 	});
 });
 
