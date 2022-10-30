@@ -32,12 +32,6 @@ router.get("/addSeccion", async (req, res) => {
 	});
 });
 
-router.get('/', async (req, res) => {
-	//res.send('Preguntas desde la base de datos');
-	const secciones = await Secciones.find().lean();
-	res.render('secciones/listarSecciones', {secciones, layout: "dashboard"});
-	
-});
 
 router.post("/add", async (req, res) => {
 
