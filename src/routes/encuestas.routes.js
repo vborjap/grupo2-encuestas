@@ -1,6 +1,7 @@
 import { Router } from "express";
 import registroEncuesta from "../models/encuesta.js"
 import url from 'url';
+import clipboard from 'clipboardy';
 
 const router = Router();
 
@@ -23,9 +24,10 @@ function fullURL(req, value) {
 // )}
 
 function copyToClipboard(req, valor){
-    console.log("Aloha")
-    navigator.clipboard.writeText(fullURL(req, valor))
-    console.log("Copiado")
+    let {portapapeles} = req.body;
+    let link = fullURL(req, portapapeles);
+    console.log(link);
+    clipboard.writeSync(link);
 }
 
 router.get("/", async (req, res) => {
