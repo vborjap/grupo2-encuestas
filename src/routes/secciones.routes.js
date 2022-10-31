@@ -22,7 +22,6 @@ router.get("/addSeccion", async (req, res) => {
 	res.render('secciones/crearSeccion', {
 		layout: "dashboard",
 		preguntas: pregunta,
-		//secciones: seccion
 	});
 });
 
@@ -34,7 +33,7 @@ router.get("/addSeccion", async (req, res) => {
 router.get("/:id", async (req, res) => {
 	const {id} = req.params
 	const seccion = await Secciones.find({_id: id}).populate('preguntas')
-	console.log(seccion)
+	//console.log(seccion)
 	res.render('secciones/verSeccion' ,{
 		layout: "dashboard",
 		seccion: seccion
