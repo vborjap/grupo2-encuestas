@@ -37,12 +37,12 @@ router.post("/encuesta", async (req, res) => {
     let {busqueda} = req.body;
     console.log(`HOla desde encuesta ${busqueda}`)
 
-    const encuestasFiltradas = await registroEncuesta.find({nomEncuesta: busqueda}).lean();
-    console.log(encuestasFiltradas);
+    const encuestas = await registroEncuesta.find({nomEncuesta: busqueda}).lean();
+    console.log(encuestas);
 
     res.render('verPlantillas', {
         layout: "dashboard",
-        encuestasFiltradas
+        encuestas
     });
 })
 
