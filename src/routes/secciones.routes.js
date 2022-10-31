@@ -35,11 +35,18 @@ router.post("/add", async (req, res) => {
 	const seccion = Secciones(req.body);
 	
 	const seccionSave = await seccion.save()
+	//console.log(seccionSave);
+	res.redirect("/secciones") 
+});
 
-	console.log(seccionSave);
-	
-	
-	res.redirect("/secciones")
-})
+//Método para eliminar una seccion
+router.get("/delete/:id", async (req, res) => {
+	const {id} = req.params
+	await Secciones.findByIdAndDelete(id)
+	res.redirect('/secciones')
+});
+
+//Método para guardar cambios en la edición de una seccion
+//*********************POR FAVOR INGRESE AQUI EL METODO PARA GUARDAR LA EDICION DE SECCION**********************
 
 export default router;
