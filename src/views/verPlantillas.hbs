@@ -15,18 +15,18 @@
 <div class="card mt-5">
     <div class="card-body">
         <div class="input-group mb-3">
+            <form action="encuestas/encuesta" method="GET">
             <input 
                 type="text" 
                 class="form-control" 
                 placeholder="Nombre de la encuesta o encuestador" 
                 aria-label="Nombre de la encuesta o encuestador"
-                name="nomEncuesta"
+                name="busqueda"
                 aria-describedby="button-addon2" />
-            {{> buttons
-            type="success"
-            message="Buscar"
-            nativeType="submit"
-            }}
+                    <div class="form-group">
+                        <button class="btn btn-danger me-5" type="submit" >Buscar</button>
+                    </div>
+                </form>
         </div>
 
         {{!-- Tabla de contenidos --}}

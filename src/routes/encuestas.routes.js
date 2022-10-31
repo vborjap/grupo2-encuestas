@@ -33,15 +33,16 @@ router.get("/", async (req, res) => {
     });
 })
 
-router.get("/", async (req, res) => {
-    let {nomEncuesta} = req.body;
+router.post("/encuesta", async (req, res) => {
+    let {busqueda} = req.body;
+    console.log(`HOla desde encuesta ${busqueda}`)
 
-    const encuestasFiltradas = await registroEncuesta.findOne({nomEncuesta: nomEncuesta}).lean();
+    const encuestasFiltradas = await registroEncuesta.find({nomEncuesta: busqueda}).lean();
     console.log(encuestasFiltradas);
 
     res.render('verPlantillas', {
         layout: "dashboard",
-        encuestas
+        encuestasFiltradas
     });
 })
 
