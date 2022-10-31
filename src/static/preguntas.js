@@ -1,5 +1,5 @@
 let inicio = '<div class="p-6 border rounded">';
-let final = "</div>";
+let final = "</div>"; 
 let hora = "";
 let fecha = '<input type="date" name="respuesta" min="2020-07-22" max="" value="2021-07-22" />';
 let rCorta = '<input class="p-2 border block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" type="text" name="respuesta" placeholder="Respuesta corta" readonly>';
