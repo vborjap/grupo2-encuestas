@@ -38,7 +38,7 @@
                                 {{#each preguntas}}
                                 
                                         <input name="preguntas" class="form-check-input" type="checkbox" value="{{_id}}" id="{{_id}}" onchange="cha('{{_id}}');">
-                                        <label>{{pregunta}}</label>
+                                        <label>{{title}}</label>
                                         
                                         
                                 {{/each}}
@@ -46,16 +46,14 @@
                         
 
                 </form>
-
                         <div class="form-group row mt-4">
-                                <div class="col-5 mb-3">
+                                <div class="col-5 mb-3 ">
                                         <label for="addPreguntas">Agregar preguntas</label>
                                         <select class="form-control mt-3" id="addPreguntas">
                                                 <option value=""></option>
                                                 {{#each preguntas}}
                                                 <option value="{{_id}}">{{title}}</option>
                                                 {{/each}}
-                                                
                                         </select>
                                         <div class="mt-3 mb-3 text-end">
                                                 <button class="btn btn-outline-primary btn-sm" onclick="chec();">Agregar >></button>
@@ -63,9 +61,8 @@
                                         </div>
                                        
 
-
+ 
                                 </div>
-
                                 <div class="col-7 mb-3">
                                         <label for="addPreguntas">Preguntas de la Sección</label>
                                         <table class="table table-bordered table-sm mt-3">
@@ -81,7 +78,7 @@
                                                         <div >
                                                                 <tr class="{{_id}} d-none" id="">
                                                                         
-                                                                        <td>{{pregunta}}</td>
+                                                                        <td>{{title}}</td>
                                                                         <td class="text-center">
                                                                                 <button class="btn btn-primary" id="abrirDetails{{_id}}">Ver tipo de respuesta</button>
                                                                                 <button class="btn btn-danger" onclick="out('{{_id}}');">Quitar</button>
@@ -92,11 +89,40 @@
                                                         <dialog id="favDialog{{_id}}">
                                                         
                                                                 <section class="text-center">
-                                                                        <h3>{{pregunta}}</h3><br>
-                                                                        <p>{{tipo_pregunta}}</p>
-                                                                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptate aut voluptates sint error pariatur saepe nulla assumenda at repudiandae. Dignissimos laborum quaerat aliquam corrupti dolorem nesciunt. Aperiam nihil quibusdam error!</p>
-                                                                        <p>Respuesta 1</p>
-                                                                        <p>Respuesta 2</p>
+                                                                        <h3>{{title}}</h3><br>
+                                                                        <p>{{tipoR}}</p>
+                                                                        {{#if (equalString tipoR "opcion-unica")}}
+                                                                                        <div class="input-group mb-3">
+                                                                                        <div class="input-group-prepend">
+                                                                                                <label class="input-group-text" for="inputGroupSelect01">Opciones únicas: </label>
+                                                                                        </div>
+                                                                                        </div>
+                                                                                        <div id="radio">
+                                                                                        {{#each respuestas as |respuesta|}}
+                                                                                                <div class="my-3 flex g-1">
+                                                                                                <input type="radio" value="valor" name="respuesta" disabled="disabled"/>
+                                                                                                <input class="ml-3 p-2 border block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" type="text" name="respuestaText" value="{{ respuesta }}" placeholder="Valor del radiobutton" disabled="disabled" >
+                                                                                        </div>
+                                                                                        
+                                                                                        {{/each}}        
+                                                                                        </div>
+                                                                                {{/if}}
+                                                                                {{#if (equalString tipoR "opcion-multiple")}}
+                                                                                        <div class="input-group mb-3">
+                                                                                        <div class="input-group-prepend">
+                                                                                                <label class="input-group-text" for="inputGroupSelect01">Opciones múltiples: </label>
+                                                                                        </div>
+                                                                                        </div>
+                                                                                        <div id="check">
+                                                                                        {{#each respuestas as |respuesta|}}
+                                                                                                <div class="my-3 flex g-1">
+                                                                                                <input class="d-none" type="checkbox" value="valor" name="respuesta" disabled="disabled"/>
+                                                                                                <input class="ml-3 p-2 border block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" type="text" name="respuestaText" value="{{ respuesta }}" placeholder="Valor del checkbox" aria-readonly="true" readonly >
+                                                                                        </div>
+                                                                                        
+                                                                                        {{/each}}        
+                                                                                        </div>
+                                                                                                {{/if}}
                                                         
                                                                 </section>
                                                                 <menu class="text-center">
@@ -127,9 +153,7 @@
                                                         
                                                 </tbody>
                                         </table>
-                                        
                                 </div>
-
                         </div>
                         <div class="">
                                  <ul>
@@ -139,8 +163,8 @@
                                                 <li>
                                                         <ul>
                                                         {{#each preguntas}}
-                                                        <li>{{pregunta}}</li>
-                                                        <li>{{tipo_pregunta}}</li>
+                                                        <li>{{title}}</li>
+                                                        <li>{{tipoR}}</li>
                                                         {{/each}}
                                                                 
                                                         </ul>
