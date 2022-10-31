@@ -1,4 +1,4 @@
- 
+
 <div class="container">
         
         <div class="row mt-3">
@@ -15,42 +15,36 @@
                 </div>
                 
                 <div class="col text-end">
-                        <form action="/secciones/add" method="post">
+                        <form name="f1" action="/secciones/add" method="post" autocomplete="off">
                         <button type="submit" class="btn btn-primary" >Registrar</button>
                 </div>
         </div>
-        <div class="row mt-3">
-                
-                        <div class="form-group row">
-                                <label for="inputNombreSeccion" class="col-sm-2 col-form-label">Nombre de la sección</label>
-                                <div class="col-10">
-                                        <input name="nombre" type="text" class="form-control" id="inputNombreSeccion" placeholder="Escriba un nombre">
-                                </div>
+        <div class="card row mt-3">
+                <!--Campo de nombre-->
+                <div class="form-group row mt-3">
+                        <label for="inputNombreSeccion" class="col-sm-2 col-form-label">Nombre de la sección</label>
+                        <div class="col-10">
+                                <input name="nombre" type="text" class="form-control" id="inputNombreSeccion" placeholder="Escriba un nombre" required>
                         </div>
-                        <div class="form-group row mt-3">
-                                <label for="inputDescripcion" class="col-sm-2 col-form-label">Descripción</label>
-                                <div class="col-10">
-                                            <textarea name="descripcion" class="form-control" id="inputDescripcion" placeholder="Escriba una descripción"></textarea>
-                                </div>
+                </div>
+                <!--Campo de descripción-->
+                <div class="form-group row mt-3">
+                        <label for="inputDescripcion" class="col-sm-2 col-form-label">Descripción</label>
+                        <div class="col-10">
+                                <textarea name="descripcion" class="form-control" id="inputDescripcion" placeholder="Escriba una descripción" required></textarea>
                         </div>
-                 
-                        <div class="d-none">
-                                {{#each preguntas}}
-                                
-                                        <input name="preguntas" class="form-check-input" type="checkbox" value="{{_id}}" id="{{_id}}" onchange="cha('{{_id}}');">
-                                        <label>{{title}}</label>
-                                        
-                                        
-                                {{/each}}
-                        </div>
-                        
-
+                </div>
+                <div class="d-none">
+                        {{#each preguntas}}
+                                <input name="preguntas" class="form-check-input" type="checkbox" value="{{_id}}" id="{{_id}}">
+                                <label>{{title}}</label>
+                        {{/each}}
+                </div>
                 </form>
                         <div class="form-group row mt-4">
                                 <div class="col-5 mb-3 ">
                                         <label for="addPreguntas">Agregar preguntas</label>
                                         <select class="form-control mt-3" id="addPreguntas">
-                                                <option value=""></option>
                                                 {{#each preguntas}}
                                                 <option value="{{_id}}">{{title}}</option>
                                                 {{/each}}
@@ -59,172 +53,205 @@
                                                 <button class="btn btn-outline-primary btn-sm" onclick="chec();">Agregar >></button>
                                                 <p id="msg"></p>
                                         </div>
-                                       
-
- 
                                 </div>
                                 <div class="col-7 mb-3">
                                         <label for="addPreguntas">Preguntas de la Sección</label>
                                         <table class="table table-bordered table-sm mt-3">
                                                 <thead class="table-dark">
                                                         <tr class="text-center">
-                                                                
-                                                                <th scope="col">Preguntas</th>
+                                                                <th scope="col" width="55%">Preguntas</th>
                                                                 <th scope="col">Opciones</th>
                                                         </tr>
                                                 </thead>
                                                 <tbody class="table-group-divider" id="bTabla">
                                                         {{#each preguntas}}
-                                                        <div >
-                                                                <tr class="{{_id}} d-none" id="">
-                                                                        
-                                                                        <td>{{title}}</td>
-                                                                        <td class="text-center">
-                                                                                <button class="btn btn-primary" id="abrirDetails{{_id}}">Ver tipo de respuesta</button>
-                                                                                <button class="btn btn-danger" onclick="out('{{_id}}');">Quitar</button>
-                                                                        </td>
-                                                                </tr>
-                                                        </div>
-
-                                                        <dialog id="favDialog{{_id}}">
-                                                        
-                                                                <section class="text-center">
-                                                                        <h3>{{title}}</h3><br>
-                                                                        <p>{{tipoR}}</p>
-                                                                        {{#if (equalString tipoR "opcion-unica")}}
+                                                                <div >
+                                                                        <tr class="{{_id}} d-none" id="">
+                                                                                <td>{{title}}</td>
+                                                                                <td class="text-center">
+                                                                                        <button class="btn btn-primary" id="abrirDetails{{_id}}">Ver tipo de respuesta</button>
+                                                                                        <button class="btn btn-danger" onclick="out('{{_id}}');">Quitar</button>
+                                                                                </td>
+                                                                        </tr>
+                                                                </div>
+                                                                <dialog id="favDialog{{_id}}" class="p-5">
+                                                                        <section class="text-center">
+                                                                                <h4>{{title}}</h4><br>
+                                                                                <!--Condicional para mostrar campo fecha-->
+                                                                                {{#if (equalString tipoR "fecha")}}
                                                                                         <div class="input-group mb-3">
-                                                                                        <div class="input-group-prepend">
-                                                                                                <label class="input-group-text" for="inputGroupSelect01">Opciones únicas: </label>
-                                                                                        </div>
-                                                                                        </div>
-                                                                                        <div id="radio">
-                                                                                        {{#each respuestas as |respuesta|}}
-                                                                                                <div class="my-3 flex g-1">
-                                                                                                <input type="radio" value="valor" name="respuesta" disabled="disabled"/>
-                                                                                                <input class="ml-3 p-2 border block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" type="text" name="respuestaText" value="{{ respuesta }}" placeholder="Valor del radiobutton" disabled="disabled" >
-                                                                                        </div>
-                                                                                        
-                                                                                        {{/each}}        
+                                                                                                <input type="date" name="respuesta" min="1990-12-31" max="" value="2022-01-01" />
                                                                                         </div>
                                                                                 {{/if}}
-                                                                                {{#if (equalString tipoR "opcion-multiple")}}
+                                                                                <!--Condicional para mostrar campo hora-->
+                                                                                {{#if (equalString tipoR "hora")}}
                                                                                         <div class="input-group mb-3">
-                                                                                        <div class="input-group-prepend">
-                                                                                                <label class="input-group-text" for="inputGroupSelect01">Opciones múltiples: </label>
+                                                                                                <input type="time" name="respuesta" min="" max="" value="00:00:00" />
                                                                                         </div>
+                                                                                {{/if}}
+                                                                                <!--Condicional para mostrar campo respuesta corta-->
+                                                                                {{#if (equalString tipoR "respuesta-corta")}}
+                                                                                        <div class="input-group mb-3">
+                                                                                                <input class="p-2 border block w-full" type="text" name="respuesta" placeholder="Respuesta...">
                                                                                         </div>
-                                                                                        <div id="check">
-                                                                                        {{#each respuestas as |respuesta|}}
-                                                                                                <div class="my-3 flex g-1">
-                                                                                                <input class="d-none" type="checkbox" value="valor" name="respuesta" disabled="disabled"/>
-                                                                                                <input class="ml-3 p-2 border block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" type="text" name="respuestaText" value="{{ respuesta }}" placeholder="Valor del checkbox" aria-readonly="true" readonly >
+                                                                                {{/if}}
+                                                                                <!--Condicional para mostrar campo respuesta larga-->
+                                                                                {{#if (equalString tipoR "respuesta-larga")}}
+                                                                                        <div class="input-group mb-3">
+                                                                                                <textarea class="p-2 border block w-full" type="text" name="respuesta" placeholder="Respuesta..."></textarea>
                                                                                         </div>
-                                                                                        
-                                                                                        {{/each}}        
+                                                                                {{/if}}
+                                                                                <!--Condicional para mostrar campo respuesta opcion unica-->
+                                                                                {{#if (equalString tipoR "opcion-unica")}}
+                                                                                        <div class="ml-5 mr-5">
+                                                                                                <div class="input-group mb-3">
+                                                                                                        <label class="form-label" for="respuesta">Opciones: </label>
+                                                                                                </div>
+                                                                                                <div>
+                                                                                                        {{#each respuestas as |respuesta|}}
+                                                                                                                <div class="form-check mb-2">
+                                                                                                                        <input class="form-check-input" type="radio" name="respuesta" id="flexRadioDefault1">
+                                                                                                                        <label class="form-check-label" for="flexRadioDefault1">
+                                                                                                                                {{ respuesta }}
+                                                                                                                        </label>
+                                                                                                                </div>
+                                                                                                        {{/each}}        
+                                                                                                </div>
                                                                                         </div>
-                                                                                                {{/if}}
-                                                        
-                                                                </section>
-                                                                <menu class="text-center">
-                                                                        <button class="btn btn-danger" id="salir{{_id}}" type="reset">Salir</button>
-                                                                        
-                                                                </menu>
-                                                        
-                                                        </dialog>
-                                                        <script>
-                                                        (function() {
-                                                                var abrirButton = document.getElementById('abrirDetails'+'{{_id}}');
-                                                                var salirButton = document.getElementById('salir'+'{{_id}}');
-                                                                var favDialog = document.getElementById('favDialog'+'{{_id}}');
+                                                                                {{/if}}
+                                                                                <!--Condicional para mostrar campo respuesta opcion multiple-->
+                                                                                {{#if (equalString tipoR "opcion-multiple")}}
+                                                                                        <div class="ml-5 mr-5">
+                                                                                                <div class="input-group mb-3">
+                                                                                                        <label class="form-label" for="respuesta">Opciones: </label>
+                                                                                                </div>
+                                                                                                <div>
+                                                                                                        {{#each respuestas as |respuesta|}}
+                                                                                                                <div class="form-check mb-2">
+                                                                                                                        <input class="form-check-input" type="checkbox" name="respuesta" id="flexCheckDefault">
+                                                                                                                        <label class="form-check-label" for="flexCheckDefault">
+                                                                                                                        {{respuesta}}
+                                                                                                                        </label>
+                                                                                                                </div>
+                                                                                                        {{/each}}        
+                                                                                                </div>
+                                                                                        </div>
+                                                                                {{/if}}
+                                                                
+                                                                        </section>
+                                                                        <div class="row text-left">
+                                                                                <button class="btn btn-danger" id="salir{{_id}}" type="reset">Salir</button>
+                                                                        </div>
+                                                                </dialog>
+                                                                <script>
+                                                                        (function() {
+                                                                                var abrirButton = document.getElementById('abrirDetails'+'{{_id}}');
+                                                                                var salirButton = document.getElementById('salir'+'{{_id}}');
+                                                                                var favDialog = document.getElementById('favDialog'+'{{_id}}');
 
-                                                                abrirButton.addEventListener('click', function() {
-                                                                        favDialog.showModal();
-                                                                });
-                                                                salirButton.addEventListener('click', function() {
-                                                                        favDialog.close();
-                                                                });
+                                                                                abrirButton.addEventListener('click', function() {
+                                                                                        favDialog.showModal();
+                                                                                });
+                                                                                salirButton.addEventListener('click', function() {
+                                                                                        favDialog.close();
+                                                                                });
 
-                                                        })();
-                                                        </script>
+                                                                        })();
+                                                                </script>
 
                                                         {{/each}}
-                                                        
-                                                        
-                                                        
                                                 </tbody>
                                         </table>
                                 </div>
                         </div>
-                        <div class="">
-                                 <ul>
-                                                {{#each secciones}}
+                        <!--<div class="">
+                                <ul>
+                                        {{#each secciones}}
                                                 <li>{{nombre}}</li>
                                                 <li>{{descripcion}}</li>
                                                 <li>
                                                         <ul>
-                                                        {{#each preguntas}}
-                                                        <li>{{title}}</li>
-                                                        <li>{{tipoR}}</li>
-                                                        {{/each}}
-                                                                
+                                                                {{#each preguntas}}
+                                                                        <li>{{title}}</li>
+                                                                        <li>{{tipoR}}</li>
+                                                                {{/each}}
                                                         </ul>
-                                                
-                                                       
                                                 </li>
-                                                {{/each}}
-                                                
-                                        </ul>
-                                        
-                                <!-- Simple pop-up dialog box, containing a form -->
-                                <dialog id="favDialog">
-                                <form method="dialog">
-                                <section>
-                                <label for="favAnimal">¿Desea eliminar el registro?</label>
+                                        {{/each}}
+                                </ul>
                                 
-                                </section>
-                                <menu>
-                                <button id="cancelar" type="reset">Cancelar</button>
-                                <button id="confirmar">Confirmar</button>
-                                </menu>
-                                </form>
+                                NOTA: Simple pop-up dialog box, containing a form
+                                <dialog id="favDialog">
+                                        <form method="dialog">
+                                                <section>
+                                                <label for="favAnimal">¿Desea eliminar el registro?</label>
+                                                
+                                                </section>
+                                                <menu>
+                                                        <button id="cancelar" type="reset">Cancelar</button>
+                                                        <button id="confirmar">Confirmar</button>
+                                                </menu>
+                                        </form>
                                 </dialog>
 
                                 <menu>
-                                <button id="updateDetails">Update details</button>
+                                        <button id="updateDetails">Update details</button>
                                 </menu>
 
                                 <script>
-                                (function() {
-                                var updateButton = document.getElementById('updateDetails');
-                                var cancelButton = document.getElementById('cancelar');
-                                var confirButton = document.getElementById('confirmar');
-                                var favDialog = document.getElementById('favDialog');
+                                        (function() {
+                                                var updateButton = document.getElementById('updateDetails');
+                                                var cancelButton = document.getElementById('cancelar');
+                                                var confirButton = document.getElementById('confirmar');
+                                                var favDialog = document.getElementById('favDialog');
 
-                                // Update button opens a modal dialog
-                                updateButton.addEventListener('click', function() {
-                                favDialog.showModal();
-                                });
+                                                // Update button opens a modal dialog
+                                                updateButton.addEventListener('click', function() {
+                                                        favDialog.showModal();
+                                                });
 
-                                // Form cancel button closes the dialog box
-                                cancelButton.addEventListener('click', function() {
-                                favDialog.close();
-                                });
+                                                // Form cancel button closes the dialog box
+                                                cancelButton.addEventListener('click', function() {
+                                                        favDialog.close();
+                                                });
 
-                                confirButton.addEventListener('click', function() {
-                                        alert("Eliminado");
-                                        reload();
-                                favDialog.close();
-                                
-                                });
+                                                confirButton.addEventListener('click', function() {
+                                                        alert("Eliminado");
+                                                        reload();
+                                                        favDialog.close();
+                                        
+                                                });
 
-                                })();
+                                        })();
                                 </script>
-                        </div>
+                        </div>-->
                           
                        
         </div>
 
 </div>
 <script>
-        alert("Texto a mostrar");
+        function out(id){
+                var elemen = document.getElementsByClassName(id)[0];
+                elemen.classList.add('d-none');
+
+                var a = document.getElementById(id);
+                console.log(a);
+                a.checked = false;
+                                
+        }
+        function cha(id){
+
+                var element = document.getElementsByClassName(id)[0];
+                element.classList.remove('d-none');
+        }
+        function chec(){
+                var b = document.getElementById("addPreguntas").value;
+                console.log(b);
+
+                var c = document.getElementById(b);
+                cha(b);
+                console.log(c);
+                c.checked = true;
+        }
 </script>
