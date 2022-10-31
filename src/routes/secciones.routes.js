@@ -17,11 +17,8 @@ router.get("/", async (req, res) => {
 //Ruta de vista Crear Seccion
 router.get("/addSeccion", async (req, res) => {
 	const pregunta = await Pregunta.find().lean()
-
-
-	const seccion = await Secciones.find().populate('preguntas')
-	//console.log(pregunta)
-	
+	//const seccion = await Secciones.find({}).populate('preguntas').lean()
+	//console.log(seccion)
 	res.render('secciones/crearSeccion', {
 		layout: "dashboard",
 		preguntas: pregunta,
