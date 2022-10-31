@@ -4,7 +4,7 @@ import Pregunta from "../models/Pregunta";
 
 const router = Router();
 
-//CONSULTAS Y RENDERIZADO DE VISTAS
+//CONSULTAS Y RENDERIZADO DE VISTAS SECCIONES
 //Ruta de vista Listar Secciones
 router.get("/", async (req, res) => {
 	const seccion = await Secciones.find().lean()
