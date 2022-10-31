@@ -34,7 +34,7 @@ router.get("/", async (req, res) => {
 })
 
 //eliminar encuesta logicamente
-router.post("/", async (req, res) => {
+router.post("/eliminar", async (req, res) => {
     let { identificador } = req.body;
     console.log(`URL: ${fullURL(req, identificador)}`);
     await registroEncuesta.updateOne({ _id: identificador }, { activa: false });
