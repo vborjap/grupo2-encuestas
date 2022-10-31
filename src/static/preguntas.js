@@ -1,6 +1,6 @@
 let inicio = '<div class="p-6 border rounded">';
 let final = "</div>";
-let hora = '<input type="time" name="respuesta" min="" max="" value="00:00:00" />';
+let hora = "";
 let fecha = '<input type="date" name="respuesta" min="2020-07-22" max="" value="2021-07-22" />';
 let rCorta = '<input class="p-2 border block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" type="text" name="respuesta" placeholder="Respuesta corta" readonly>';
 let rLarga = '<textarea class="p-2 border block wn-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" type="text" name="respuesta" placeholder="Respuesta larga" ></textarea>';
@@ -32,7 +32,7 @@ function cambiarPregunta(e) {
     }
 
     if(e.value == "hora") {
-        el.innerHTML = inicio + hora + final;
+
     }
     if(e.value == "fecha") {
         el.innerHTML = inicio + fecha + final;
