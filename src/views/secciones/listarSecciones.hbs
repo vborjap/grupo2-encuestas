@@ -1,17 +1,16 @@
-<br></br>
-<div class="text-center">
+<div class="text-center mt-3">
     <h1>Listado de Secciones</h1>
 </div>
-<br></br>
-<div>
+<div class="mt-1">
     {{> buttons
     message="Crear seccion"
     type = "primary"
     tag = "a"
     href = "secciones/addSeccion"
+    
     }}
 </div>
-<div class="card mt-5">
+<div class="card mt-2">
     <div class="card-body">
 
         <div class="input-group mb-3">
@@ -41,22 +40,19 @@
             <tr>
                 <td>{{nombre}}</td>
                 <td>
-                    <div class="d-flex justify-content-around">
-                        <a class="btn btn-success" href="">Ver</a>
+                    <div class=" justify-content-around">
+                        <a class="btn btn-success" href="secciones/{{_id}}">Ver</a>
 
                         <a class="btn btn-warning" href="">Editar</a>
 
-                        <form action="" method="POST">
-                            <div class="form-group">
-                                <button class="btn btn-danger" type="submit">Eliminar</button>
-                            </div>
-                        </form>
+                        <a class="btn btn-danger" href="secciones/delete/{{_id}}">Eliminar</a>
+
                     </div>
                     </th>
                 </td>
             </tr>
             {{else}}
-            <div class="card mx-auto">
+            <div class="card mx-auto pb-3 pt-2 mb-2">
                 <div class="lead  d-flex flex-column align-items-center">
                     <p>No hay secciones ingresadas aún</p>
                     <a href="secciones/addSeccion" class="btn btn-success btn-block">Crear una</a>
