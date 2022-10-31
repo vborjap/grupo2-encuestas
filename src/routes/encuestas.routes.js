@@ -33,7 +33,16 @@ router.get("/", async (req, res) => {
     });
 })
 
-router.post("/encuesta", async (req, res) => {
+//eliminar encuesta logicamente
+router.post("/eliminar", async (req, res) => {
+    let { identificador } = req.body;
+    console.log(`URL: ${fullURL(req, identificador)}`);
+    await registroEncuesta.updateOne({ _id: identificador }, { activa: false });
+    res.redirect("/encuestas");
+})
+
+router.post("/", async (req, res) => {
+
     let {busqueda} = req.body;
     console.log(`HOla desde encuesta ${busqueda}`)
 
@@ -46,13 +55,6 @@ router.post("/encuesta", async (req, res) => {
     });
 })
 
-//eliminar encuesta logicamente
-router.post("/eliminar", async (req, res) => {
-    let { identificador } = req.body;
-    console.log(`URL: ${fullURL(req, identificador)}`);
-    await registroEncuesta.updateOne({ _id: identificador }, { activa: false });
-    res.redirect("/encuestas");
-})
 
 //Método que renderiza el formulario para crear encuesta
 router.get("/crear", async (req, res) => {
