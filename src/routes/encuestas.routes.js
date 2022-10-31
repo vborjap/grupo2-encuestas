@@ -14,7 +14,7 @@ function fullURL(req, value) {
     })
 }
 
-//Función para compartir un enlace 
+//Compartir encuesta 
 function copyToClipboard(req, valor) {
     let link = fullURL(req, valor);
 
@@ -33,7 +33,7 @@ router.get("/", async (req, res) => {
     });
 })
 
-//eliminar encuesta logicamente
+//Eliminar encuesta logicamente
 router.post("/eliminar", async (req, res) => {
     let { identificador } = req.body;
     console.log(`URL: ${fullURL(req, identificador)}`);
@@ -41,20 +41,18 @@ router.post("/eliminar", async (req, res) => {
     res.redirect("/encuestas");
 })
 
+//Filtrar de encuestas
 router.post("/", async (req, res) => {
 
     let {busqueda} = req.body;
-    console.log(`HOla desde encuesta ${busqueda}`)
 
     const encuestas = await registroEncuesta.find({nomEncuesta: busqueda}).lean();
-    console.log(encuestas);
 
     res.render('verPlantillas', {
         layout: "dashboard",
         encuestas
     });
 })
-
 
 //Método que renderiza el formulario para crear encuesta
 router.get("/crear", async (req, res) => {
