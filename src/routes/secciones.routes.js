@@ -46,7 +46,7 @@ router.post("/add", async (req, res) => {
 	const seccion = Secciones(req.body);
 	const seccionSave = await seccion.save()
 	//console.log(seccionSave);
-	res.redirect("/secciones")
+	res.redirect("/secciones") 
 });
 
 //Método para eliminar una seccion
