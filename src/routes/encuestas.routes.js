@@ -33,6 +33,18 @@ router.get("/", async (req, res) => {
     });
 })
 
+router.get("/", async (req, res) => {
+    let {nomEncuesta} = req.body;
+
+    const encuestasFiltradas = await registroEncuesta.findOne({nomEncuesta: nomEncuesta}).lean();
+    console.log(encuestasFiltradas);
+
+    res.render('verPlantillas', {
+        layout: "dashboard",
+        encuestas
+    });
+})
+
 //eliminar encuesta logicamente
 router.post("/eliminar", async (req, res) => {
     let { identificador } = req.body;
