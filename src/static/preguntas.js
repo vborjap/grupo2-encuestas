@@ -4,10 +4,19 @@ let hora = "";
 let fecha = '<input type="date" name="respuesta" min="2020-07-22" max="" value="2021-07-22" />';
 let rCorta = '<input class="p-2 border block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" type="text" name="respuesta" placeholder="Respuesta corta" readonly>';
 let rLarga = '<textarea class="p-2 border block wn-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" type="text" name="respuesta" placeholder="Respuesta larga" ></textarea>';
-let oUnica = '<div id="radio"><div class="cursor-pointer inline-block px-3 py-2 bg-blue-500 text-white rounded shadow" onclick="resetRadio()"> <button class="btn btn-primary btn-block">Reset</button></div><div class="cursor-pointer inline-block px-3 py-2 ml-5 bg-green-500 text-white rounded shadow" onclick="insertRadio()"><button class="btn btn-primary btn-block">Agregar</button></div><div class="my-3 flex g-1"><input type="radio" value="valor" name="respuesta" />'
- +'<input class="ml-3 p-2 border block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" type="text" name="respuestaText" placeholder="Valor del radiobutton" ></div><div class="my-3 flex g-1"><input type="radio" value="valor" name="respuesta" /><input class="ml-3 p-2 border block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" type="text" name="respuestaText" placeholder="Valor del radiobutton" ></div></div>';
-//let oMultiple = '<div id="check"><div class="my-3"><input type="checkbox" value="" name="respuesta[]" /></div></div>';
-let oMultiple = '<div id="check"> <div class="cursor-pointer inline-block px-3 py-2 bg-blue-500 text-white rounded shadow" onclick="resetRadio2()"> <button class="btn btn-warning btn-block">Reset</button></div><div class="cursor-pointer inline-block px-3 py-2 ml-5 bg-green-500 text-white rounded shadow" onclick="insertRadio2()"><button class="btn btn-primary btn-block">Agregar</button></div>'
+let oUnica = '<div id="radio"><div class="cursor-pointer inline-block px-3 py-2 bg-blue-500 text-white rounded shadow" onclick="resetRadio()">'
+//+' <button class="btn btn-primary btn-block">Reset</button>'
++'</div><div class="cursor-pointer inline-block px-3 py-2 ml-5 bg-green-500 text-white rounded shadow" onclick="insertRadio()">'
++'<button class="btn btn-warning btn-block">Agregar opción</button>'
++'</div><div class="my-3 flex g-1"><input type="radio" value="valor" name="respuesta" />'
+ +'<input class="ml-3 p-2 border block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" type="text" name="respuestaText" placeholder="Valor del radiobutton" ></div>'
+ +'<div class="my-3 flex g-1"><input type="radio" value="valor" name="respuesta" /><input class="ml-3 p-2 border block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" type="text" name="respuestaText" placeholder="Valor del radiobutton" ></div>'
+ +'</div>';
+
+ let oMultiple = '<div id="check"> <div class="cursor-pointer inline-block px-3 py-2 bg-blue-500 text-white rounded shadow" onclick="resetRadio2()">'
+// +'<button class="btn btn-warning btn-block">Reset</button>'
+ +'</div><div class="cursor-pointer inline-block px-3 py-2 ml-5 bg-green-500 text-white rounded shadow" onclick="insertRadio2()">'
+ +'<button class="btn btn-warning btn-block">Agregar opción</button></div>'
 +'<div class="my-3 flex g-1"><input type="checkbox"  value="valor" name="respuesta" />'
 +'<input class="ml-3 p-2 border block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" type="text" name="respuestaText" placeholder="Valor del radiobutton" ></input>'
 +'</div><div class="my-3 flex g-1"><input type="checkbox"  value="valor" name="respuesta" />'
