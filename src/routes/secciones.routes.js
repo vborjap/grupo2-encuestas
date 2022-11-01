@@ -1,5 +1,5 @@
 import { Router} from "express";
-import Secciones from "../models/Secciones";
+import Secciones from "../models/secciones";
 import Pregunta from "../models/Pregunta";
 
 const router = Router();
