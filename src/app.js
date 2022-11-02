@@ -43,4 +43,7 @@ app.set("view engine", '.hbs');
 app.use(express.json())
 app.use(indexRoutes);
 
+//Configuracion para entender datos desde formulario
+app.use(express.urlencoded({extended: false}));
+
 export default app;

@@ -3,7 +3,7 @@ import encuentasRoutes from "./encuestas.routes.js";
 import preguntasRoutes from "./preguntas.routes.js"
 import respuestasRoutes from "./respuestas.routes.js"
 import seccionesRoutes from "./secciones.routes.js"
-import usuariosRoutes from "./usuarios.routes.js"
+import { router as usuariosRoutes } from "./usuarios.routes.js"
 
 const router = Router();
 //
