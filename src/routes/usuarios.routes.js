@@ -5,6 +5,21 @@ router.get("/", (req, res) => {
 	res.send("Estas en usuarios")
 });
 
+//creamos la ruta para Agregar Usuario
+router.get("/signup", (req, res) => {
+	res.render('signup', {
+		layout: "dashboard"
+	});
+});
+
+//Creamos la ruta para Agregar usuario desde Post
+router.post("/signup", (req, res) => {
+	res.send("Gracias por los datos");
+});
+
+
+//router.get('/usuarios/signup', renderSignUpForm);
+
 export default router;
 
 /*
