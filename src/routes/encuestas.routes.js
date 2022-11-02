@@ -2,6 +2,11 @@ import { Router } from "express";
 import registroEncuesta from "../models/encuesta.js"
 import url from 'url';
 import ncp from 'copy-paste';
+/*
+//IMPORTS UTILIZADOS PARA EL METODO DE GUARDAR RESPUESTAS
+
+import Pregunta from "../models/Pregunta.js";
+import Secciones from "../models/secciones.js";*/
 
 const router = Router();
 
@@ -108,5 +113,36 @@ router.post("/ver", (req, res) => {
     copyToClipboard(req, portapapeles);
     res.redirect("/encuestas/ver");
 })
+
+//POSIBLES METODOS PARA GUARDAR RESPUESTAS
+
+/*
+//Generado por IA
+
+router.post("/guardar", async (req, res) => {
+    const { pregunta, respuesta } = req.body;
+    const nuevaRespuesta = new Pregunta({ pregunta, respuesta })
+    console.log(nuevaRespuesta);
+    await nuevaRespuesta.save();
+    res.redirect("/encuestas");
+});
+
+//Generado por César
+
+router.post("/:id", async (req, res) => {
+    const encuesta = await registroEncuesta.findById(req.params.id).lean();
+    const secciones = await Secciones.findById(req.params.id).lean();//(encuesta.secciones).lean();
+    const preguntas = await Pregunta.findById(req.params.id).lean();//(secciones.preguntas).lean();
+    const respuestas = new Pregunta(preguntas.respuestas);
+    console.log(respuestas);
+    await respuestas.save();
+    res.render('verEncuesta', {
+        layout: "dashboard",
+        encuesta,
+        secciones,
+        preguntas,
+        respuestas
+    });
+})*/
 
 export default router;
