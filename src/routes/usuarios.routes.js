@@ -4,8 +4,11 @@ const router = Router();
 //Incluimos nuestro modelo de datos de Collection Usuarios
 const Usuario = require('../models/Users');
 
+//Creamos la ruta de pantalla principal de usuarios
 router.get("/", (req, res) => {
-	res.send("Estas en usuarios")
+	res.render('listadoUsuarios', {
+		layout: "dashboard"
+	});
 });
 
 //creamos la ruta para Agregar Usuario
@@ -59,11 +62,17 @@ router.post("/nuevoUsuario", async (req, res) => {
 	});
 });
 
-//Creamos la Ruta para generacion del listado de usuarios desde base de datos
-router.get("/signup", (req, res) => {
-	res.render('signup', {
+//Creamos la ruta de pantalla Editar usuarios
+router.get("/editarUsuario", (req, res) => {
+	res.render('editarUsuario', {
 		layout: "dashboard"
 	});
 });
 
+//Creamos la ruta de pantalla Editar usuarios
+router.get("/verUsuario", (req, res) => {
+	res.render('verUsuario', {
+		layout: "dashboard"
+	});
+});
 export { router };
