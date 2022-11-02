@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-12">
-        <h1 class="text-center">Editar encuesta</h1>
+        <h1 class="text-center">Editar Encuesta</h1>
     </div>
 </div>
 <!--Form-->
@@ -32,35 +32,36 @@
     </div>
      <!--Secciones-->
      <div class="row mt-5 d-flex justify-content-end">
-        <div class="col-3">
+        <div class="col-12 col-md-3">
             <select class="form-select" aria-label="Default select example" name="secciones">
                 <option selected value="{{editar.secciones}}">{{editar.secciones}}</option>
-                <option value="Uno">One</option>
-                <option value="Dos">Two</option>
-                <option value="Tres">Three</option>
+                {{#each secciones}}
+                <option value="{{nombre}}">{{nombre}}</option>
+                {{/each}}
             </select>
         </div>
 </form>
 
-        <div class="col-8">
+        <div class="col-12 col-md-8 d-flex justify-content-center mt-2">
              <!--Tabla-->
-        <table class="table w-75 text-center">
+        <table class="table table-hover table-bordered border-success w-75 text-center">
          <thead>
                  <tr>
                     <th scope="col">Secciones</th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Acción</th>
                 </tr>
          </thead>
          <tbody>
                {{#each registros}}
-                <!--<li>{{this}}</li>-->
+                {{#if this.activa}}
            
                  <tr>
                      <td>{{secciones}}</td>
                      <td>{{nomEncuesta}}</td>
                      <td><button type="button" class="btn btn-success">Ver Preguntas</button></td>
                 </tr>
+                {{/if}}
             {{/each}}
           </tbody>
        </table>

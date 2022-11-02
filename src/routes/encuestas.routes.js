@@ -2,6 +2,8 @@ import { Router } from "express";
 import registroEncuesta from "../models/encuesta.js"
 import url from 'url';
 import ncp from 'copy-paste';
+import Secciones from "../models/secciones.js"
+import { ADDRGETNETWORKPARAMS } from "dns";
 /*
 //IMPORTS UTILIZADOS PARA EL METODO DE GUARDAR RESPUESTAS
 
@@ -62,11 +64,13 @@ router.post("/", async (req, res) => {
 //Método que renderiza el formulario para crear encuesta
 router.get("/crear", async (req, res) => {
     const registros = await registroEncuesta.find({}).lean();
+    const secciones=await Secciones.find({}).lean();
     //mostramos en consola los registros traidos de la BDD.
     console.log(registros);
     res.render('crearEncuesta', {
         layout: "dashboard",
-        registros
+        registros,
+        secciones
     });
 })
 
@@ -86,11 +90,14 @@ router.get("/editar/:id", async (req, res) => {
     const registros = await registroEncuesta.find({}).lean();
     //obtener registro a editar
     const editar = await registroEncuesta.findById(req.params.id).lean();
+    //Obtenemos las secciones
+    const secciones=await Secciones.find({}).lean();
     //console.log(registros);
     res.render('editarEncuesta', {
         layout: "dashboard",
         registros,
-        editar
+        editar,
+        secciones
     });
 });
 
