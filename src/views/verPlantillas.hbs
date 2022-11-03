@@ -46,10 +46,10 @@
                         <td>{{this.nomEncuesta}}</td>
                         <!--Ver-->
                         <td class="d-flex">     
-                            <button type="button" class="btn btn-success me-1" href="http://localhost:3000/encuestas/ver/{{_id}}">Ver</button>  
+                            <button type="button" class="btn btn-success me-1" href="http://localhost:3000/encuestas/ver/{{this._id}}">Ver</button>  
                         
                             <!--Editar-->
-                            <a href="http://localhost:3000/encuestas/editar/{{_id}}"><button type="submit" class="btn btn-warning me-1" >Editar</button></a>
+                            <a href="http://localhost:3000/encuestas/editar/{{this._id}}"><button type="submit" class="btn btn-warning me-1" >Editar</button></a>
                             <!--Eliminar-->
                             <form action="encuestas/eliminar" method="POST">
                                 <div class="form-group">

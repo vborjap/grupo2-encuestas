@@ -103,20 +103,25 @@ router.post("/editar/:id", async (req, res) => {
     console.log("ACTUALIZADO.........")
 });
 
-//metodo para mostrar vista de encuestas generada por usuario
-router.get("/ver/:id", async (req, res) => {
-    const {id} = req.params;
-    let encuesta = await registroEncuesta.findById({_id: id}).populate({
-       path: "secciones",
-       populate: {
-        path: "preguntas"
-       } 
-    }).lean();
-    console.log(encuesta);
-    res.render("encuestas/verEncuesta", {
-        dato: encuesta
+router.get("/ver",(req,res) => {
+    res.render("verEncuesta", {
     });
-});
+})
+
+//metodo para mostrar vista de encuestas generada por usuario
+// router.get("/ver/:id", async (req, res) => {
+//     const {id} = req.params;
+//     let encuesta = await registroEncuesta.findById({_id: id}).populate({
+//        path: "secciones",
+//        populate: {
+//         path: "preguntas"
+//        } 
+//     }).lean();
+//     console.log(encuesta);
+//     res.render("encuestas/verEncuesta", {
+//         dato: encuesta
+//     });
+// });
 
 router.post("/ver", (req, res) => {
     let { portapapeles } = req.body;
