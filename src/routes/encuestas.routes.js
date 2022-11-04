@@ -123,6 +123,29 @@ router.get("/ver",(req,res) => {
 //     });
 // });
 
+router.post("/guardar", async  (req, res) => {
+    let keys = Object.keys(req.body);
+    let values = Object.values(req.body);
+    let preguntas = [], encuesta;
+    for(let i =0; i < keys.length; i++) {
+        if(keys[i] == "encuesta") {
+            encuesta = values[i];
+        }
+        if(keys[i].match(/respuesta*/)) {
+            preguntas.push({
+                idPregunta: keys[i].split("-")[1],
+                respuestas: values[i]
+            });
+        }
+    };
+    let nuevaRespuesta = new Respuesta({
+        idEncuesta: encuesta,
+        preguntas: preguntas
+    });
+    await nuevaRespuesta.save();
+    res.redirect("/encuestas/ver");
+});
+
 router.post("/ver", (req, res) => {
     let { portapapeles } = req.body;
     copyToClipboard(req, portapapeles);
