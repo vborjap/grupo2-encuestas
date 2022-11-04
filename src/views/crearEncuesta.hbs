@@ -35,7 +35,7 @@
             <select class="form-select" aria-label="Default select example" name="secciones">
                 <option selected value="N/A">Selecciona una sección...</option>
                 {{#each secciones}}
-                <option value="{{nombre}}">{{nombre}}</option>
+                <option value="{{_id}}">{{nombre}}</option>
                 {{/each}}
             </select>
         </div>
@@ -46,7 +46,7 @@
         <table class="table table-hover table-bordered border-success w-75 text-center">
          <thead>
                  <tr>
-                    <th scope="col">Sección</th>
+                    <th scope="col">N°</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Acción</th>
                 </tr>
@@ -56,7 +56,7 @@
                {{#if this.activa}}
            
                  <tr>
-                     <td>{{secciones}}</td>
+                     <td>{{inc @index}}</td>
                      <td>{{nomEncuesta}}</td>
                      <td><button type="button" class="btn btn-success">Ver Preguntas</button></td>
                 </tr>

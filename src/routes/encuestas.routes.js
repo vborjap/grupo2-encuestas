@@ -55,7 +55,13 @@ router.post("/", async (req, res) => {
         encuestas
     });
 })
+ //contador
+ var Handlebars = require('handlebars');
 
+ Handlebars.registerHelper("inc", function(value, options)
+ {
+     return parseInt(value) + 1;
+ });
 //Método que renderiza el formulario para crear encuesta
 router.get("/crear", async (req, res) => {
     const registros = await registroEncuesta.find({}).lean();
@@ -73,8 +79,6 @@ router.get("/crear", async (req, res) => {
 router.post("/crear", async (req, res) => {
     const { nomEncuesta, descripcion, secciones } = req.body;
     const nuevaEncuesta = new registroEncuesta({ nomEncuesta, descripcion, secciones })
-
-    console.log(nuevaEncuesta);
     await nuevaEncuesta.save();
     res.redirect("/encuestas");
 });
@@ -82,9 +86,11 @@ router.post("/crear", async (req, res) => {
 //Vista Editar
 router.get("/editar/:id", async (req, res) => {
     //llenar tabla
-    const registros = await registroEncuesta.find({}).lean();
+    const registros = await registroEncuesta.find({}).populate('secciones').lean();
     //obtener registro a editar
-    const editar = await registroEncuesta.findById(req.params.id).lean();
+    const editar = await registroEncuesta.findById(req.params.id).populate('secciones').lean();
+
+   
     //Obtenemos las secciones
     const secciones=await Secciones.find({}).lean();
     //console.log(registros);
