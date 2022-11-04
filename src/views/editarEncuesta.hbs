@@ -34,9 +34,11 @@
      <div class="row mt-5 d-flex justify-content-end">
         <div class="col-12 col-md-3">
             <select class="form-select" aria-label="Default select example" name="secciones">
-                <option selected value="{{editar.secciones}}">{{editar.secciones}}</option>
+               {{#each editar.secciones as |seccion|}}
+                <option selected value="{{seccion._id}}">{{seccion.nombre}}</option>
+                {{/each}}
                 {{#each secciones}}
-                <option value="{{nombre}}">{{nombre}}</option>
+                <option value="{{_id}}">{{nombre}}</option>
                 {{/each}}
             </select>
         </div>
@@ -47,22 +49,30 @@
         <table class="table table-hover table-bordered border-success w-75 text-center">
          <thead>
                  <tr>
-                    <th scope="col">Secciones</th>
+                    <th scope="col">N°</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Acción</th>
                 </tr>
          </thead>
          <tbody>
+          
                {{#each registros}}
+               
                 {{#if this.activa}}
-           
-                 <tr>
-                     <td>{{secciones}}</td>
+               
+                 <tr>      
+                     <td>{{inc @index}}</td>    
                      <td>{{nomEncuesta}}</td>
                      <td><button type="button" class="btn btn-success">Ver Preguntas</button></td>
                 </tr>
+                     
                 {{/if}}
             {{/each}}
+             
+           
+                
+          
+          
           </tbody>
        </table>
         </div>
