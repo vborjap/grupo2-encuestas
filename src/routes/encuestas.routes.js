@@ -161,7 +161,7 @@ router.post("/guardar", async  (req, res) => {
         preguntas: preguntas
     });
     await nuevaRespuesta.save();
-    res.redirect("/encuestas/ver");
+    res.redirect("/encuestas");
 });
 
 
