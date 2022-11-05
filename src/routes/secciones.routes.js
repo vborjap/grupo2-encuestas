@@ -7,11 +7,22 @@ const router = Router();
 //CONSULTAS Y RENDERIZADO DE VISTAS
 //Ruta de vista Listar Secciones
 router.get("/", async (req, res) => {
-	const seccion = await Secciones.find().lean()
-	res.render('secciones/listarSecciones' ,{
+	if(req.query.buscar){
+		const seccion = await Secciones.find({nombre:{$regex:'.*'+req.query.buscar+'.*', $options:"i"}}).lean()
+		res.render('secciones/listarSecciones' ,{
 		layout: "dashboard",
-		seccion: seccion
-	})
+		seccion: seccion,
+		buscar: req.query.buscar
+		})
+	}else {
+		const seccion = await Secciones.find().lean()
+		res.render('secciones/listarSecciones' ,{
+		layout: "dashboard",
+		seccion: seccion,
+		buscar: ""
+		})
+	}
+	
 });
 
 //Ruta de vista Crear Seccion
@@ -27,6 +38,20 @@ router.get("/addSeccion", async (req, res) => {
 
 //Ruta de vista Editar Seccion
 //*********************POR FAVOR INGRESE AQUI EL METODO PARA RENDERIZAR LA VISTA DE EDICION DE SECCION**********************
+router.get("/editSeccion/:id", async (req, res) => {
+	try {
+		const datosSecciones = await Secciones.findById(req.params.id).populate('preguntas').lean()
+		const pregunta = await Pregunta.find().lean()
+
+		res.render("secciones/editarSeccion", {
+			datosSecciones,
+			preguntas: pregunta,
+			layout: "dashboard",
+		})
+	} catch (error) {
+		console.log(error.message);
+	}
+});
 
 
 //Ruta de vista Ver Seccion
@@ -58,5 +83,11 @@ router.get("/delete/:id", async (req, res) => {
 
 //Método para guardar cambios en la edición de una seccion
 //*********************POR FAVOR INGRESE AQUI EL METODO PARA GUARDAR LA EDICION DE SECCION**********************
+router.post("/editSeccion/:id", async (req, res) =>{
+
+	await Secciones.findByIdAndUpdate(req.params.id, req.body);
+
+	res.redirect("/secciones")
+})
 
 export default router;

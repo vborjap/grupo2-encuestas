@@ -12,16 +12,14 @@
 </div>
 <div class=" mt-2">
     <div class="card-body">
-
+        <form action="/secciones" method="get">
         <div class="input-group mb-3">
-            <!--<input type="text" class="form-control" placeholder="Nombre de la seccion" aria-label="Nombre de la seccion"
-                aria-describedby="button-addon2" />-->
-            {{!--> buttons
-            type="success"
-            message="Buscar"
-            nativeType="submit"
-            --}}
+            <input name="buscar" type="text" class="form-control" placeholder="Nombre de la seccion" aria-label="Nombre de la seccion"
+                aria-describedby="button-addon2" value="{{buscar}}"/>
+            <button type="submit" class="btn btn-success">Buscar</button>
+
         </div>
+        </form>
 
         {{!-- Tabla de contenidos --}}
         <h5>Gestión de secciones</h5>
@@ -43,7 +41,7 @@
                     <div class=" justify-content-around">
                         <a class="btn btn-success" href="secciones/{{_id}}">Ver</a>
 
-                        <a class="btn btn-warning" href="">Editar</a>
+                        <a class="btn btn-warning" href="secciones/editSeccion/{{_id}}">Editar</a>
 
                         <a class="btn btn-danger" href="secciones/delete/{{_id}}">Eliminar</a>
 
