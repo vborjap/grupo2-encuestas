@@ -3,6 +3,7 @@ import registroEncuesta from "../models/encuesta.js"
 import url from 'url';
 import ncp from 'copy-paste';
 import Secciones from "../models/secciones.js"
+import Respuesta from "../models/respuesta.js"
 import { ADDRGETNETWORKPARAMS } from "dns";
 
 const router = Router();
