@@ -10,7 +10,7 @@
                         }}
                 </div>
                 <div class="col-6 text-center">
-                        <h1></h1>
+                        <h1>hola</h1>
                 </div>
                 
                 <div class="col text-end">
@@ -22,22 +22,16 @@
         </div>
 
 
-<div class="row">
-    <div class="col-12">
-        <h1 class="text-center">Nombre de la encuesta</h1>
-         
-    </div>
-</div>
-
 <form action="" method="POST">
     <button class="btn btn-primary" type="submnit" name="identificador" value={{dato._id}} > Compartir </button>
 </form> 
 
+{{!-- Se muestra la encuesta ya configurada por el usuario --}}
 <div class="card my-5" style="max-width: 800px; margin-left: auto; margin-right: auto">
     <div class="card-body">
         <h1>{{ dato.nomEncuesta }}</h1>
         <p>{{ dato.descripcion }}</p>
-        <form action="/encuestas/guardar" method="post">
+        <form action="/ver/guardar" method="post">
             <input type="text" name="encuesta" value="{{ dato._id }}">
             {{#each dato.secciones as |seccion|}}
                 <hr>
@@ -87,6 +81,7 @@
                 {{/each}}
             {{/each}}
             <br>
+            {{!-- Boton que envia la encuesta a la base de datos --}}
             {{> buttons 
                 nativeType="submit"
                 message="Enviar"

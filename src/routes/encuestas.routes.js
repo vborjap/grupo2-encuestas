@@ -114,6 +114,7 @@ router.post("/editar/:id", async (req, res) => {
     res.redirect("/encuestas");
 });
 
+//metodo para ver plantilla verEncuesta -- Edward Mejia MA17078
 router.post("/ver/:id", (req, res) => {
     let { identificador } = req.body;
     let link = copyToClipboard(req,identificador);
@@ -121,7 +122,7 @@ router.post("/ver/:id", (req, res) => {
     res.redirect("/encuestas");
 })
 
-//metodo para mostrar vista de encuestas generada por usuario
+//metodo para mostrar vista de encuestas generada por usuario -- Edward Mejia MA17078
 router.get("/ver/:id", async (req, res) => {
     const {id} = req.params;
     let encuesta = await registroEncuesta.findById({_id: id}).populate({
