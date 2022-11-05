@@ -27,6 +27,20 @@ router.get("/addSeccion", async (req, res) => {
 
 //Ruta de vista Editar Seccion
 //*********************POR FAVOR INGRESE AQUI EL METODO PARA RENDERIZAR LA VISTA DE EDICION DE SECCION**********************
+router.get("/editSeccion/:id", async (req, res) => {
+	try {
+		const datosSecciones = await Secciones.findById(req.params.id).populate('preguntas').lean()
+		const pregunta = await Pregunta.find().lean()
+
+		res.render("secciones/editarSeccion", {
+			datosSecciones,
+			preguntas: pregunta,
+			layout: "dashboard",
+		})
+	} catch (error) {
+		console.log(error.message);
+	}
+});
 
 
 //Ruta de vista Ver Seccion
@@ -58,5 +72,11 @@ router.get("/delete/:id", async (req, res) => {
 
 //Método para guardar cambios en la edición de una seccion
 //*********************POR FAVOR INGRESE AQUI EL METODO PARA GUARDAR LA EDICION DE SECCION**********************
+router.post("/editSeccion/:id", async (req, res) =>{
+
+	await Secciones.findByIdAndUpdate(req.params.id, req.body);
+
+	res.redirect("/secciones")
+})
 
 export default router;
