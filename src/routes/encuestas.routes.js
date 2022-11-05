@@ -37,7 +37,7 @@ function copyToClipboard(req) {
 router.get("/", async (req, res) => {
 
     const encuestas = await registroEncuesta.find({}).lean();
-    console.log(encuestas);
+  
 
     res.render('verPlantillas', {
         layout: "dashboard",
@@ -65,19 +65,18 @@ router.post("/", async (req, res) => {
         encuestas
     });
 })
- //contador
+ //contador 
  var Handlebars = require('handlebars');
 
  Handlebars.registerHelper("inc", function(value, options)
  {
      return parseInt(value) + 1;
  });
-//Método que renderiza el formulario para crear encuesta
+
+//Método que renderiza el formulario para crear encuesta --by Anderson Velásquez VJ21002
 router.get("/crear", async (req, res) => {
     const registros = await registroEncuesta.find({}).lean();
     const secciones=await Secciones.find({}).lean();
-    //mostramos en consola los registros traidos de la BDD.
-    console.log(registros);
     res.render('crearEncuesta', {
         layout: "dashboard",
         registros,
@@ -85,7 +84,7 @@ router.get("/crear", async (req, res) => {
     });
 })
 
-//Método para recibir y guardar en la base de datos
+//Método para recibir y guardar en la base de datos --by Anderson Velásquez VJ21002
 router.post("/crear", async (req, res) => {
     const { nomEncuesta, descripcion, secciones } = req.body;
     const nuevaEncuesta = new registroEncuesta({ nomEncuesta, descripcion, secciones })
@@ -93,17 +92,14 @@ router.post("/crear", async (req, res) => {
     res.redirect("/encuestas");
 });
 
-//Vista Editar
+//Vista Editar --by Anderson Velásquez VJ21002
 router.get("/editar/:id", async (req, res) => {
     //llenar tabla
     const registros = await registroEncuesta.find({}).populate('secciones').lean();
     //obtener registro a editar
     const editar = await registroEncuesta.findById(req.params.id).populate('secciones').lean();
-
-   
     //Obtenemos las secciones
     const secciones=await Secciones.find({}).lean();
-    //console.log(registros);
     res.render('editarEncuesta', {
         layout: "dashboard",
         registros,
@@ -111,12 +107,11 @@ router.get("/editar/:id", async (req, res) => {
         secciones
     });
 });
-
+//Método para recibir y guardar en la base de datos --by Anderson Velásquez VJ21002
 router.post("/editar/:id", async (req, res) => {
     const { nomEncuesta, descripcion, secciones } = req.body;
     await registroEncuesta.findByIdAndUpdate(req.params.id, { nomEncuesta, descripcion, secciones });
     res.redirect("/encuestas");
-    console.log("ACTUALIZADO.........")
 });
 
 router.post("/ver/:id", (req, res) => {
