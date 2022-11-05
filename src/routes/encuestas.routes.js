@@ -109,9 +109,11 @@ router.post("/editar/:id", async (req, res) => {
     console.log("ACTUALIZADO.........")
 });
 
-router.get("/ver",(req,res) => {
-    res.render("verEncuesta", {
-    });
+router.post("/ver/:id", (req, res) => {
+    let { id } = req.params;
+    let link = copyToClipboard(req, id);
+    console.log(link)
+    res.redirect("/encuestas");
 })
 
 //metodo para mostrar vista de encuestas generada por usuario
@@ -152,10 +154,5 @@ router.post("/guardar", async  (req, res) => {
     res.redirect("/encuestas/ver");
 });
 
-router.post("/ver", (req, res) => {
-    let { portapapeles } = req.body;
-    copyToClipboard(req, portapapeles);
-    res.redirect("/encuestas/ver");
-})
 
 export default router;
