@@ -115,19 +115,19 @@ router.get("/ver",(req,res) => {
 })
 
 //metodo para mostrar vista de encuestas generada por usuario
-// router.get("/ver/:id", async (req, res) => {
-//     const {id} = req.params;
-//     let encuesta = await registroEncuesta.findById({_id: id}).populate({
-//        path: "secciones",
-//        populate: {
-//         path: "preguntas"
-//        } 
-//     }).lean();
-//     console.log(encuesta);
-//     res.render("encuestas/verEncuesta", {
-//         dato: encuesta
-//     });
-// });
+router.get("/ver/:id", async (req, res) => {
+    const {id} = req.params;
+    let encuesta = await registroEncuesta.findById({_id: id}).populate({
+       path: "secciones",
+       populate: {
+        path: "preguntas"
+       } 
+    }).lean();
+    console.log(encuesta);
+    res.render("encuestas/verEncuesta", {
+        dato: encuesta
+    });
+});
 
 router.post("/guardar", async  (req, res) => {
     let keys = Object.keys(req.body);

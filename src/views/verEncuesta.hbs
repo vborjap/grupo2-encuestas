@@ -1,7 +1,97 @@
-<br></br>
-<div class="text-center">
-    <h1>Nombre de la encuesta</h1>
+<div class="container">
+        
+        <div class="row mt-3">
+                <div class="col ">
+                        {{> buttons
+                        message="Atrás"
+                        type = "success"
+                        tag = "a"
+                        href = "/encuestas"
+                        }}
+                </div>
+                <div class="col-6 text-center">
+                        <h1></h1>
+                </div>
+                
+                <div class="col text-end">
+                        
+                </div>
+        </div>
+        <div class="card row mt-3">
+                {{_id}}
+        </div>
+
+
+<div class="row">
+    <div class="col-12">
+        <h1 class="text-center">Nombre de la encuesta</h1>
+         
+    </div>
 </div>
+
 <form action="" method="POST">
     <button class="btn btn-primary" type="submnit" name="portapapeles" value="999"> Compartir </button>
-</form>
+</form> 
+
+<div class="card my-5" style="max-width: 800px; margin-left: auto; margin-right: auto">
+    <div class="card-body">
+        <h1>{{ dato.nomEncuesta }}</h1>
+        <p>{{ dato.descripcion }}</p>
+        <form action="/ver/guardar" method="post">
+            <input type="text" name="encuesta" value="{{ dato._id }}">
+            {{#each dato.secciones as |seccion|}}
+                <hr>
+                <h2>{{ seccion.nombre }}</h2>
+                <p>{{ seccion.descripcion }}</p>
+                {{#each seccion.preguntas as |pregunta|}}
+                    <div class="my-3 rounded border p-3">
+                        <h4>{{ pregunta.title }}</h4>
+
+                        {{#if (equalString pregunta.tipoR "opcion-unica") }}
+                            {{#each pregunta.respuestas as |respuesta|}}
+                                <div>
+                                    
+                                    <input type="radio" name="respuesta-{{pregunta._id}}" value="{{ respuesta }}">
+                                    <label for="req">{{ respuesta }}</label>
+                                </div>
+                            {{/each}}
+                        {{/if}}
+
+                        {{#if (equalString pregunta.tipoR "opcion-multiple") }}
+                            {{#each pregunta.respuestas as |respuesta|}}
+                                <div>
+                                    
+                                    <input type="checkbox" name="respuesta-{{pregunta._id}}" value="{{ respuesta }}">
+                                    <span>{{ respuesta }}</span>
+                                </div>
+                            {{/each}}
+                        {{/if}}
+
+                        {{#if (equalString pregunta.tipoR "respuesta-corta") }}
+                            {{#each pregunta.respuestas as |respuesta|}}
+                                <div>
+                                    <input class="form-control" type="text" name="respuesta-{{pregunta._id}}" value="{{ respuesta }}">
+                                </div>
+                            {{/each}}
+                        {{/if}}
+
+                        {{#if (equalString pregunta.tipoR "respuesta-larga") }}
+                            {{#each pregunta.respuestas as |respuesta|}}
+                                <div>
+                                    <textarea class="form-control" name="respuesta-{{pregunta._id}}">{{ respuesta }}</textarea>
+                                </div>
+                            {{/each}}
+                        {{/if}}
+
+                    </div>
+                {{/each}}
+            {{/each}}
+            <br>
+            {{> buttons 
+                nativeType="submit"
+                message="Enviar"
+                type="success"}}
+        </form>
+    </div>
+</div>
+
