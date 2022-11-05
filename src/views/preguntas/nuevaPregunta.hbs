@@ -19,13 +19,8 @@
               <button type="button" class="btn btn-primary" onclick="window.location.href='/preguntas';">Atras</button>
             </div >
             <br><br>
-               <div class="d-flex align-items-center justify-content-center ">
-                <h3>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                    &nbsp&nbsp&nbsp&nbsp
-                    CREAR PREGUNTA
-                </h3>
+               <div class="col-12">
+                    <h1 class="text-center">Crear Pregunta</h1>
                 </div>
             <br><br><br>
         </nav>
@@ -52,7 +47,7 @@
                     <span class="input-group-text" id="inputGroup-sizing-sm">Pregunta: </span>
                 </div>
              <input type="text" class="form-control" name="title" aria-label="Small" 
-             aria-describedby="inputGroup-sizing-sm" placeholder="Title" autofocus>
+             aria-describedby="inputGroup-sizing-sm" required  placeholder="Title" autofocus >
          </div>
     <div class="input-group mb-3">
             <div class="input-group-prepend">
@@ -62,10 +57,10 @@
                 class="p-2 border relative block w-full rounded border-gray-300 bg-transparent focus:z-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                 name="tipoR" id="tipo"
                 onchange="cambiarPregunta(this)">
-                <option value="*" selected>Seleccionar opcion</option>
+                <!--option value="*">Seleccionar opcion</option-->
                 <option value="fecha">Fecha</option>
                 <option value="hora">Hora</option>
-                <option value="respuesta-corta">Respuesta corta</option>
+                <option value="respuesta-corta" selected>Respuesta corta</option>
                 <option value="respuesta-larga">Respuesta larga</option>
                 <option value="opcion-unica">Opcion unica</option>
                 <option value="opcion-multiple">Opcion multiple</option>
