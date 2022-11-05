@@ -12,7 +12,9 @@ router.use(urlencoded({
 }));
 
 router.get("/", (req, res) => {
-    res.render('index');
+    res.render('index',{
+        layout: "dashboard"
+    });
 });
 
 // Habilitar cuando se implemente autenticacion
