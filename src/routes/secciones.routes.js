@@ -7,11 +7,22 @@ const router = Router();
 //CONSULTAS Y RENDERIZADO DE VISTAS
 //Ruta de vista Listar Secciones
 router.get("/", async (req, res) => {
-	const seccion = await Secciones.find().lean()
-	res.render('secciones/listarSecciones' ,{
+	if(req.query.buscar){
+		const seccion = await Secciones.find({nombre:{$regex:'.*'+req.query.buscar+'.*', $options:"i"}}).lean()
+		res.render('secciones/listarSecciones' ,{
 		layout: "dashboard",
-		seccion: seccion
-	})
+		seccion: seccion,
+		buscar: req.query.buscar
+		})
+	}else {
+		const seccion = await Secciones.find().lean()
+		res.render('secciones/listarSecciones' ,{
+		layout: "dashboard",
+		seccion: seccion,
+		buscar: ""
+		})
+	}
+	
 });
 
 //Ruta de vista Crear Seccion
