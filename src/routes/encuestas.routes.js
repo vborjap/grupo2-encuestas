@@ -124,7 +124,7 @@ router.get("/ver/:id", async (req, res) => {
        } 
     }).lean();
     console.log(encuesta);
-    res.render("encuestas/verEncuesta", {
+    res.render("verEncuesta", {
         dato: encuesta
     });
 });
