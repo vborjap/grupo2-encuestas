@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-12">
-        <h1 class="text-center">Nueva encuesta</h1>
+        <h1 class="text-center">Nueva Encuesta</h1>
     </div>
 </div>
 <!--Form-->
@@ -16,8 +16,8 @@
     <div class="col-4 text-end">
         <p>Ingresa el nombre de la encuesta:</p>
     </div>
-    <div class="col-8">
-        <input class="w-75"type="text" name="nomEncuesta" required >
+    <div class="col-6">
+        <input class="form-control" type="text" name="nomEncuesta" required >
     </div>
     </div>
     <!--Descripcion-->
@@ -25,8 +25,8 @@
         <div class="col-4 text-end">
             Descripción:
         </div>
-        <div class="col-8">
-            <textarea name="descripcion" cols="30" rows="10" class="w-75" placeholder="(Opcional)"></textarea>
+        <div class="col-6">
+            <textarea name="descripcion" cols="30" rows="10" class="form-control" placeholder="(Opcional)"></textarea>
         </div>
     </div>
      <!--Secciones-->
@@ -34,32 +34,33 @@
         <div class="col-12 col-md-3">
             <select class="form-select" aria-label="Default select example" name="secciones">
                 <option selected value="N/A">Selecciona una sección...</option>
-                <option value="Uno">One</option>
-                <option value="Dos">Two</option>
-                <option value="Tres">Three</option>
+                {{#each secciones}}
+                <option value="{{_id}}">{{nombre}}</option>
+                {{/each}}
             </select>
         </div>
 </form>
 
         <div class="col-12 col-md-8 d-flex justify-content-center mt-2">
              <!--Tabla-->
-        <table class="table w-75 text-center">
+        <table class="table table-hover table-bordered border-success w-75 text-center">
          <thead>
                  <tr>
-                    <th scope="col">Sección</th>
+                    <th scope="col">N°</th>
                     <th scope="col">Nombre</th>
-                    <th scope="col"></th>
+                    <th scope="col">Acción</th>
                 </tr>
          </thead>
          <tbody>
              {{#each registros}}
-                <!--<li>{{this}}</li>-->
+               {{#if this.activa}}
            
                  <tr>
-                     <td>{{secciones}}</td>
+                     <td>{{inc @index}}</td>
                      <td>{{nomEncuesta}}</td>
-                     <td><button type="button" class="btn btn-success">Ver Preguntas</button></td>
+                     <td><a href="http://localhost:3000/encuestas/ver/{{this._id}}"><button type="button" class="btn btn-success">Ver Preguntas</button></a></td>
                 </tr>
+                {{/if}}
             {{/each}}
           </tbody>
        </table>

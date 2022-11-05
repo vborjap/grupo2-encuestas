@@ -1,0 +1,64 @@
+<div class="text-center mt-3">
+    <h1>Listado de Secciones</h1>
+</div>
+<div class="mt-1">
+    {{> buttons
+    message="Crear seccion"
+    type = "primary"
+    tag = "a"
+    href = "secciones/addSeccion"
+    
+    }}
+</div>
+<div class=" mt-2">
+    <div class="card-body">
+        <form action="/secciones" method="get">
+        <div class="input-group mb-3">
+            <input name="buscar" type="text" class="form-control" placeholder="Nombre de la seccion" aria-label="Nombre de la seccion"
+                aria-describedby="button-addon2" value="{{buscar}}"/>
+            <button type="submit" class="btn btn-success">Buscar</button>
+
+        </div>
+        </form>
+
+        {{!-- Tabla de contenidos --}}
+        <h5>Gestión de secciones</h5>
+        <table id="grid" class="table table-striped table-bordered dt-responsive nowrap">
+
+            <div>
+                <thead>
+                    <tr>
+                        <th width="75%">Secciones</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+            </div>
+
+            {{#each seccion}}
+            <tr>
+                <td>{{nombre}}</td>
+                <td>
+                    <div class=" justify-content-around">
+                        <a class="btn btn-success" href="secciones/{{_id}}">Ver</a>
+
+                        <a class="btn btn-warning" href="secciones/editSeccion/{{_id}}">Editar</a>
+
+                        <a class="btn btn-danger" href="secciones/delete/{{_id}}">Eliminar</a>
+
+                    </div>
+                    </th>
+                </td>
+            </tr>
+            {{else}}
+            <div class="card mx-auto pb-3 pt-2 mb-2">
+                <div class="lead  d-flex flex-column align-items-center">
+                    <p>No hay secciones ingresadas aún</p>
+                    <a href="secciones/addSeccion" class="btn btn-success btn-block">Crear una</a>
+                </div>
+            </div>
+
+            {{/each}}
+        </table>
+    </div>
+
+</div>

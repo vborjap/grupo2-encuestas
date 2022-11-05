@@ -8,7 +8,9 @@ import morgan from "morgan";
 import methodOverride from "method-override";
 
 
-const app = express();
+const app = express();  
+
+
 
 morgan.token('host', (req, res) => {
     return req.hostname;
@@ -40,6 +42,7 @@ app.engine('.hbs', engine({
 
 app.use("/static", express.static(path.join(__dirname, "static")));
 app.set("view engine", '.hbs');
+
 
 //Rutas
 app.use(express.json())

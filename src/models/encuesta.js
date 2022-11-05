@@ -16,10 +16,13 @@ const Schemaencuesta=new Schema({
         default: true,
         required: false
     },
-    secciones:{
-        type: String,
-        required: true
-    }
+    secciones: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Secciones"
+          
+        }
+    ]
 },{
     timestamps: true
 })

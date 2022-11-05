@@ -2,21 +2,33 @@ import { Router } from "express";
 import registroEncuesta from "../models/encuesta.js"
 import url from 'url';
 import ncp from 'copy-paste';
+import Secciones from "../models/secciones.js"
+import Respuesta from "../models/respuesta.js"
+import { ADDRGETNETWORKPARAMS } from "dns";
 
 const router = Router();
 
 //Función para obtener la URL completa
 function fullURL(req, value) {
+    if (value){
     return url.format({
         protocol: req.protocol,
         host: req.get('host'),
         pathname: `${req.originalUrl}/${value}`
     })
+  } else {
+    return url.format({
+        protocol: req.protocol,
+        host: req.get('host'),
+        pathname: `${req.originalUrl}`
+    })
+
+  }
 }
 
-//Función para compartir un enlace 
-function copyToClipboard(req, valor) {
-    let link = fullURL(req, valor);
+//Compartir encuesta 
+function copyToClipboard(req) {
+    let link = fullURL(req);
 
     console.log(link);
     ncp.copy(link, () => "Copiado al portapapeles");
@@ -33,22 +45,43 @@ router.get("/", async (req, res) => {
     });
 })
 
-//eliminar encuesta logicamente
-router.post("/", async (req, res) => {
+//Eliminar encuesta logicamente
+router.post("/eliminar", async (req, res) => {
     let { identificador } = req.body;
     console.log(`URL: ${fullURL(req, identificador)}`);
     await registroEncuesta.updateOne({ _id: identificador }, { activa: false });
     res.redirect("/encuestas");
 })
 
+//Filtrar de encuestas
+router.post("/", async (req, res) => {
+
+    let {busqueda} = req.body;
+
+    const encuestas = await registroEncuesta.find({nomEncuesta: busqueda}).lean();
+
+    res.render('verPlantillas', {
+        layout: "dashboard",
+        encuestas
+    });
+})
+ //contador
+ var Handlebars = require('handlebars');
+
+ Handlebars.registerHelper("inc", function(value, options)
+ {
+     return parseInt(value) + 1;
+ });
 //Método que renderiza el formulario para crear encuesta
 router.get("/crear", async (req, res) => {
     const registros = await registroEncuesta.find({}).lean();
+    const secciones=await Secciones.find({}).lean();
     //mostramos en consola los registros traidos de la BDD.
     console.log(registros);
     res.render('crearEncuesta', {
         layout: "dashboard",
-        registros
+        registros,
+        secciones
     });
 })
 
@@ -56,8 +89,6 @@ router.get("/crear", async (req, res) => {
 router.post("/crear", async (req, res) => {
     const { nomEncuesta, descripcion, secciones } = req.body;
     const nuevaEncuesta = new registroEncuesta({ nomEncuesta, descripcion, secciones })
-
-    console.log(nuevaEncuesta);
     await nuevaEncuesta.save();
     res.redirect("/encuestas");
 });
@@ -65,14 +96,19 @@ router.post("/crear", async (req, res) => {
 //Vista Editar
 router.get("/editar/:id", async (req, res) => {
     //llenar tabla
-    const registros = await registroEncuesta.find({}).lean();
+    const registros = await registroEncuesta.find({}).populate('secciones').lean();
     //obtener registro a editar
-    const editar = await registroEncuesta.findById(req.params.id).lean();
+    const editar = await registroEncuesta.findById(req.params.id).populate('secciones').lean();
+
+   
+    //Obtenemos las secciones
+    const secciones=await Secciones.find({}).lean();
     //console.log(registros);
     res.render('editarEncuesta', {
         layout: "dashboard",
         registros,
-        editar
+        editar,
+        secciones
     });
 });
 
@@ -83,17 +119,50 @@ router.post("/editar/:id", async (req, res) => {
     console.log("ACTUALIZADO.........")
 });
 
+router.post("/ver/:id", (req, res) => {
+    let { identificador } = req.body;
+    let link = copyToClipboard(req,identificador);
+    console.log(link)
+    res.redirect("/encuestas");
+})
+
 //metodo para mostrar vista de encuestas generada por usuario
-router.get("/ver", (req, res) => {
-    res.render('verEncuesta', {
-        layout: "dashboard"
+router.get("/ver/:id", async (req, res) => {
+    const {id} = req.params;
+    let encuesta = await registroEncuesta.findById({_id: id}).populate({
+       path: "secciones",
+       populate: {
+        path: "preguntas"
+       } 
+    }).lean();
+    console.log(encuesta);
+    res.render("verEncuesta", {
+        dato: encuesta
     });
 });
 
-router.post("/ver", (req, res) => {
-    let { portapapeles } = req.body;
-    copyToClipboard(req, portapapeles);
-    res.redirect("/encuestas/ver");
-})
+router.post("/guardar", async  (req, res) => {
+    let keys = Object.keys(req.body);
+    let values = Object.values(req.body);
+    let preguntas = [], encuesta;
+    for(let i =0; i < keys.length; i++) {
+        if(keys[i] == "encuesta") {
+            encuesta = values[i];
+        }
+        if(keys[i].match(/respuesta*/)) {
+            preguntas.push({
+                idPregunta: keys[i].split("-")[1],
+                respuestas: values[i]
+            });
+        }
+    };
+    let nuevaRespuesta = new Respuesta({
+        idEncuesta: encuesta,
+        preguntas: preguntas
+    });
+    await nuevaRespuesta.save();
+    res.redirect("/encuestas");
+});
+
 
 export default router;
