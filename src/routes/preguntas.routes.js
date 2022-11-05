@@ -1,7 +1,6 @@
 import { Router} from "express";
 const router = Router();
 
-//Cambio hecho por: Rebeca Barrientos
 const Pregunta = require('../models/Pregunta');
 
 //ruta de boton vista de agregar pregunta
@@ -16,33 +15,7 @@ router.get("/ver", (req, res) => {
 	});
 });
 
-//Ruta para recibir datos crear pregunta
-/*router.post("/nuevaPregunta", async(req, res) => {
-	const { title, tipoR}=req.body;
 
-	/*const errors = [];
-	//Arreglar la validacion
-	if(!title){
-		errors.push({text: 'Please write a title'});
-	}
-	if (errors.lenght > 0){
-		res.render('/preguntas/nuevaPregunta', {
-			errors,
-			title,
-			description
-		}); 
-	} else{
-	
-		//Almacenando en la base de datos
-		const newPregunta = new Pregunta({title, tipoR});
-		await newPregunta.save();
-		res.redirect('/preguntas');
-
-		//Mostrando mensaje
-		//console.log(newPregunta);
-		//res.send('ok');
-	//}
-});*/
 
 //ruta a la que se redirecciona
 router.get('/', async (req, res) => {
@@ -51,10 +24,6 @@ router.get('/', async (req, res) => {
 	res.render('preguntas/preguntasView', {pregunta, layout: "dashboard"});
 	
 });
-
-//Fin de cambio hecho por: Rebeca Barrientos
-
-
 
 //para poder ver registros de base de datos según id
 router.get("/:id", async (req, res) => {
@@ -85,9 +54,6 @@ router.put('/editarPreguntas/:id', async (req, res) => {
 	if(tipoR == "opcion-unica" || tipoR == "opcion-multiple") {
         respuesta = req.body.respuestaText;
     }
-    if(respuesta == undefined) {
-        return res.end("Invalid request");
-    }
 	
 	await Pregunta.findByIdAndUpdate(req.params.id, { title: title, tipoR: tipoR, respuestas: respuesta }).lean();
 	res.redirect('/preguntas')
@@ -104,14 +70,8 @@ router.post("/delete/:id", async (req, res) => {
 	res.redirect('/preguntas');
 });
 
-
-
 export default router;
 
-
-
-
-//nuevos cambiossssssssssssssssssssssssssssssssssssssssssssssssss
 router.post("/", (req, res) => {
     const {title, tipoR} = req.body;
     let respuesta = req.body.respuesta;
@@ -120,19 +80,13 @@ router.post("/", (req, res) => {
     if(tipoR == "opcion-unica" || tipoR == "opcion-multiple") {
         respuesta = req.body.respuestaText;
     }
-    if(respuesta == undefined) {
-        return res.end("Invalid request");
-    }
     const nuevaPregunta = new Pregunta({
         title: title,
         tipoR: tipoR,
         respuestas: respuesta
     });
     nuevaPregunta.save();
-    //res.json(nuevaPregunta);
 	return res.redirect("/preguntas");
 });
-
-//------------------------------------------------------------------
 
 
