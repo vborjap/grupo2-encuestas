@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-12">
-        <h1 class="text-center">Editar encuesta</h1>
+        <h1 class="text-center">Editar Encuesta</h1>
     </div>
 </div>
 <!--Form-->
@@ -17,8 +17,8 @@
     <div class="col-4 text-end">
         <p>Ingresa el nombre de la encuesta:</p>
     </div>
-    <div class="col-8">
-        <input class="w-75"type="text" name="nomEncuesta" value="{{editar.nomEncuesta}}" required >
+    <div class="col-6">
+        <input class="form-control"type="text" name="nomEncuesta" value="{{editar.nomEncuesta}}" required >
     </div>
     </div>
     <!--Descripcion-->
@@ -26,42 +26,53 @@
         <div class="col-4 text-end">
             Descripción:
         </div>
-        <div class="col-8">
-            <textarea name="descripcion" cols="30" rows="10" class="w-75">{{editar.descripcion}}</textarea>
+        <div class="col-6">
+            <textarea name="descripcion" cols="30" rows="10" class="form-control">{{editar.descripcion}}</textarea>
         </div>
     </div>
      <!--Secciones-->
      <div class="row mt-5 d-flex justify-content-end">
-        <div class="col-3">
+        <div class="col-12 col-md-3">
             <select class="form-select" aria-label="Default select example" name="secciones">
-                <option selected value="{{editar.secciones}}">{{editar.secciones}}</option>
-                <option value="Uno">One</option>
-                <option value="Dos">Two</option>
-                <option value="Tres">Three</option>
+               {{#each editar.secciones as |seccion|}}
+                <option selected value="{{seccion._id}}">{{seccion.nombre}}</option>
+                {{/each}}
+                {{#each secciones}}
+                <option value="{{_id}}">{{nombre}}</option>
+                {{/each}}
             </select>
         </div>
 </form>
 
-        <div class="col-8">
+        <div class="col-12 col-md-8 d-flex justify-content-center mt-2">
              <!--Tabla-->
-        <table class="table w-75 text-center">
+        <table class="table table-hover table-bordered border-success w-75 text-center">
          <thead>
                  <tr>
-                    <th scope="col">Secciones</th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
+                    <th scope="col">N°</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Acción</th>
                 </tr>
          </thead>
          <tbody>
+          
                {{#each registros}}
-                <!--<li>{{this}}</li>-->
-           
-                 <tr>
-                     <td>{{secciones}}</td>
+               
+                {{#if this.activa}}
+               
+                 <tr>      
+                     <td>{{inc @index}}</td>    
                      <td>{{nomEncuesta}}</td>
-                     <td><button type="button" class="btn btn-success">Ver Preguntas</button></td>
+                     <td><a href="http://localhost:3000/encuestas/ver/{{this._id}}"><button type="button" class="btn btn-success">Ver Preguntas</button></a></td>
                 </tr>
+                     
+                {{/if}}
             {{/each}}
+             
+           
+                
+          
+          
           </tbody>
        </table>
         </div>

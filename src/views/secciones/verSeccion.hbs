@@ -1,0 +1,101 @@
+<div class="container">
+
+        <div class="row mt-3">
+                <div class="col ">
+                        {{> buttons
+                        message="Atrás"
+                        type = "danger"
+                        tag = "a"
+                        href = "/secciones"
+                        }}
+                </div>
+                <div class="col-6 text-center">
+
+                </div>
+
+                <div class="col text-end">
+
+                </div>
+        </div>
+        <div class="row">
+                <div class="col"></div>
+                <div class="col-8">
+                        <div class="row mt-3">
+                                {{#each seccion}}
+                                <h2 class="text-center">{{nombre}}</h2>
+                                <p class="text-center">{{descripcion}}</p>
+                                {{#each preguntas}}
+                                <div class="mb-3">
+                                        <label for="ex{{inc @index}}" class="form-label">{{title}}</label>
+
+                                        <!--Condicional para mostrar campo fecha-->
+                                        {{#if (equalString tipoR "fecha")}}
+
+                                        <input id="ex{{inc @index}}" class="form-control" type="date" name="respuesta" min="1990-12-31" max=""
+                                                value="2022-01-01" autocomplete="off"/>
+
+                                        {{/if}}
+                                        <!--Condicional para mostrar campo hora-->
+                                        {{#if (equalString tipoR "hora")}}
+                                        
+                                                <input id="ex{{inc @index}}" class="form-control" type="time" name="respuesta" min="" max="" value="00:00:00" autocomplete="off"/>
+                                        
+                                        {{/if}}
+                                        <!--Condicional para mostrar campo respuesta corta-->
+                                        {{#if (equalString tipoR "respuesta-corta")}}
+                                        
+                                                <input id="ex{{inc @index}}" class="form-control" type="text" name="respuesta"
+                                                        placeholder="Respuesta..." autocomplete="off"/>
+
+                                        {{/if}}
+                                        <!--Condicional para mostrar campo respuesta larga-->
+                                        {{#if (equalString tipoR "respuesta-larga")}}
+                                        
+                                                <textarea id="ex{{inc @index}}" class="form-control" type="text" name="respuesta"
+                                                        placeholder="Respuesta..." autocomplete="off"></textarea>
+                                        
+                                        {{/if}}
+                                        <!--Condicional para mostrar campo respuesta opcion unica-->
+                                        {{#if (equalString tipoR "opcion-unica")}}
+                                        
+                                                
+                                                <div>
+                                                        {{#each respuestas as |respuesta|}}
+                                                        <div class="form-check mb-2">
+                                                                <input class="form-check-input" type="radio"
+                                                                        name="respuesta"
+                                                                        id="flexRadioDefault{{inc @index}}" autocomplete="off">
+                                                                <label class="form-check-label"
+                                                                        for="flexRadioDefault{{inc @index}}">
+                                                                        {{ respuesta }}
+                                                                </label>
+                                                        </div>
+                                                        {{/each}}
+                                                </div>
+                                        
+                                        {{/if}}
+                                        <!--Condicional para mostrar campo respuesta opcion multiple-->
+                                        {{#if (equalString tipoR "opcion-multiple")}}
+                                        
+                                                <div>
+                                                        {{#each respuestas as |respuesta|}}
+                                                        <div class="form-check mb-2">
+                                                                <input class="form-check-input" type="checkbox"
+                                                                        name="respuesta" id="flexCheckDefault{{inc @index}}" autocomplete="off">
+                                                                <label class="form-check-label" for="flexCheckDefault{{inc @index}}">
+                                                                        {{respuesta}}
+                                                                </label>
+                                                        </div>
+                                                        {{/each}}
+                                                </div>
+                                        
+                                        {{/if}}
+                                </div>
+                                {{/each}}
+                                {{/each}}
+                        </div>
+                </div>
+                <div class="col"></div>
+        </div>
+
+</div>

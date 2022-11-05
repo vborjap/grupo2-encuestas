@@ -3,6 +3,10 @@ body{
         font-family: 'Barlow', sans-serif;
         font-size: 16px;
 }
+p {
+        font-family: 'Barlow', sans-serif;
+        font-size: 16px;
+}
 h1 {
         font-family: 'Barlow', sans-serif;
         font-size: 50px;
@@ -29,8 +33,21 @@ h6 {
 }
 label {
         font-family: 'Abel', sans-serif;
-        font-size: 18px;
+        font-size: 17px;
+        font-weight: bold;
 }
 #btnLogo {
         font-weight: bold;
+}
+
+.colorA {
+        background: #DFF6FF !important;
+}
+
+.colorB {
+        background: #06283D !important;
+}
+
+.colorC {
+        background: #F1F7F4 !important;
 }
