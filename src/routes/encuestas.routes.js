@@ -9,16 +9,25 @@ const router = Router();
 
 //Función para obtener la URL completa
 function fullURL(req, value) {
+    if (value){
     return url.format({
         protocol: req.protocol,
         host: req.get('host'),
         pathname: `${req.originalUrl}/${value}`
     })
+  } else {
+    return url.format({
+        protocol: req.protocol,
+        host: req.get('host'),
+        pathname: `${req.originalUrl}`
+    })
+
+  }
 }
 
 //Compartir encuesta 
-function copyToClipboard(req, valor) {
-    let link = fullURL(req, valor);
+function copyToClipboard(req) {
+    let link = fullURL(req);
 
     console.log(link);
     ncp.copy(link, () => "Copiado al portapapeles");
@@ -110,8 +119,8 @@ router.post("/editar/:id", async (req, res) => {
 });
 
 router.post("/ver/:id", (req, res) => {
-    let { id } = req.params;
-    let link = copyToClipboard(req, id);
+    let { identificador } = req.body;
+    let link = copyToClipboard(req,identificador);
     console.log(link)
     res.redirect("/encuestas");
 })
