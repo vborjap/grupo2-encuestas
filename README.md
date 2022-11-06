@@ -3,7 +3,7 @@ Este proyecto esta conformado por alumnos de IGF115 y PRN315 y tiene la finalida
 
 ## Instalación y desarrollo
 
-Las tecnologias necesidas para la ejecucion de este proyecto son `Mongo DB` como base de datos y `Node JS` como entorno de ejecucion de JavaScript.
+Las tecnologías necesarias para la ejecución de este proyecto son `Mongo DB`  como base de datos y `NodeJS` como entorno de ejecución de JavaScript.
 
 ```git 
 git clone https://github.com/vborjap/grupo2-encuestas.git encuestas
@@ -24,12 +24,12 @@ Instalar las dependencias npm
 npm install
 ```
 
-Esto instalara todos los paquetes necesarios para la ejecucion de la aplicacion:
+Esto instalará todos los paquetes necesarios para la ejecución de la aplicación:
 <img src="https://i.imgur.com/JXZWgCF.png">
 
 ```npm
 npm start
 ```
-Con esta instruccion se iniciara el servidor en tu `localhost`, especificamente en el puerto 3000.
+Con esta instrucción se iniciará el servidor en tu `localhost`, específicamente en el puerto 3000.
 <img src="https://i.imgur.com/4zdiiTX.png)">
-> **NOTA**: Asegurate de tener encedido el servicio de `Mongo DB` antes de ejecutar esta sentencia, de lo contrario puedes encontrarte con un error.
+> **NOTA**: Asegúrate de tener encedido el servicio de `Mongo DB` antes de ejecutar esta sentencia, de lo contrario puedes encontrarte con un error.
