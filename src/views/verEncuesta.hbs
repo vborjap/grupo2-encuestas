@@ -1,30 +1,17 @@
-<div class="container">
-        
-        <div class="row mt-3">
-                <div class="col ">
-                        {{> buttons
-                        message="Atrás"
-                        type = "success"
-                        tag = "a"
-                        href = "/encuestas"
-                        }}
-                </div>
-                <div class="col-6 text-center">
-                        <h1>Encuesta</h1>
-                </div>
-                
-                <div class="col text-end">
-                        
-                </div>
-        </div>
-        <div class="card row mt-3">
-                {{_id}}
-        </div>
+
+<div>
+    {{> buttons
+    message="Atrás"
+    type = "success"
+    tag = "a"
+    href = "/encuestas"
+    }}
+    <form action="" method="POST">
+        <button class="btn btn-primary" type="submit" name="identificador" value={{dato._id}} > Compartir </button>
+    </form> 
+</div>
 
 
-<form action="" method="POST">
-    <button class="btn btn-primary" type="submnit" name="identificador" value={{dato._id}} > Compartir </button>
-</form> 
 
 {{!-- Se muestra la encuesta ya configurada por el usuario --}}
 <div class="card my-5" style="max-width: 800px; margin-left: auto; margin-right: auto">
