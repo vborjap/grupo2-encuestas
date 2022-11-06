@@ -131,6 +131,7 @@ router.get("/ver/:id", async (req, res) => {
     }).lean();
     console.log(encuesta);
     res.render("verEncuesta", {
+        layout: "dashboard",
         dato: encuesta
     });
 });
