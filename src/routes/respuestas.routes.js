@@ -45,13 +45,16 @@ router.get("/:id", async (req, res) => {
 	}).reduce((pre, current, index) => {
 		let valor, llave;
 		for(let i = 0; i < current.length; i++) {
-			valor = Object.values(current[i]);
-			llave = Object.keys(current[i]);
-			if(pre[llave] == undefined) {
-				pre[llave] = valor;
-			}else {
-				pre[llave] = pre[llave].concat(valor);
+			if(current[i] != undefined) {
+				valor = Object.values(current[i]);
+				llave = Object.keys(current[i]);
+				if(pre[llave] == undefined) {
+					pre[llave] = valor;
+				}else {
+					pre[llave] = pre[llave].concat(valor);
+				}
 			}
+			
 		}
 		return pre;
 	}, {});
