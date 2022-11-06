@@ -113,5 +113,7 @@ export function chart(respuestas, type) {
                 }
             }
         },
+        
     }
+    
 }
