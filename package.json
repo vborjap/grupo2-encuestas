@@ -30,7 +30,9 @@
     "method-override": "^3.0.0",
     "mongoose": "^6.6.7",
     "mongoose-autopopulate": "^0.16.1",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "pirates": "^4.0.5",
+    "sync-exec": "^0.6.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.19.3",
