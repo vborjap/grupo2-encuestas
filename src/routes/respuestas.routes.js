@@ -1,19 +1,30 @@
 import { Router} from "express";
 const router = Router();
+import registroEncuesta from "../models/encuesta";
 
 // Rutas Modulo 5
 router.get("/", (req, res) => {
-	res.render('listarRespuestas', {
-		layout: "dashboard"
+	let encuestas = registroEncuesta.find().select("_id").select("nomEncuesta").lean();
+
+	res.render('respuestas/index', {
+		layout: "dashboard",
+		datos: encuestas
 	});
 });
 
 router.get("/:id", (req, res) => {
 	const {id} = req.params;
+	
+	let encuesta = registroEncuesta.findById({_id: id}).populate({
+		path: "secciones",
+		populate: {
+			path: "preguntas"
+		}
+	}).lean();
 
-	res.render("verRespuesta", {
+	res.render("respuestas/show", {
 		layout:"Dashboard",
-		id
+		datos: encuesta
 	});
 });
 
