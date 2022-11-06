@@ -13,10 +13,10 @@ router.get("/", async (req, res) => {
 	});
 });
 
-router.get("/:id", (req, res) => {
+router.get("/:id", async (req, res) => {
 	const {id} = req.params;
 	
-	let encuesta = registroEncuesta.findById({_id: id}).populate({
+	let encuesta = await registroEncuesta.findById({_id: id}).populate({
 		path: "secciones",
 		populate: {
 			path: "preguntas"
