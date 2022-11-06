@@ -39,7 +39,14 @@ function copyToClipboard(req) {
 
 //Renderizar vista de encuestas principal
 router.get("/", async (req, res) => {
-  const encuestas = await registroEncuesta.find({}).lean();
+  let encuestas;
+
+  if(req.query.buscar !== undefined && req.query.buscar != "") {
+    let regex = new RegExp('^' + req.query.buscar, "i");
+    encuestas = await registroEncuesta.find({nomEncuesta: regex}).lean();
+  }else {
+    encuestas = await registroEncuesta.find({}).lean();
+  }
   res.render("verPlantillas", {
     layout: "dashboard",
     encuestas,

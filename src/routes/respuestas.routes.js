@@ -35,7 +35,6 @@ router.get("/:id", async (req, res) => {
 		path: "idEncuesta"
 	}).populate({path: "preguntas.idPregunta", select: ["_id", "tipoR"]}).lean();
 
-	console.log(encuesta, respuestas);
 	let respuestasProcesadas = respuestas.map(respuesta => {
 		return respuesta.preguntas.map(pregunta => {
 			if(pregunta.idPregunta.tipoR == "opcion-unica" || pregunta.idPregunta.tipoR == "opcion-multiple"){
@@ -44,33 +43,36 @@ router.get("/:id", async (req, res) => {
 				]));
 			}
 		});
-	});
-	
-	let respuestasMapeadas = respuestasProcesadas.reduce((pre, current, index) => {
+	}).reduce((pre, current, index) => {
 		let valor, llave;
 		for(let i = 0; i < current.length; i++) {
-			valor = Object.values(current[i]);
-			llave = Object.keys(current[i]);
-			if(pre[llave] == undefined) {
-				pre[llave] = valor;
-			}else {
-				pre[llave] = pre[llave].concat(valor);
+			if(current[i] != undefined) {
+				valor = Object.values(current[i]);
+				llave = Object.keys(current[i]);
+				if(pre[llave] == undefined) {
+					pre[llave] = valor;
+				}else {
+					pre[llave] = pre[llave].concat(valor);
+				}
 			}
+			
 		}
 		return pre;
 	}, {});
 	let datos = {};
 	let resVal, resKey;
-	resVal = Object.values(respuestasMapeadas);
-	resKey = Object.keys(respuestasMapeadas);
+	resVal = Object.values(respuestasProcesadas);
+	resKey = Object.keys(respuestasProcesadas);
 	for(let i = 0; i < resKey.length; i++) {
 		datos[resKey[i]] = resVal[i].reduce((prev, c) => prev.concat(c));
 	}
-
+	console.log(datos);
 	res.render("respuestas/show", {
 		layout:"Dashboard",
-		datos: encuesta
+		datos: encuesta,
+		respuestas: datos
 	});
 });
 
 export default router;
+
