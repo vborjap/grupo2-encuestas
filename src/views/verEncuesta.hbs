@@ -1,17 +1,15 @@
-
-<div>
+<div class="d-flex justify-content-between align-items-center">
     {{> buttons
     message="Atrás"
     type = "success"
     tag = "a"
     href = "/encuestas"
+    class = "mx-5"
     }}
     <form action="" method="POST">
-        <button class="btn btn-primary" type="submit" name="identificador" value={{dato._id}} > Compartir </button>
+        <button class="btn btn-primary mx-5" type="submit" name="identificador" value={{dato._id}} > Compartir </button>
     </form> 
 </div>
-
-
 
 {{!-- Se muestra la encuesta ya configurada por el usuario --}}
 <div class="card my-5" style="max-width: 800px; margin-left: auto; margin-right: auto">
