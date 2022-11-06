@@ -43,8 +43,28 @@ router.get("/signin", (req, res) => {
 });
 
 //Creamos la ruta para la Autenticacion
-router.post("/signin", (req, res) => {
-		res.send('Encuestas');
+router.post("/signin", async(req, res) => {
+	const {usuario, password}=req.body;
+	const BuscarUsuario = await Users.findOne({userName:usuario})
+	
+	if(!BuscarUsuario){
+			res.render('errorUsuario', {
+			layout: "dashboard"
+		});
+	} else{
+			res.render('verPlantillas', {
+			layout: "dashboard"
+		});
+		/*const BuscarPassword = await Users.findOne({password:password})
+		if(BuscarPassword != password){
+			res.send('Contraseña Erronea');
+		}else{
+			res.render('verPlantillas', {
+			layout: "dashboard"
+		});
+		}*/
+	}
+		
 	//res.redirect('encuestas', {
 	//layout: "dashboard"
 	//});
