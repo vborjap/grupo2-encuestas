@@ -4,6 +4,7 @@ import preguntasRoutes from "./preguntas.routes.js"
 import respuestasRoutes from "./respuestas.routes.js"
 import seccionesRoutes from "./secciones.routes.js"
 import usuariosRoutes from "./usuarios.routes.js"
+import authRoutes from "./auth.routes";
 
 const router = Router();
 //
@@ -39,6 +40,7 @@ router.use('/preguntas', preguntasRoutes);
 router.use('/respuestas', respuestasRoutes);
 router.use('/secciones', seccionesRoutes);
 router.use('/usuarios', usuariosRoutes);
+router.use("/auth", authRoutes);
 
 // Esto permite redireccionar a inicio en caso que no exista la URL
 // Nota: Comunmente debe redireccionar a una vista 404, es de comentarlo a los de IGF

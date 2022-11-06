@@ -29,37 +29,20 @@
     </tr>
   </thead>
   <tbody>
+      {{#each datos as |pregunta|}}
     <tr>
-      <th><p class="text-center"> Sistemas embebidos </p></th>
-      <th> {{> buttons
-              message="Ver Respuesta"
-              type = "success"
+      <th><p>{{pregunta.nombre}}</p></th>
+      <th> 
+        {{> buttons
+              message= "Ver respuestas"
+              type= "success"
               tag = "a"
-              href = "#b"
-              
-        }} 
+              href= (link "/respuestas" pregunta._id)
+        }}
       </th>
     </tr>
-    <tr>
-      <th><p class="text-center"> Zonas rurales</p> </th>
-      <th> {{> buttons
-              message="Ver Respuesta"
-              type = "success"
-              tag = "a"
-              href = "#b"
-        }}
-        </th>
-    </tr>
-    <tr>
-      <th> <p class="text-center">Zonas Urbanas</p> </th>
-      <th>
-        {{> buttons
-              message="Ver Respuesta"
-              type = "success"
-              tag = "a"
-              href = "#b"
-        }} </th>
-    </tr>
+    {{/each}}
+   
   </tbody>
 </table>
   </div>
