@@ -48,7 +48,7 @@
                     </div>
                     {{/each}}
                     <div style="max-width: 500px; margin: 0 auto;">
-                        {{> chart options=(chart (respuestas (compareRespuesta ../../respu pregunta._id)) (typeChart)) id=(random 10) w="400" h="400"}}
+                        {{> chart options=(chart (respuestas (compareRespuesta ../../respu pregunta._id)) (typeChart) pregunta.title) id=(random 10) w="400" h="400"}}
                     </div>
                     <div class="html2pdf__page-break"></div>
 
@@ -64,7 +64,7 @@
                     </div>
                     {{/each}}
                     <div style="max-width: 500px; margin:0 auto ;">
-                        {{> chart options=(chart (respuestas (compareRespuesta ../../respu pregunta._id)) (typeChart)) id=(random 10) w="400" h="400"}}
+                        {{> chart options=(chart (respuestas (compareRespuesta ../../respu pregunta._id)) (typeChart) pregunta.title ) id=(random 10) w="400" h="400"}}
                     </div>
                     <div class="html2pdf__page-break"></div>
 

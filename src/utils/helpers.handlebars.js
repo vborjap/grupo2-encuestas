@@ -61,7 +61,7 @@ export function random(length) {
  * @returns {String}
  */
 export function typeChart() {
-    let val = ['bar', 'line', 'polarArea', 'radar'];
+    let val = ['bar', 'line', 'polarArea'];
     return val[Math.floor(Math.random() * val.length)];
 }
 
@@ -75,17 +75,17 @@ export function respuestas(respuestas) {
 }
 
 
-export function chart(respuestas, type) {
+export function chart(respuestas, type, title) {
     console.log(respuestas);
 
     let labels = Object.keys(respuestas);
     let values = Object.values(respuestas);
     return {
-        type: 'bar',
+        type: type,
         data: {
             labels: labels,
             datasets: [{
-                label: 'Title',
+                label: title,
                 data: values,
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
