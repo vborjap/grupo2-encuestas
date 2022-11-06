@@ -8,6 +8,8 @@ import morgan from "morgan";
 
 
 const app = express();
+//requerimos el archivo de configuracion de Passport
+require('./config/passport');
 
 morgan.token('host', (req, res) => {
     return req.hostname;
@@ -45,5 +47,7 @@ app.use(indexRoutes);
 
 //Configuracion para entender datos desde formulario
 app.use(express.urlencoded({extended: false}));
+
+
 
 export default app;

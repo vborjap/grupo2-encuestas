@@ -10,15 +10,7 @@ const UsersSchema = new Schema({
     tipoUsuario:{type: String, required: true}
 },{
     timestamps: true
-})
-
-UsersSchema.methods.encrypPassword = async password =>{
-    const salt = await bcrypt.genSalt(10);
-    return await bcrypt.hash(password, salt);
-};
-
-UsersSchema.methods.matchPassword = async function(password){
-    return await bcrypt.compare(password, this.password);
-}
+},{versionKey:false
+});
 
 module.exports = model('Users', UsersSchema);

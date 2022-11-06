@@ -1,1 +1,36 @@
-<h1>Listado de usuarios</h1>
+<div class="container">
+
+    <a href="/usuarios/signup" class="btn btn-outline-primary mt-4">Nuevo</a>
+
+    <table class="table table-bordered table-striped text-center mt-4">
+        <thead>
+            <tr class="bg-primary text-white">
+                <th scope="col"></th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Fecha Nacimiento</th>
+                <th scope="col">Nacionalidad</th>
+                <th scope="col">Email</th>
+                <th scope="col">User</th>
+                <th scope="col">Tipo Usuario</th>
+                <th scope="col">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each usuarios}}  
+            <tr>
+                <td style="vertical-align:middle;" style="display: none;"> {{'._id' }}</td>
+                <td style="vertical-align:middle;"> {{ '.name' }}</td>
+                <td style="vertical-align:middle;"> {{ '.fechaNac' }}</td>
+                <td style="vertical-align:middle;"> {{ '.nacionalidad' }}</td>
+                <td style="vertical-align:middle;"> {{ '.email' }}</td>
+                <td style="vertical-align:middle;"> {{ '.userName' }}</td>
+                <td style="vertical-align:middle;"> {{ '.tipoUsuario' }}</td>
+                <td style="vertical-align:middle;">
+                    <a href="/usuarios/editarUsuario" class="btn btn-outline-primary">Editar</a>
+                    <a href="/usuarios/eliminarUsuario" class="btn btn-outline-danger">Borrar</a>
+                </td>
+            </tr>
+             {{/each }}
+        </tbody>
+    </table>
+</div>
