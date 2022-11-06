@@ -1,7 +1,15 @@
 <div class="container">
 
-     <!--Botones atras y exportar-->
-    <div class = "relative" style = "height: 50px; margin-top: 40px;" >
+   
+    <!--
+    <form action="" method="POST">
+        <button class="btn btn-primary" type="submnit" name="identificador" value={{dato._id}}> Compartir </button>
+    </form>
+    -->
+    <div class="card my-5" style="max-width: 2000px; margin-left: auto; margin-right: auto;" >
+        
+<!--Botones atras y exportar-->
+    <div class = "relative" style = "height: 10px; margin: 40px;" >
 
       <div class = "float-start">
             {{> buttons
@@ -23,41 +31,46 @@
             nativeType="subtmi"}}
     </div>
 
+    <!--
         <div class="col text-end">
-
+            
         </div>
-
+    -->
+    </div>
+<hr>
+         <div class="text-center my-5">
+        <h1 class="text-center" style="font-weight:bold;">{{datos.nomEncuesta}}</h1>
     </div>
 
-    <div class="text-center my-5">
-        <h1 class="text-center">{{datos.nomEncuesta}}</h1>
-    </div>
+
+        <div class="card-body" style="margin: 50px;">
+
+            <div style="height: 160px ;">
+
+            <h3 style="font-weight:bold; font-size: 35px;">Descripción de la encuesta: </h3>
+
+            <p class="p-3 bg-light rounded" style="font-size: 18px;">{{ datos.descripcion }}</p>
 
 
-    <form action="" method="POST">
-        <button class="btn btn-primary" type="submnit" name="identificador" value={{dato._id}}> Compartir </button>
-    </form>
-
-    <div class="card my-5" style="max-width: 1400px; margin-left: auto; margin-right: auto">
-        <div class="card-body">
-            <h2>Descripcion de la encuesta: </h2>
-            <p class="p-3 bg-light rounded">{{ datos.descripcion }}</p>
+            </div>
+            
             <form action="/encuestas/guardar" method="post">
+
                 <input type="text" name="encuesta" value="{{ datos._id }}" hidden>
                 {{#each datos.secciones as |seccion|}}
                 <hr>
-                <h2>{{ seccion.nombre }}</h2>
-                <p>{{ seccion.descripcion }}</p>
+                <h3 style="font-weight:bold; font-size: 35px;">{{ seccion.nombre }}</h3>
+                <p style="font-size: 18px;" class="p-3 bg-light rounded">{{ seccion.descripcion }}</p>
+
                 {{#each seccion.preguntas as |pregunta|}}
                 <div class="my-3 rounded border p-3">
-                    <h4>{{ pregunta.title }}</h4>
-
+                    <h4 style="font-weight:bold; font-size: 26px;">{{ pregunta.title }}</h4>
                     {{#if (equalString pregunta.tipoR "opcion-unica") }}
                     {{#each pregunta.respuestas as |respuesta|}}
                     <div>
 
                         <input type="radio" name="respuesta-{{pregunta._id}}" value="{{ respuesta }}" disabled>
-                        <label for="req">{{ respuesta }}</label>
+                        <label for="req" >{{ respuesta }}</label>
                     </div>
                     {{/each}}
                     {{/if}}
@@ -67,7 +80,7 @@
                     <div>
 
                         <input type="checkbox" name="respuesta-{{pregunta._id}}" value="{{ respuesta }}" disabled>
-                        <span>{{ respuesta }}</span>
+                        <span >{{ respuesta }}</span>
                     </div>
                     {{/each}}
                     {{/if}}
