@@ -45,11 +45,19 @@ router.get("/ver", (req, res) => {
 });*/
 
 //ruta a la que se redirecciona
+//Ruta de vista preguntas y buscar preguntas
 router.get('/', async (req, res) => {
 	//res.send('Preguntas desde la base de datos');
-	const pregunta = await Pregunta.find().lean();
+	//const pregunta = await Pregunta.find().lean();
+	let pregunta;
+	if(req.query.buscar !== undefined && req.query.buscar != "") {
+		let regex = new RegExp('^' + req.query.buscar , "i");
+		pregunta = await Pregunta.find({title: regex }).select("title").lean();
+	}else {
+		pregunta = await Pregunta.find().select("title").lean();
+	}
 	res.render('preguntas/preguntasView', {pregunta, layout: "dashboard"});
-	
+
 });
 
 //Fin de cambio hecho por: Rebeca Barrientos
@@ -60,9 +68,8 @@ router.get('/', async (req, res) => {
 router.get("/:id", async (req, res) => {
 
 	const {id} = req.params;
-
 	var pregunta = await Pregunta.find({_id: id}).lean();
-
+	
     console.log(pregunta);
 	res.render('preguntas/verPregunta', {
 		id,

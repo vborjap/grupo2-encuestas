@@ -4,6 +4,7 @@ import registroEncuesta from "../models/encuesta";
 import Respuesta from "../models/respuesta";
 
 // Rutas Modulo 5
+//Ruta de vista respuestas/index.hbs y buscar Encuestas 
 router.get("/", async (req, res) => {
 	let encuestas;
 
