@@ -1,8 +1,7 @@
 import { Router} from "express";
+import Pregunta from "../models/Pregunta";
 const router = Router();
 
-//Cambio hecho por: Rebeca Barrientos
-const Pregunta = require('../models/Pregunta');
 
 //ruta de boton vista de agregar pregunta
 router.get("/add", (req, res) => {
@@ -10,6 +9,7 @@ router.get("/add", (req, res) => {
 		layout: "dashboard"
 	});
 });
+
 router.get("/ver", (req, res) => {
 	res.render('preguntas/verPregunta', {
 		layout: "dashboard"

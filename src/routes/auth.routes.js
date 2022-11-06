@@ -46,7 +46,7 @@ router.get("/change", (req, res) => {
 });
 
 router.post("/change", (req, res) => {
-    const {token,  password, password_repeat} = req.body;
+    const {token, password, password_repeat} = req.body;
 
     res.redirect("/auth/login");
 });
