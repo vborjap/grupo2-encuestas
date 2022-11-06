@@ -9,8 +9,8 @@ const UsersSchema = new Schema({
     password: {type: String, required: true},
     tipoUsuario:{type: String, required: true}
 },{
-    timestamps: true
-},{versionKey:false
+    timestamps: true,
+    versionKey:false
 });
 
 module.exports = model('Users', UsersSchema);
