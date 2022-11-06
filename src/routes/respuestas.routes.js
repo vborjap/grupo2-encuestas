@@ -5,7 +5,14 @@ import Respuesta from "../models/respuesta";
 
 // Rutas Modulo 5
 router.get("/", async (req, res) => {
-	let encuestas = await registroEncuesta.find().select("_id").select("nomEncuesta").lean();
+	let encuestas;
+
+	if(req.query.buscar !== undefined && req.query.buscar != "") {
+		let regex = new RegExp('^' + req.query.buscar , "i");
+		encuestas = await registroEncuesta.find({nomEncuesta: regex}).select("_id").select("nomEncuesta").lean();
+	}else {
+		encuestas = await registroEncuesta.find().select("_id").select("nomEncuesta").lean();
+	}
 
 	res.render('respuestas/index', {
 		layout: "dashboard",
