@@ -32,7 +32,7 @@
         <h1>{{ dato.nomEncuesta }}</h1>
         <p>{{ dato.descripcion }}</p>
         <form action="/ver/guardar" method="post">
-            <input type="text" name="encuesta" value="{{ dato._id }}">
+            <input type="text" name="encuesta" value="{{ dato._id }}" hidden>
             {{#each dato.secciones as |seccion|}}
                 <hr>
                 <h2>{{ seccion.nombre }}</h2>
