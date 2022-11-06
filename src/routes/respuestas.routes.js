@@ -37,13 +37,12 @@ router.get("/:id", async (req, res) => {
 
 	let respuestasProcesadas = respuestas.map(respuesta => {
 		return respuesta.preguntas.map(pregunta => {
-			if(pregunta.idPregunta.tipoR == "opcion-unica" || pregunta.idPregunta.tipoR == "opcion-multiple"){
-				return Object.fromEntries(new Map([
-					[pregunta.idPregunta._id.toString(), pregunta.respuestas]
-				]));
-			}
+			return Object.fromEntries(new Map([
+				[pregunta.idPregunta._id.toString(), pregunta.respuestas]
+			]));
 		});
 	}).reduce((pre, current, index) => {
+		// console.log(pre);
 		let valor, llave;
 		for(let i = 0; i < current.length; i++) {
 			if(current[i] != undefined) {
@@ -70,7 +69,8 @@ router.get("/:id", async (req, res) => {
 	res.render("respuestas/show", {
 		layout:"Dashboard",
 		datos: encuesta,
-		respuestas: datos
+		respu: datos,
+		gretting: "hola"
 	});
 });
 

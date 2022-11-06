@@ -1,4 +1,4 @@
-import {menuList, configList} from "./sidebar.handlebars";
+import { menuList, configList } from "./sidebar.handlebars";
 const globalData = {
     menuList,
     configList
@@ -8,7 +8,7 @@ const globalData = {
  * @param {*} context 
  * @returns {String}
  */
-export function json (context) {
+export function json(context) {
     return JSON.stringify(context);
 }
 
@@ -47,10 +47,10 @@ export function link(...options) {
  * @returns {String}
  */
 export function random(length) {
-    var result           = '';
-    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var result = '';
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     var charactersLength = characters.length;
-    for ( var i = 0; i < length; i++ ) {
+    for (var i = 0; i < length; i++) {
         result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
     return result;
@@ -76,13 +76,12 @@ export function respuestas(respuestas) {
 
 
 export function chart(respuestas, type) {
+    console.log(respuestas);
 
-    
     let labels = Object.keys(respuestas);
     let values = Object.values(respuestas);
     return {
-        
-        type: type,
+        type: 'bar',
         data: {
             labels: labels,
             datasets: [{
@@ -116,7 +115,25 @@ export function chart(respuestas, type) {
                 }
             }
         },
-        
+
     }
-    
+
+}
+
+
+export function compareRespuesta(objeto, id) {
+    // let objet = JSON.stringify(objeto);
+    // console.log(objeto)
+    if (objeto != undefined) {
+        let values, keys;
+        values = Object.values(objeto);
+        keys = Object.keys(objeto);
+        // console.log(values, keys);
+        for (let i = 0; i< keys.length; i++) {
+            if (keys[i] == id) {
+                return values[i];
+            }
+        }
+    }
+    return [];
 }

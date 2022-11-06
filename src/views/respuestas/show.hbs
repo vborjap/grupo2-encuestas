@@ -1,3 +1,4 @@
+
 <div class="container">
 
      <!--Botones atras y exportar-->
@@ -41,7 +42,7 @@
     <div class="card my-5" style="max-width: 1400px; margin-left: auto; margin-right: auto">
         <div class="card-body">
             <h2>Descripcion de la encuesta: </h2>
-            <p class="p-3 bg-light rounded">{{ datos.descripcion }}</p>
+            <p>{{ datos.descripcion }}</p>
             <form action="/encuestas/guardar" method="post">
                 <input type="text" name="encuesta" value="{{ datos._id }}" hidden>
                 {{#each datos.secciones as |seccion|}}
@@ -58,8 +59,11 @@
 
                         <input type="radio" name="respuesta-{{pregunta._id}}" value="{{ respuesta }}" disabled>
                         <label for="req">{{ respuesta }}</label>
+                        
                     </div>
                     {{/each}}
+                    <br>
+                    {{> chart options=(chart (respuestas (compareRespuesta ../../respu pregunta._id)) (typeChart)) id=(random 10) w="400" h="400"}}
                     {{/if}}
 
                     {{#if (equalString pregunta.tipoR "opcion-multiple") }}
@@ -68,25 +72,38 @@
 
                         <input type="checkbox" name="respuesta-{{pregunta._id}}" value="{{ respuesta }}" disabled>
                         <span>{{ respuesta }}</span>
+                        
                     </div>
                     {{/each}}
+                    <br>
+                         {{> chart options=(chart (respuestas (compareRespuesta ../../respu pregunta._id)) (typeChart)) id=(random 10) w="400" h="400"}}
                     {{/if}}
 
                     {{#if (equalString pregunta.tipoR "respuesta-corta") }}
-                    {{#each pregunta.respuestas as |respuesta|}}
-                    <div>
-                        <input class="form-control" type="text" name="respuesta-{{pregunta._id}}"
-                            value="{{ respuesta }}" disabled>
-                    </div>
-                    {{/each}}
+                    <h5>Respuestas</h5>
+                    <ol>
+                        {{#each (compareRespuesta ../../respu pregunta._id) as |r|}}
+                            <li class="my-1">
+                                <div>
+                                    <input class="form-control" type="text" name="respuesta-{{pregunta._id}}"
+                                        value="{{ r }}" disabled>
+                                </div>
+                            </li>
+                        {{/each}}
+                    </ol>
                     {{/if}}
 
                     {{#if (equalString pregunta.tipoR "respuesta-larga") }}
-                    {{#each pregunta.respuestas as |respuesta|}}
-                    <div>
-                        <textarea class="form-control" name="respuesta-{{pregunta._id}}" disabled>{{ respuesta }}</textarea>
-                    </div>
-                    {{/each}}
+                    <h5>Respuestas</h5>
+                    <ol>
+                        {{#each (compareRespuesta ../../respu pregunta._id) as |r|}}
+                            <li class="my-1">
+                                <div>
+                                    <textarea class="form-control" type="text" name="respuesta-{{pregunta._id}}"disabled>{{r}}</textarea>
+                                </div>
+                            </li>
+                        {{/each}}
+                    </ol>
                     {{/if}}
 
                 </div>
