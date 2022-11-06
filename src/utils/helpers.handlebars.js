@@ -74,11 +74,14 @@ export function respuestas(respuestas) {
     return Object.fromEntries(respuestas.reduce((pre, current) => ((pre.set(current, pre.has(current) ? pre.get(current) + 1 : 1))), new Map));
 }
 
+
 export function chart(respuestas, type) {
 
+    
     let labels = Object.keys(respuestas);
     let values = Object.values(respuestas);
     return {
+        
         type: type,
         data: {
             labels: labels,
