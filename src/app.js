@@ -25,36 +25,31 @@ app.set("views", path.join(__dirname, 'views'));
 
 // Configuracion handlebars: https://handlebarsjs.com/guide/#what-is-handlebars
 app.engine('.hbs', engine({
-
     layoutsDir: path.join(app.get('views'), 'layouts'),
     defaultLayout: "main",
     extname: ".hbs",
-
     // Configuracion para el directorio partials
     partialsDir: [
         path.join(app.get("views"), "partials")
     ],
     helpers: helpersHandlebars,
-    compilerOptions: {
-        menuList
-    },
-    menuList
 }));
 
 
 app.set("view engine", '.hbs');
 app.use(session({ 
     cookie: { maxAge: 60000 }, 
-    secret: 'woot',
+    secret: 'root',
     resave: false, 
     saveUninitialized: false
 }));
 app.use(flash());
 //Rutas
+
+app.use("/static", express.static(path.join(__dirname, "static")));
 app.use(express.json())
 app.use(methodOverride("_method"));
 app.use(indexRoutes);
 
-app.use("/static", express.static(path.join(__dirname, "static")));
 
 export default app;

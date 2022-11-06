@@ -1,79 +1,66 @@
 
-
-    <nav class="navbar navbar-light bg-light">
-
-
-            <div class="container"> 
-              <button type="button" class="btn btn-primary" onclick="window.location.href='/preguntas';">Atras</button>
-            </div >
-            <br><br>
-               <div class="d-flex align-items-center justify-content-center ">
-                <h3>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                    &nbsp&nbsp&nbsp&nbsp
-                    CREAR PREGUNTA
-                </h3>
-                </div>
-            <br><br><br>
-        </nav>
-
-    <!-- Cambio hecho por: Rebeca Barrientos -->
-{{#each erorrs}}
-<div class="alert alert-danger alert-dismissible fade show" role="alert">
-  {{text}}
-  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-    </span>  
-    </button>
+<div class="text-center my-5">
+    <h3>
+        CREAR PREGUNTA
+    </h3>
 </div>
+
+<!-- Cambio hecho por: Rebeca Barrientos -->
+{{#each erorrs}}
+{{> alert
+    type="danger"
+    message=text}}
 {{/each}}
 
 
 <div class="col-md-10 mx-auto">
     <div class = "card">
-
-    <div class = "card-body">
-        <form action="/preguntas" method="POST">
-        <div class="input-group input-group-sm mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="inputGroup-sizing-sm">Pregunta: </span>
+        <div class = "card-body">
+            <div class="py-3 mb-3">
+                {{> buttons
+                    message="Atras"
+                    type="primary"
+                    tag="a"
+                    href=(link "/preguntas")}}
+            </div>
+            <form action="/preguntas" method="POST">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Pregunta: </span>
+                    </div>
+                    <input type="text" class="form-control" name="title" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Title" autofocus>
                 </div>
-             <input type="text" class="form-control" name="title" aria-label="Small" 
-             aria-describedby="inputGroup-sizing-sm" placeholder="Title" autofocus>
-         </div>
-    <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <label class="input-group-text" for="inputGroupSelect01">Tipo respuesta: </label>
-            </div>
-            <select 
-                class="p-2 border relative block w-full rounded border-gray-300 bg-transparent focus:z-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                name="tipoR" id="tipo"
-                onchange="cambiarPregunta(this)">
-                <option value="*" selected>Seleccionar opcion</option>
-                <option value="fecha">Fecha</option>
-                <option value="hora">Hora</option>
-                <option value="respuesta-corta">Respuesta corta</option>
-                <option value="respuesta-larga">Respuesta larga</option>
-                <option value="opcion-unica">Opcion unica</option>
-                <option value="opcion-multiple">Opcion multiple</option>
-            </select>
-    </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="inputGroupSelect01">Tipo respuesta: </label>
+                    </div>
+                    <select 
+                        class="p-2 border block w-full rounded"
+                        name="tipoR" id="tipo"
+                        onchange="cambiarPregunta(this)">
+                        <option value="*" selected>Seleccionar opcion</option>
+                        <option value="fecha">Fecha</option>
+                        <option value="hora">Hora</option>
+                        <option value="respuesta-corta">Respuesta corta</option>
+                        <option value="respuesta-larga">Respuesta larga</option>
+                        <option value="opcion-unica">Opcion unica</option>
+                        <option value="opcion-multiple">Opcion multiple</option>
+                    </select>
+                </div>
 
-            <div class="form-group">
-                <button class="btn btn-primary btn-block" type="submit">
-                    Save
-                </button>
-            </div>
-            <br>
-            <div id="RDOM" class="px-6 py-12">
+                    <div class="form-group">
+                        {{> buttons
+                            message="Guardar"
+                            type="primary"
+                            nativeType="submit"
+                            class="btn-block"}}
+                    </div>
+                    <br>
+                    <div id="RDOM" class="px-6 py-12"></div>
 
+                </div>
+            </form>
         </div>
-        </form>
     </div>
 </div>
-</div>
-
 <script src="/static/preguntas.js"></script>
-
-
