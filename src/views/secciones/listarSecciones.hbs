@@ -49,8 +49,9 @@
 
                         <a class="btn btn-warning" href="">Editar</a>
 
-                        <a class="btn btn-danger" href="secciones/delete/{{_id}}">Eliminar</a>
-
+                        <button class="btn btn-danger" onclick="borrarSeccion('{{_id }}')">Eliminar</button>
+                        <a id="form-{{_id}}" class="d-none" href="secciones/delete/{{_id}}">Eliminar</a>
+                        
                     </div>
                     </th>
                 </td>
@@ -68,3 +69,20 @@
     </div>
 
 </div>
+
+
+<script>
+    function borrarSeccion( id) {
+        swal({
+            title: "¿Esta seguro que quiere eliminar este elemento?",
+            text: "Al darle click en OK va a eliminar permanentemente la Seccion",
+            buttons: true,
+            })
+            .then((willDelete) => {
+            if (willDelete) {
+                let form = document.getElementById("form-" + id);
+                form.click();
+            } 
+        });
+    }
+</script>

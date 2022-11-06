@@ -50,9 +50,10 @@
                             <!--Editar-->
                             <a href="http://localhost:3000/encuestas/editar/{{this._id}}"><button type="submit" class="btn btn-warning me-1" >Editar</button></a>
                             <!--Eliminar-->
-                            <form action="encuestas/eliminar" method="POST">
+                            <form  action="encuestas/eliminar" method="POST">
                                 <div class="form-group">
-                                    <button class="btn btn-danger me-1" type="submit" name="identificador" value={{this._id}}>Eliminar</button>
+                                    <button  class="btn btn-danger me-1" onclick="borrarEncuesta(event, '{{this._id}}')">Eliminar</button>
+                                    <input id="form-{{this._id}}" type="submit" value="{{this._id}}" name="identificador" hidden >
                                 </div>
                             </form>
                         </td>
@@ -72,3 +73,23 @@
         </table>
     </div>
 </div>
+
+
+<script>
+    function borrarEncuesta(e, id) {
+        e.preventDefault();
+        swal({
+            title: "¿Esta seguro que quiere eliminar este elemento?",
+            text: "Al darle click en OK va a eliminar logicamente la encuesta",
+            buttons: true,
+            })
+            .then((willDelete) => {
+            if (willDelete) {
+                let form = document.getElementById("form-" + id);
+                form.click();
+                {{!-- console.log(form); --}}
+                {{!-- return form.click(); --}}
+            } 
+        });
+    }
+</script>

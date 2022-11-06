@@ -51,7 +51,8 @@
 
                         <form action="/preguntas/delete/{{_id}}?_method=post" method="POST">
                           <div class="form-group">
-                            <button class="btn btn-danger" type="submit">Eliminar</button>
+                            <button class="btn btn-danger" onclick="borrarPregunta(event, '{{ _id }}')">Eliminar</button>
+                            <input id="form-{{_id}}" type="submit" hidden>
                           </div>
                         </form>
                       </div>
@@ -71,3 +72,20 @@
   </div>
 </div>
 
+
+<script>
+    function borrarPregunta(e, id) {
+        e.preventDefault();
+        swal({
+            title: "¿Esta seguro que quiere eliminar este elemento?",
+            text: "Al darle click en OK va a eliminar permanentemente la pregunta",
+            buttons: true,
+            })
+            .then((willDelete) => {
+            if (willDelete) {
+                let form = document.getElementById("form-" + id);
+                form.click();
+            } 
+        });
+    }
+</script>
