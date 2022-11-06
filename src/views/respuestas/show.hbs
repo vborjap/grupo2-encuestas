@@ -8,7 +8,7 @@
             message="Atrás"
             type = "success"
             tag = "a"
-            href = "/encuestas"
+            href = "/respuestas"
             }}
         </div>
             <!--
@@ -29,17 +29,8 @@
 
     </div>
 
-    <!--
-    <div class="card row mt-3">
-        {{_id}}
-    </div>
-    -->
-
-    <!--TItulo de la encuesta-->
-    <div class="row">
-        <div class="col-12">
-            <h1 class="text-center">{{datos.nomEncuesta}}</h1>
-        </div>
+    <div class="text-center my-5">
+        <h1 class="text-center">{{datos.nomEncuesta}}</h1>
     </div>
 
 
@@ -49,11 +40,11 @@
 
     <div class="card my-5" style="max-width: 1400px; margin-left: auto; margin-right: auto">
         <div class="card-body">
-            <h1>{{ dato.nomEncuesta }}</h1>
-            <p>{{ dato.descripcion }}</p>
+            <h2>Descripcion de la encuesta: </h2>
+            <p class="p-3 bg-light rounded">{{ datos.descripcion }}</p>
             <form action="/encuestas/guardar" method="post">
-                <input type="text" name="encuesta" value="{{ dato._id }}">
-                {{#each dato.secciones as |seccion|}}
+                <input type="text" name="encuesta" value="{{ datos._id }}" hidden>
+                {{#each datos.secciones as |seccion|}}
                 <hr>
                 <h2>{{ seccion.nombre }}</h2>
                 <p>{{ seccion.descripcion }}</p>
@@ -65,7 +56,7 @@
                     {{#each pregunta.respuestas as |respuesta|}}
                     <div>
 
-                        <input type="radio" name="respuesta-{{pregunta._id}}" value="{{ respuesta }}">
+                        <input type="radio" name="respuesta-{{pregunta._id}}" value="{{ respuesta }}" disabled>
                         <label for="req">{{ respuesta }}</label>
                     </div>
                     {{/each}}
@@ -75,7 +66,7 @@
                     {{#each pregunta.respuestas as |respuesta|}}
                     <div>
 
-                        <input type="checkbox" name="respuesta-{{pregunta._id}}" value="{{ respuesta }}">
+                        <input type="checkbox" name="respuesta-{{pregunta._id}}" value="{{ respuesta }}" disabled>
                         <span>{{ respuesta }}</span>
                     </div>
                     {{/each}}
@@ -85,7 +76,7 @@
                     {{#each pregunta.respuestas as |respuesta|}}
                     <div>
                         <input class="form-control" type="text" name="respuesta-{{pregunta._id}}"
-                            value="{{ respuesta }}">
+                            value="{{ respuesta }}" disabled>
                     </div>
                     {{/each}}
                     {{/if}}
@@ -93,7 +84,7 @@
                     {{#if (equalString pregunta.tipoR "respuesta-larga") }}
                     {{#each pregunta.respuestas as |respuesta|}}
                     <div>
-                        <textarea class="form-control" name="respuesta-{{pregunta._id}}">{{ respuesta }}</textarea>
+                        <textarea class="form-control" name="respuesta-{{pregunta._id}}" disabled>{{ respuesta }}</textarea>
                     </div>
                     {{/each}}
                     {{/if}}
