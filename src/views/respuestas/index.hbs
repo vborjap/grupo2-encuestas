@@ -4,10 +4,12 @@
 <div class="card mt-5">
   <div class="card-body">
 
-    <div class="input-group mb-3">
+   <form action="/respuestas" method="get">
+     <div class="input-group mb-3">
       <input
         type="text"
         class="form-control"
+        name="buscar"
         placeholder="Recipient's username"
         aria-label="Recipient's username"
         aria-describedby="button-addon2"
@@ -15,8 +17,9 @@
       {{> buttons
         type="success"
         message="Buscar"
-        nativeType="subtmi"}}
+        nativeType="submit"}}
     </div>
+   </form>
 
     {{!-- Tabla de contenidos   --}}
 

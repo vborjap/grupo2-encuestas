@@ -5,7 +5,14 @@ import Respuesta from "../models/respuesta";
 
 // Rutas Modulo 5
 router.get("/", async (req, res) => {
-	let encuestas = await registroEncuesta.find().select("_id").select("nomEncuesta").lean();
+	let encuestas;
+
+	if(req.query.buscar !== undefined && req.query.buscar != "") {
+		let regex = new RegExp('^' + req.query.buscar , "i");
+		encuestas = await registroEncuesta.find({nomEncuesta: regex}).select("_id").select("nomEncuesta").lean();
+	}else {
+		encuestas = await registroEncuesta.find().select("_id").select("nomEncuesta").lean();
+	}
 
 	res.render('respuestas/index', {
 		layout: "dashboard",
@@ -27,7 +34,6 @@ router.get("/:id", async (req, res) => {
 		path: "idEncuesta"
 	}).populate({path: "preguntas.idPregunta", select: ["_id", "tipoR"]}).lean();
 
-	console.log(encuesta, respuestas);
 	let respuestasProcesadas = respuestas.map(respuesta => {
 		return respuesta.preguntas.map(pregunta => {
 			if(pregunta.idPregunta.tipoR == "opcion-unica" || pregunta.idPregunta.tipoR == "opcion-multiple"){
@@ -36,9 +42,7 @@ router.get("/:id", async (req, res) => {
 				]));
 			}
 		});
-	});
-	
-	let respuestasMapeadas = respuestasProcesadas.reduce((pre, current, index) => {
+	}).reduce((pre, current, index) => {
 		let valor, llave;
 		for(let i = 0; i < current.length; i++) {
 			valor = Object.values(current[i]);
@@ -53,12 +57,12 @@ router.get("/:id", async (req, res) => {
 	}, {});
 	let datos = {};
 	let resVal, resKey;
-	resVal = Object.values(respuestasMapeadas);
-	resKey = Object.keys(respuestasMapeadas);
+	resVal = Object.values(respuestasProcesadas);
+	resKey = Object.keys(respuestasProcesadas);
 	for(let i = 0; i < resKey.length; i++) {
 		datos[resKey[i]] = resVal[i].reduce((prev, c) => prev.concat(c));
 	}
-
+	console.log(datos);
 	res.render("respuestas/show", {
 		layout:"Dashboard",
 		datos: encuesta
