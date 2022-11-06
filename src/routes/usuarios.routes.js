@@ -52,17 +52,19 @@ router.post("/signin", async(req, res) => {
 			layout: "dashboard"
 		});
 	} else{
-			res.render('verPlantillas', {
+			/*res.render('verPlantillas', {
 			layout: "dashboard"
-		});
-		/*const BuscarPassword = await Users.findOne({password:password})
-		if(BuscarPassword != password){
-			res.send('Contraseña Erronea');
+		});*/
+		const BuscarPassword = await Users.findOne({password:{$eq: password }})
+		if(!BuscarPassword){
+			res.render('errorPassword', {
+				layout: "dashboard"
+			});
 		}else{
 			res.render('verPlantillas', {
 			layout: "dashboard"
-		});
-		}*/
+			});
+		}
 	}
 		
 	//res.redirect('encuestas', {
