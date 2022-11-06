@@ -24,7 +24,7 @@ Instalar las dependencias npm
 npm install
 ```
 
-Esto instalara todos los paquetes necesarios para la ejecucion de la aplicacion, deberas esperar una salida de terminal similar:
+Esto instalara todos los paquetes necesarios para la ejecucion de la aplicacion:
 <img src="https://i.imgur.com/JXZWgCF.png">
 
 ```npm
