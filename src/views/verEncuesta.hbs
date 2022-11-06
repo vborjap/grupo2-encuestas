@@ -1,44 +1,23 @@
-<div class="container">
-        
-        <div class="row mt-3">
-                <div class="col ">
-                        {{> buttons
-                        message="Atrás"
-                        type = "success"
-                        tag = "a"
-                        href = "/encuestas"
-                        }}
-                </div>
-                <div class="col-6 text-center">
-                        <h1></h1>
-                </div>
-                
-                <div class="col text-end">
-                        
-                </div>
-        </div>
-        <div class="card row mt-3">
-                {{_id}}
-        </div>
-
-
-<div class="row">
-    <div class="col-12">
-        <h1 class="text-center">Nombre de la encuesta</h1>
-         
-    </div>
+<div class="d-flex justify-content-between align-items-center">
+    {{> buttons
+    message="Atrás"
+    type = "success"
+    tag = "a"
+    href = "/encuestas"
+    class = "mx-5"
+    }}
+    <form action="" method="POST">
+        <button class="btn btn-primary mx-5" type="submit" name="identificador" value={{dato._id}} > Compartir </button>
+    </form> 
 </div>
 
-<form action="" method="POST">
-    <button class="btn btn-primary" type="submnit" name="identificador" value={{dato._id}} > Compartir </button>
-</form> 
-
+{{!-- Se muestra la encuesta ya configurada por el usuario --}}
 <div class="card my-5" style="max-width: 800px; margin-left: auto; margin-right: auto">
     <div class="card-body">
         <h1>{{ dato.nomEncuesta }}</h1>
         <p>{{ dato.descripcion }}</p>
         <form action="/encuestas/guardar" method="post">
-            <input type="text" name="encuesta" value="{{ dato._id }}">
+            <input type="text" name="encuesta" value="{{ dato._id }}" hidden>
             {{#each dato.secciones as |seccion|}}
                 <hr>
                 <h2>{{ seccion.nombre }}</h2>
@@ -87,6 +66,7 @@
                 {{/each}}
             {{/each}}
             <br>
+            {{!-- Boton que envia la encuesta a la base de datos --}}
             {{> buttons 
                 nativeType="submit"
                 message="Enviar"

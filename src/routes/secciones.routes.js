@@ -7,9 +7,22 @@ const router = Router();
 //CONSULTAS Y RENDERIZADO DE VISTAS
 //Ruta de vista Listar Secciones
 router.get("/", async (req, res) => {
+<<<<<<< HEAD
 	if(req.query.buscar){
 		const seccion = await Secciones.find({nombre:{$regex:'.*'+req.query.buscar+'.*', $options:"i"}}).lean()
 		res.render('secciones/listarSecciones' ,{
+=======
+	//const seccion = await Secciones.find().lean()
+	let seccion;
+	if(req.query.buscar !== undefined && req.query.buscar != "") {
+		let regex = new RegExp('^' + req.query.buscar , "i");
+		seccion = await Secciones.find({nombre: regex}).select("nombre").lean();
+	}else {
+		seccion = await Secciones.find().select("nombre").lean();
+	}
+
+	res.render('secciones/listarSecciones' ,{
+>>>>>>> main
 		layout: "dashboard",
 		seccion: seccion,
 		buscar: req.query.buscar

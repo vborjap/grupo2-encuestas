@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,10 +28,30 @@
             <br><br><br>
         </nav>
 
+=======
+<div class="text-center my-5">
+    <h3>
+      EDITAR PREGUNTA
+    </h3>
+</div>
+    <!-- Cambio hecho por: Rebeca Barrientos -->
+{{#each erorrs}}
+    {{> alert type="danger" message=text}}
+{{/each}}
+
+
+>>>>>>> main
 <div class="col-md-10 mx-auto">
     <div class = "card">
         <div class = "card-body">
-       
+        
+        <div class="py-3 mb-3">
+            {{> buttons
+                message="Atras"
+                type="primary"
+                    tag="a"
+                    href=(link "/preguntas")}}
+        </div>
 
         <form action="/preguntas/editarPreguntas/{{pregunta._id}}?_method=put" method="POST">
         <div class="input-group input-group-sm mb-3">
@@ -54,6 +75,7 @@
                 <div id="radio">
                     {{#each pregunta.respuestas as |respuesta|}}
                         <div class="my-3 flex g-1">
+<<<<<<< HEAD
                         <input type="radio" value="valor" name="respuesta" />
                         <input class="ml-3 p-2 border block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" type="text" name="respuestaText" value="{{ respuesta }}" placeholder="Valor del radiobutton">
                     </div>
@@ -61,18 +83,38 @@
                     {{/each}}
 
                     <div class="cursor-pointer inline-block px-3 py-2 ml-5 bg-green-500 text-white rounded shadow" onclick="insertRadio()"><button class="btn btn-primary btn-block">Agregar opción</button></div>        
+=======
+                        <input type="radio" value="valor" name="respuesta" disabled />
+                        <input class="ml-3 p-2 border rounded shadow" type="text" name="respuestaText" value="{{ respuesta }}" placeholder="Valor del radiobutton" >
+                    </div>
+                    
+                    {{/each}}
+                    <!--div class="cursor-pointer inline-block px-3 py-2 bg-blue-500 text-white rounded shadow" onclick="resetRadio()"><button class="btn btn-primary btn-block">Reset</button></div-->
+                    <div class="px-3 py-2 ml-5 rounded shadow" onclick="insertRadio()"><button class="btn btn-primary btn-block">Agregar opción</button></div>        
+>>>>>>> main
                 </div>
             {{/if}}
             {{#if (equalString pregunta.tipoR "opcion-multiple")}}
                 <div id="check">
                     {{#each pregunta.respuestas as |respuesta|}}
                         <div class="my-3 flex g-1">
+<<<<<<< HEAD
                         <input type="checkbox" value="valor" name="respuesta" />
                         <input class="ml-3 p-2 border block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" type="text" name="respuestaText" value="{{ respuesta }}" placeholder="Valor del checkbox" >                                           
                     {{/each}}   
                     <div class="cursor-pointer inline-block px-3 py-2 ml-5 bg-green-500 text-white rounded shadow" onclick="insertRadio2()"><button class="btn btn-primary btn-block">Agregar opción</button></div>        
                     <!--div class="cursor-pointer inline-block px-3 py-2 ml-5 bg-red-500 text-white rounded shadow" onclick="deleteRadio2(\'check-d-' + num + '\')"><button class="btn btn-danger btn-block">Borrar</button></div></div-->
                     </div>     
+=======
+                        <input type="checkbox" value="valor" name="respuesta" disabled />
+                        <input class="ml-3 p-2 border shadow" type="text" name="respuestaText" value="{{ respuesta }}" placeholder="Valor del checkbox" >
+                        <!--div class="cursor-pointer inline-block px-3 py-2 bg-blue-500 text-white rounded shadow" onclick="resetRadio2()">Reset</div-->
+                        <div class="px-3 py-2 ml-5 rounded shadow" onclick="insertRadio2()">Agregar</div>
+                    </div>
+                    
+                    {{/each}}        
+                </div>
+>>>>>>> main
             {{/if}}
 
 
@@ -90,5 +132,10 @@
         </div>
     </div>
 </div>
+<<<<<<< HEAD
 </html>
+=======
+<!-- Fin de cambio hecho por: Rebeca Barrientos -->
+
+>>>>>>> main
 <script src="/static/preguntas.js"></script>

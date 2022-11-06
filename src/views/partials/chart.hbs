@@ -1,0 +1,9 @@
+<canvas id="{{id}}" width="500" height="500"></canvas>
+
+
+{{#if id }}
+    <script>
+        new Chart(document.getElementById("{{ id }}").getContext("2d"), {{{json options }}})
+    </script>
+{{/if}}
+    
