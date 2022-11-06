@@ -5,7 +5,6 @@
     <table class="table table-bordered table-striped text-center mt-4">
         <thead>
             <tr class="bg-primary text-white">
-                <th scope="col"></th>
                 <th scope="col">Nombre</th>
                 <th scope="col">Fecha Nacimiento</th>
                 <th scope="col">Nacionalidad</th>
@@ -18,13 +17,12 @@
         <tbody>
             {{#each usuarios}}  
             <tr>
-                <td style="vertical-align:middle;" style="display: none;"> {{ this._id }}</td>
-                <td style="vertical-align:middle;"> {{ this.name }}</td>
-                <td style="vertical-align:middle;"> {{ this.fechaNac }}</td>
-                <td style="vertical-align:middle;"> {{ this.nacionalidad }}</td>
-                <td style="vertical-align:middle;"> {{ this.email }}</td>
-                <td style="vertical-align:middle;"> {{ this.userName }}</td>
-                <td style="vertical-align:middle;"> {{ this.tipoUsuario }}</td>
+                <td style="vertical-align:middle;"> {{ name }}</td>
+                <td style="vertical-align:middle;"> {{ fechaNac }}</td>
+                <td style="vertical-align:middle;"> {{ nacionalidad }}</td>
+                <td style="vertical-align:middle;"> {{ email }}</td>
+                <td style="vertical-align:middle;"> {{ userName }}</td>
+                <td style="vertical-align:middle;"> {{ tipoUsuario }}</td>
                 <td style="vertical-align:middle;">
                     <a href="/usuarios/editarUsuario" class="btn btn-outline-primary">Editar</a>
                     <a href="/usuarios/eliminarUsuario" class="btn btn-outline-danger">Borrar</a>

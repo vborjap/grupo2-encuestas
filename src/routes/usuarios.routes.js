@@ -8,8 +8,8 @@ const Usuario = require('../models/Users');
 
 //Creamos la ruta de pantalla principal de usuarios
 router.get("/", async (req, res) => {
-	const usuarios = await Users.find();
-    console.log(usuarios);
+	const usuarios = await Users.find().lean();
+    //console.log(usuarios);
     res.render('listadoUsuarios', {
         usuarios,
         layout: "dashboard"
@@ -44,9 +44,10 @@ router.get("/signin", (req, res) => {
 
 //Creamos la ruta para la Autenticacion
 router.post("/signin", (req, res) => {
-        res.send('Inicio sesion', {
-		layout: "dashboard"
-	});
+		res.send('Encuestas');
+	//res.redirect('encuestas', {
+	//layout: "dashboard"
+	//});
 });
 
 //Creamos la ruta de pantalla Editar usuarios
