@@ -34,11 +34,9 @@ function copyToClipboard(req) {
     ncp.copy(link, () => "Copiado al portapapeles");
 }
 
+//Render de la vista de encuestas
 router.get("/", async (req, res) => {
-
     const encuestas = await registroEncuesta.find({}).lean();
-  
-
     res.render('verPlantillas', {
         layout: "dashboard",
         encuestas
@@ -137,10 +135,13 @@ router.get("/ver/:id", async (req, res) => {
     });
 });
 
+//Método para guardar las respuestas de la encuesta
 router.post("/guardar", async  (req, res) => {
+    //Obtenemos los datos del formulario
     let keys = Object.keys(req.body);
     let values = Object.values(req.body);
     let preguntas = [], encuesta;
+    //Ciclo para asignar los valores obtenidos a las variables
     for(let i =0; i < keys.length; i++) {
         if(keys[i] == "encuesta") {
             encuesta = values[i];
@@ -152,10 +153,12 @@ router.post("/guardar", async  (req, res) => {
             });
         }
     };
+    //Creamos el objeto para guardar en la base de datos
     let nuevaRespuesta = new Respuesta({
         idEncuesta: encuesta,
         preguntas: preguntas
     });
+    //Guardamos en la base de datos
     await nuevaRespuesta.save();
     res.redirect("/encuestas");
 });
