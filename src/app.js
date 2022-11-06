@@ -3,7 +3,6 @@ import indexRoutes from "./routes/index.routes.js";
 import { engine } from "express-handlebars";
 import path from "path";
 import * as helpersHandlebars from "./utils/helpers.handlebars";
-import {menuList} from "./utils/sidebar.handlebars";
 import morgan from "morgan";
 import methodOverride from "method-override";
 import flash from "express-flash";
@@ -11,7 +10,8 @@ import session from "express-session";
 
 const app = express(); 
 
-
+//requerimos el archivo de configuracion de Passport
+require('./config/passport');
 
 morgan.token('host', (req, res) => {
     return req.hostname;
@@ -50,6 +50,9 @@ app.use("/static", express.static(path.join(__dirname, "static")));
 app.use(express.json())
 app.use(methodOverride("_method"));
 app.use(indexRoutes);
+
+//Configuracion para entender datos desde formulario
+app.use(express.urlencoded({extended: false}));
 
 
 export default app;
