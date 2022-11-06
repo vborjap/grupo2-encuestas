@@ -3,8 +3,8 @@ const router = Router();
 import registroEncuesta from "../models/encuesta";
 
 // Rutas Modulo 5
-router.get("/", (req, res) => {
-	let encuestas = registroEncuesta.find().select("_id").select("nomEncuesta").lean();
+router.get("/", async (req, res) => {
+	let encuestas = await registroEncuesta.find().select("_id").select("nomEncuesta").lean();
 
 	res.render('respuestas/index', {
 		layout: "dashboard",
