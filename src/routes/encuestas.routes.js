@@ -56,6 +56,7 @@ router.get("/", async (req, res) => {
 //Eliminar encuestas logicamente
 router.post("/eliminar", async (req, res) => {
   let { identificador } = req.body;
+  console.log(req.body);
   console.log(`URL: ${fullURL(req, identificador)}`);
   await registroEncuesta.updateOne({ _id: identificador }, { activa: false });
   res.redirect("/encuestas");

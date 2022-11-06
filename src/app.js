@@ -45,14 +45,14 @@ app.use(session({
 }));
 app.use(flash());
 //Rutas
-
+//Configuracion para entender datos desde formulario
+app.use(express.urlencoded({extended: true}));
 app.use("/static", express.static(path.join(__dirname, "static")));
 app.use(express.json())
 app.use(methodOverride("_method"));
 app.use(indexRoutes);
 
-//Configuracion para entender datos desde formulario
-app.use(express.urlencoded({extended: false}));
+
 
 
 export default app;
