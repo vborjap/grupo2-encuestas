@@ -123,21 +123,26 @@ router.post("/", (req, res) => {
     const {title, tipoR} = req.body;
     let respuesta = req.body.respuesta;
 
-    // Si el tipoR es de opcion unica/multiple se asigna los valores de los input[type="text"]
-    if(tipoR == "opcion-unica" || tipoR == "opcion-multiple") {
-        respuesta = req.body.respuestaText;
-    }
-    if(respuesta == undefined) {
-        return res.end("Invalid request");
-    }
-    const nuevaPregunta = new Pregunta({
-        title: title,
-        tipoR: tipoR,
-        respuestas: respuesta
-    });
-    nuevaPregunta.save();
-    //res.json(nuevaPregunta);
-	return res.redirect("/preguntas");
+    if(title != "") {
+		// Si el tipoR es de opcion unica/multiple se asigna los valores de los input[type="text"]
+		if(tipoR == "opcion-unica" || tipoR == "opcion-multiple") {
+			respuesta = req.body.respuestaText;
+		}
+		if(respuesta == undefined) {
+			return res.end("Invalid request");
+		}
+		const nuevaPregunta = new Pregunta({
+			title: title,
+			tipoR: tipoR,
+			respuestas: respuesta
+		});
+		nuevaPregunta.save();
+		//res.json(nuevaPregunta);
+		return res.redirect("/preguntas");
+	}else {
+		req.flash("error", "No debe ingresar datos vacios");
+		return res.redirect("/preguntas/add");
+	}
 });
 
 //------------------------------------------------------------------
