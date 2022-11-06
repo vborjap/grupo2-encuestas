@@ -1,0 +1,112 @@
+<div class="container">
+
+     <!--Botones atras y exportar-->
+    <div class = "relative" style = "height: 50px; margin-top: 40px;" >
+
+      <div class = "float-start">
+            {{> buttons
+            message="Atrás"
+            type = "success"
+            tag = "a"
+            href = "/encuestas"
+            }}
+        </div>
+            <!--
+         <div class = "text-center">
+            |<h3>Resumen</h3>
+          </div>
+             -->
+    <div  class  = "float-end">
+        {{> buttons 
+            type="success"
+            message="Exportar"
+            nativeType="subtmi"}}
+    </div>
+
+        <div class="col text-end">
+
+        </div>
+
+    </div>
+
+    <!--
+    <div class="card row mt-3">
+        {{_id}}
+    </div>
+    -->
+
+    <!--TItulo de la encuesta-->
+    <div class="row">
+        <div class="col-12">
+            <h1 class="text-center">{{datos.nomEncuesta}}</h1>
+        </div>
+    </div>
+
+
+    <form action="" method="POST">
+        <button class="btn btn-primary" type="submnit" name="identificador" value={{dato._id}}> Compartir </button>
+    </form>
+
+    <div class="card my-5" style="max-width: 1400px; margin-left: auto; margin-right: auto">
+        <div class="card-body">
+            <h1>{{ dato.nomEncuesta }}</h1>
+            <p>{{ dato.descripcion }}</p>
+            <form action="/encuestas/guardar" method="post">
+                <input type="text" name="encuesta" value="{{ dato._id }}">
+                {{#each dato.secciones as |seccion|}}
+                <hr>
+                <h2>{{ seccion.nombre }}</h2>
+                <p>{{ seccion.descripcion }}</p>
+                {{#each seccion.preguntas as |pregunta|}}
+                <div class="my-3 rounded border p-3">
+                    <h4>{{ pregunta.title }}</h4>
+
+                    {{#if (equalString pregunta.tipoR "opcion-unica") }}
+                    {{#each pregunta.respuestas as |respuesta|}}
+                    <div>
+
+                        <input type="radio" name="respuesta-{{pregunta._id}}" value="{{ respuesta }}">
+                        <label for="req">{{ respuesta }}</label>
+                    </div>
+                    {{/each}}
+                    {{/if}}
+
+                    {{#if (equalString pregunta.tipoR "opcion-multiple") }}
+                    {{#each pregunta.respuestas as |respuesta|}}
+                    <div>
+
+                        <input type="checkbox" name="respuesta-{{pregunta._id}}" value="{{ respuesta }}">
+                        <span>{{ respuesta }}</span>
+                    </div>
+                    {{/each}}
+                    {{/if}}
+
+                    {{#if (equalString pregunta.tipoR "respuesta-corta") }}
+                    {{#each pregunta.respuestas as |respuesta|}}
+                    <div>
+                        <input class="form-control" type="text" name="respuesta-{{pregunta._id}}"
+                            value="{{ respuesta }}">
+                    </div>
+                    {{/each}}
+                    {{/if}}
+
+                    {{#if (equalString pregunta.tipoR "respuesta-larga") }}
+                    {{#each pregunta.respuestas as |respuesta|}}
+                    <div>
+                        <textarea class="form-control" name="respuesta-{{pregunta._id}}">{{ respuesta }}</textarea>
+                    </div>
+                    {{/each}}
+                    {{/if}}
+
+                </div>
+                {{/each}}
+                {{/each}}
+                <br>
+                {{> buttons
+                nativeType="submit"
+                message="Enviar"
+                type="success"}}
+            </form>
+        </div>
+    </div>
+</div>
