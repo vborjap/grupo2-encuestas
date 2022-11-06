@@ -65,7 +65,8 @@ router.get("/:id", async (req, res) => {
 	console.log(datos);
 	res.render("respuestas/show", {
 		layout:"Dashboard",
-		datos: encuesta
+		datos: encuesta,
+		respuestas: datos
 	});
 });
 
