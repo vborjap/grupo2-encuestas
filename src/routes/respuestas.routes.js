@@ -7,14 +7,12 @@ import Respuesta from "../models/respuesta";
 //Ruta de vista respuestas/index.hbs y buscar Encuestas 
 router.get("/", async (req, res) => {
 	let encuestas;
-
 	if(req.query.buscar !== undefined && req.query.buscar != "") {
 		let regex = new RegExp('^' + req.query.buscar , "i");
 		encuestas = await registroEncuesta.find({nomEncuesta: regex}).select("_id").select("nomEncuesta").lean();
 	}else {
 		encuestas = await registroEncuesta.find().select("_id").select("nomEncuesta").lean();
 	}
-
 	res.render('respuestas/index', {
 		layout: "dashboard",
 		datos: encuestas
@@ -34,10 +32,6 @@ router.get("/:id", async (req, res) => {
 	let respuestas = await Respuesta.find({idEncuesta: id}).populate({
 		path: "idEncuesta"
 	}).populate({path: "preguntas.idPregunta", select: ["_id", "tipoR"]}).lean();
-
-
-	console.log(encuesta, respuestas);
-
 	let respuestasProcesadas = respuestas.map(respuesta => {
 		return respuesta.preguntas.map(pregunta => {
 			if(pregunta.idPregunta != null) {
@@ -81,7 +75,6 @@ router.get("/:id", async (req, res) => {
 router.post("/delete/:id", async (req, res) => {
 	const {id} = req.params;
 	await Respuesta.find({idEncuesta: id}).then(async datos => {
-
 		if(datos.length != 0) {
 			for(let i= 0; i < datos.length; i++) {
 				datos[i].delete();
@@ -96,9 +89,6 @@ router.post("/delete/:id", async (req, res) => {
 		req.flash("error", error.message);
 		return res.redirect("/respuestas");
 	})
-	
-
-
 });
 
 export default router;

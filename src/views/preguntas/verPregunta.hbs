@@ -34,6 +34,39 @@
                 </div>
             
             <div id="RDOM" class="px-6 py-12">
+
+                    {{#if (equalString pregunta.tipoR "fecha")}}
+                        {{#each pregunta.preguntas as |pregunta|}}
+                            <div>
+                                <input class="form-control" name="respuesta" type="date" value="{{ respuesta }}">
+                            </div>
+                        {{/each}}
+                    {{/if}}
+
+                    {{#if (equalString pregunta.tipoR "hora")}}
+                        {{#each pregunta.respuestas as |respuesta|}}
+                            <div>
+                                <input class="form-control" name="respuesta" type="time" value="{{ respuesta }}">
+                            </div>
+                        {{/each}}
+                    {{/if}}
+
+                     {{#if (equalString pregunta.tipoR "respuesta-corta") }}
+                        {{#each pregunta.respuestas as |respuesta|}}
+                            <div>
+                                <input class="form-control" type="text" name="respuesta" value="{{ respuesta }}">
+                            </div>
+                        {{/each}}
+                    {{/if}}
+
+                    {{#if (equalString pregunta.tipoR "respuesta-larga") }}
+                        {{#each pregunta.respuestas as |respuesta|}}
+                            <div>
+                                <textarea class="form-control" name="respuesta">{{respuesta}}</textarea>
+                            </div>
+                        {{/each}}
+                    {{/if}}
+
                     {{#if (equalString tipoR "opcion-unica")}}
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
@@ -41,11 +74,11 @@
                             </div>
                             </div>
                         <div id="radio">
-                            {{#each respuestas as |respuesta|}}
-                                <div class="my-3 flex g-1">
-                                <input type="radio" value="valor" name="respuesta" disabled="disabled"/>
-                                <input class="ml-3 p-2 border block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" type="text" name="respuestaText" value="{{ respuesta }}" placeholder="Valor del radiobutton" disabled="disabled" >
-                            </div>
+                            {{#each respuestas}}
+                                <div class="my-3 d-flex g-1">
+                                    <input type="radio" value="valor" name="respuesta" disabled="disabled"/>
+                                    <input class="form-control ms-3" type="text" name="respuestaText" value="{{ this }}" placeholder="Valor del radiobutton" disabled>
+                                </div>
                             
                             {{/each}}        
                         </div>
@@ -57,10 +90,10 @@
                             </div>
                             </div>
                         <div id="check">
-                            {{#each respuestas as |respuesta|}}
+                            {{#each respuestas}}
                                 <div class="my-3 flex g-1">
                                 <input type="checkbox" value="valor" name="respuesta" disabled="disabled"/>
-                                <input class="ml-3 p-2 border block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" type="text" name="respuestaText" value="{{ respuesta }}" placeholder="Valor del checkbox" aria-readonly="true" readonly >
+                                <input class="form-control ms-3" type="text" name="respuestaText" value="{{ this }}" placeholder="Valor del checkbox" aria-readonly="true" disbled>
                             </div>
                             
                             {{/each}}        
