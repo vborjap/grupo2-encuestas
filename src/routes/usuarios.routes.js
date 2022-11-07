@@ -1,4 +1,4 @@
-import { Router} from "express";
+import { Router } from "express";
 import Users from "../models/Users";
 const router = Router();
 
@@ -9,11 +9,17 @@ const router = Router();
 //Creamos la ruta de pantalla principal de usuarios
 router.get("/", async (req, res) => {
 	const usuarios = await Users.find().lean();
-    //console.log(usuarios);
-    res.render('listadoUsuarios', {
-        usuarios,
-        layout: "dashboard"
+	//console.log(usuarios);
+	res.render('listadoUsuarios', {
+		usuarios,
+		layout: "dashboard"
 	});
+});
+
+//logout
+router.get("/Users/logout", (req, res) => {
+	req.logout();
+	res.redirect('/index')
 });
 
 //creamos la ruta para Agregar Usuario
@@ -26,13 +32,13 @@ router.get("/signup", (req, res) => {
 //Creamos la ruta para Agregar usuario desde Post
 router.post("/nuevoUsuario", async (req, res) => {
 	//entramos los datos del request bady
-    const {name, fechaNac, nacionalidad, email, userName, password, confirmPassword, tipoUsuario} = req.body;
-  
-        const nuevoUsuario = new Usuario({name, fechaNac, nacionalidad, email, userName, password, tipoUsuario});
-        await nuevoUsuario.save();
-        res.render('nuevoUsuario', {
-            layout: "dashboard"
-	    });
+	const { name, fechaNac, nacionalidad, email, userName, password, confirmPassword, tipoUsuario } = req.body;
+
+	const nuevoUsuario = new Usuario({ name, fechaNac, nacionalidad, email, userName, password, tipoUsuario });
+	await nuevoUsuario.save();
+	res.render('nuevoUsuario', {
+		layout: "dashboard"
+	});
 });
 
 //Creamos la ruta de Pantalla de Inicio
@@ -43,30 +49,30 @@ router.get("/signin", (req, res) => {
 });
 
 //Creamos la ruta para la Autenticacion
-router.post("/signin", async(req, res) => {
-	const {usuario, password}=req.body;
-	const BuscarUsuario = await Users.findOne({userName:usuario})
-	
-	if(!BuscarUsuario){
-			res.render('errorUsuario', {
-			layout: "dashboard"
+router.post("/signin", async (req, res) => {
+	const { usuario, password } = req.body;
+	const BuscarUsuario = await Users.findOne({ userName: usuario })
+
+	if (!BuscarUsuario) {
+		res.render('errorUsuario', {
+
 		});
-	} else{
-			/*res.render('verPlantillas', {
-			layout: "dashboard"
-		});*/
-		const BuscarPassword = await Users.findOne({password:{$eq: password }})
-		if(!BuscarPassword){
+	} else {
+		/*res.render('verPlantillas', {
+		layout: "dashboard"
+	});*/
+		const BuscarPassword = await Users.findOne({ password: { $eq: password } })
+		if (!BuscarPassword) {
 			res.render('errorPassword', {
-				layout: "dashboard"
+
 			});
-		}else{
+		} else {
 			res.render('verPlantillas', {
-			layout: "dashboard"
+				layout: "dashboard"
 			});
 		}
 	}
-		
+
 	//res.redirect('encuestas', {
 	//layout: "dashboard"
 	//});
@@ -74,11 +80,11 @@ router.post("/signin", async(req, res) => {
 
 //Creamos la ruta de pantalla Editar usuarios
 router.get("/editarUsuario", (req, res) => {
-   /* const usuario = await Users.updateOne({id:id}, { 
-        $set:{
-            campo:'Valor'
-        }       
-    })*/
+	/* const usuario = await Users.updateOne({id:id}, { 
+		 $set:{
+			 campo:'Valor'
+		 }       
+	 })*/
 	res.render('editarUsuario', {
 		layout: "dashboard"
 	});
@@ -97,6 +103,8 @@ router.get("/eliminarUsuario", (req, res) => {
 		layout: "dashboard"
 	});
 });
+
+
 
 
 export default router;
