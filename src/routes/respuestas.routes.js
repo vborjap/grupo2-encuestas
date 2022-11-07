@@ -35,14 +35,18 @@ router.get("/:id", async (req, res) => {
 		path: "idEncuesta"
 	}).populate({path: "preguntas.idPregunta", select: ["_id", "tipoR"]}).lean();
 
+
+	console.log(encuesta, respuestas);
+
 	let respuestasProcesadas = respuestas.map(respuesta => {
 		return respuesta.preguntas.map(pregunta => {
-			return Object.fromEntries(new Map([
-				[pregunta.idPregunta._id.toString(), pregunta.respuestas]
-			]));
+			if(pregunta.idPregunta != null) {
+				return Object.fromEntries(new Map([
+					[pregunta.idPregunta._id.toString(), pregunta.respuestas]
+				]));
+			}
 		});
 	}).reduce((pre, current, index) => {
-		// console.log(pre);
 		let valor, llave;
 		for(let i = 0; i < current.length; i++) {
 			if(current[i] != undefined) {
@@ -72,6 +76,29 @@ router.get("/:id", async (req, res) => {
 		respu: datos,
 		gretting: "hola"
 	});
+});
+
+router.post("/delete/:id", async (req, res) => {
+	const {id} = req.params;
+	await Respuesta.find({idEncuesta: id}).then(async datos => {
+
+		if(datos.length != 0) {
+			for(let i= 0; i < datos.length; i++) {
+				datos[i].delete();
+			}
+			req.flash("success", "Se eliminaron los resultados para la encuesta con id " + id);
+			return res.redirect("/respuestas");
+		}
+		req.flash("info", "No existen respuestas para esta encuesta");
+		res.redirect("/respuestas");
+	}).catch(error => {
+		console.log(error);
+		req.flash("error", error.message);
+		return res.redirect("/respuestas");
+	})
+	
+
+
 });
 
 export default router;

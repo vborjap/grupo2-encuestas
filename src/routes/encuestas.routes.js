@@ -176,6 +176,7 @@ router.post("/guardar", async (req, res) => {
       });
     }
   }
+  console.log(preguntas);
 
   //Guardamos en la base de datos
   let nuevaRespuesta = new Respuesta({
@@ -184,6 +185,7 @@ router.post("/guardar", async (req, res) => {
   });
 
   await nuevaRespuesta.save();
+  // console.log(nuevaRespuesta);
   res.redirect("/encuestas");
 });
 
