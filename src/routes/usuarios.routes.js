@@ -16,6 +16,12 @@ router.get("/", async (req, res) => {
 	});
 });
 
+//logout
+router.get("/Users/logout", (req, res) => {
+	req.logout();
+	res.redirect('/index')
+});
+
 //creamos la ruta para Agregar Usuario
 router.get("/signup", (req, res) => {
 	res.render('signup', {
@@ -34,7 +40,7 @@ router.post("/nuevoUsuario", async (req, res) => {
 	//entramos los datos del request bady
 	const { name, fechaNac, nacionalidad, email, userName, password, confirmPassword, tipoUsuario } = req.body;
 
-	const nuevoUsuario = new Users({ name, fechaNac, nacionalidad, email, userName, password, tipoUsuario });
+	const nuevoUsuario = new Usuario({ name, fechaNac, nacionalidad, email, userName, password, tipoUsuario });
 	await nuevoUsuario.save();
 	res.render('nuevoUsuario2', {
 		layout: "dashboard"
@@ -55,7 +61,7 @@ router.post("/signin", async (req, res) => {
 
 	if (!BuscarUsuario) {
 		res.render('errorUsuario', {
-
+			layout: "dashboard"
 		});
 	} else {
 		/*res.render('verPlantillas', {
@@ -64,7 +70,7 @@ router.post("/signin", async (req, res) => {
 		const BuscarPassword = await Users.findOne({ password: { $eq: password } })
 		if (!BuscarPassword) {
 			res.render('errorPassword', {
-
+				layout: "dashboard"
 			});
 		} else {
 			res.render('verPlantillas', {
@@ -103,6 +109,8 @@ router.get("/eliminarUsuario", (req, res) => {
 		layout: "dashboard"
 	});
 });
+
+
 
 
 export default router;
