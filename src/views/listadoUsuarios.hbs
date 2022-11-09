@@ -1,6 +1,6 @@
 <div class="container">
 
-    <a href="/usuarios/signup" class="btn btn-outline-primary mt-4">Nuevo</a>
+    <a href="/usuarios/crearUsuario" class="btn btn-outline-primary mt-4">Nuevo</a>
 
     <table class="table table-bordered table-striped text-center mt-4">
         <thead>
@@ -15,7 +15,7 @@
             </tr>
         </thead>
         <tbody>
-            {{#each usuarios}}  
+            {{#each usuarios}}
             <tr>
                 <td style="vertical-align:middle;"> {{ name }}</td>
                 <td style="vertical-align:middle;"> {{ fechaNac }}</td>
@@ -28,7 +28,7 @@
                     <a href="/usuarios/eliminarUsuario" class="btn btn-outline-danger">Borrar</a>
                 </td>
             </tr>
-             {{/each }}
+            {{/each }}
         </tbody>
     </table>
 </div>

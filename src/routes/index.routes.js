@@ -12,12 +12,27 @@ router.use(urlencoded({
     extended: true
 }));
 
+
+
 router.get("/", (req, res) => {
-    res.render('index',{
+    res.render('index', {
+
+    });
+});
+
+router.get("/index2", (req, res) => {
+    res.render('index2', {
         layout: "dashboard"
     });
 });
 
+router.get("/signin", (req, res) => {
+    res.render("signin");
+});
+
+router.get("/signup", (req, res) => {
+    res.render("signup");
+});
 // Habilitar cuando se implemente autenticacion
 // Nota: doy por hecho que se utilizara una variable
 // de estado llamada user y se enviara en el body de una solicitud
@@ -44,8 +59,8 @@ router.use("/auth", authRoutes);
 
 // Esto permite redireccionar a inicio en caso que no exista la URL
 // Nota: Comunmente debe redireccionar a una vista 404, es de comentarlo a los de IGF
-router.get("*",  (req, res) => {
-   res.redirect("/");
+router.get("*", (req, res) => {
+    res.redirect("/index2");
 });
 
 export default router;
