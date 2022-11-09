@@ -1,10 +1,10 @@
 export const menuList = [
     {
         name: "Inicio",
-        url: "/index2",
+        url: "/",
         icon: "fa-home",
         child: []
-    },
+    }, 
     {
         name: "Encuestas",
         url: "/encuestas",

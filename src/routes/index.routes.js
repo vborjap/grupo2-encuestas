@@ -12,27 +12,12 @@ router.use(urlencoded({
     extended: true
 }));
 
-
-
 router.get("/", (req, res) => {
-    res.render('index', {
-
-    });
-});
-
-router.get("/index2", (req, res) => {
-    res.render('index2', {
+    res.render('index',{
         layout: "dashboard"
     });
 });
 
-router.get("/signin", (req, res) => {
-    res.render("signin");
-});
-
-router.get("/signup", (req, res) => {
-    res.render("signup");
-});
 // Habilitar cuando se implemente autenticacion
 // Nota: doy por hecho que se utilizara una variable
 // de estado llamada user y se enviara en el body de una solicitud
@@ -50,14 +35,6 @@ router.get("/about", (req, res) => {
     res.render("about");
 });
 
-router.get("/signin", (req, res) => {
-    res.render("signin");
-});
-
-router.get("/signup", (req, res) => {
-    res.render("signup");
-});
-
 router.use("/encuestas", encuentasRoutes);
 router.use('/preguntas', preguntasRoutes);
 router.use('/respuestas', respuestasRoutes);
@@ -65,11 +42,10 @@ router.use('/secciones', seccionesRoutes);
 router.use('/usuarios', usuariosRoutes);
 router.use("/auth", authRoutes);
 
-
 // Esto permite redireccionar a inicio en caso que no exista la URL
 // Nota: Comunmente debe redireccionar a una vista 404, es de comentarlo a los de IGF
-router.get("*", (req, res) => {
-    res.redirect("/index2");
+router.get("*",  (req, res) => {
+   res.redirect("/");
 });
 
 export default router;

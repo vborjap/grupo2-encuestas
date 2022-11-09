@@ -1,12 +1,12 @@
 //importamos connect del modulo mongoose
-import { connect } from "mongoose";
-(async () => {
-    try {
+import {connect}from "mongoose";
+(async()=>{
+    try{
         //realizamos la conexion con la base de datos
-        const db = await connect("mongodb://0.0.0.0:27017/encuestas")
+        const db= await connect("mongodb://localhost:27017/encuestas")
         console.log('DB connected to', db.connection.name)
-    }
-    catch (error) {
+        }
+    catch(error){
         console.error(error);
     }
 })();
