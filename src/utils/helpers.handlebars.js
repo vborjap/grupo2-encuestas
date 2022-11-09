@@ -122,13 +122,10 @@ export function chart(respuestas, type, title) {
 
 
 export function compareRespuesta(objeto, id) {
-    // let objet = JSON.stringify(objeto);
-    // console.log(objeto)
     if (objeto != undefined) {
         let values, keys;
         values = Object.values(objeto);
         keys = Object.keys(objeto);
-        // console.log(values, keys);
         for (let i = 0; i< keys.length; i++) {
             if (keys[i] == id) {
                 return values[i];
@@ -136,4 +133,8 @@ export function compareRespuesta(objeto, id) {
         }
     }
     return [];
+}
+
+export function isEmptyArray(arr) {
+    return arr.length == 0;
 }

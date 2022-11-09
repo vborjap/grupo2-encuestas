@@ -21,6 +21,21 @@
     {{!-- Tabla de contenidos   --}}
 
 <h5>Encuestas realizadas</h5>
+{{#each messages.info }}
+  {{>alert
+    type="info"
+    message=this}}
+{{/each}}
+{{#each messages.error }}
+  {{>alert
+    type="danger"
+    message=this}}
+{{/each}}
+{{#each messages.success }}
+  {{>alert
+    type="success"
+    message=this}}
+{{/each}}
 <table id = "grid" class="table table-striped table-bordered dt-responsive nowrap">
   <thead>
     <tr>
@@ -35,12 +50,18 @@
     <tr>
       <th><p>{{this.nomEncuesta}}</p></th>
       <th> 
-        {{> buttons
-              message= "Ver respuestas"
-              type= "success"
-              tag = "a"
-              href= (link "/respuestas" this._id)
-        }}
+        <div class="d-flex g-1">
+          {{> buttons
+                message= "Ver respuestas"
+                type= "success"
+                tag = "a"
+                href= (link "/respuestas" this._id)
+          }}
+          <form class="ms-3" action="/respuestas/delete/{{this._id}}" method="post">
+              <button class="btn btn-danger" onclick="borrarRespuestas(event, '{{this._id}}')">Eliminar Respuestas</button>
+              <input id="form-{{this._id}}" type="submit" hidden>
+          </form>
+        </div>
       </th>
     </tr>
     {{/each}}
@@ -49,3 +70,19 @@
 </table>
  
 
+<script>
+    function borrarRespuestas(e, id) {
+        e.preventDefault();
+        swal({
+            title: "¿Esta seguro que quiere eliminar las respuestas para esta encuesta?",
+            text: "Al darle click en OK va a eliminar todas las repuestas insertadas en esta encuesta",
+            buttons: true,
+            })
+            .then((willDelete) => {
+            if (willDelete) {
+                let form = document.getElementById("form-" + id);
+                form.click();
+            } 
+        });
+    }
+</script>

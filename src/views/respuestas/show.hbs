@@ -46,6 +46,40 @@
                 {{#each seccion.preguntas as |pregunta|}}
                 <div class="my-3 rounded p-3">
                     <h4>{{ pregunta.title }}</h4>
+                    {{#if (equalString pregunta.tipoR "fecha")}}
+                        <h5>Respuestas</h5>
+                        {{#if (isEmptyArray (compareRespuesta ../../respu pregunta._id))}}
+                            <div class="p-3 bg-light rounded">No hay respuestas aun</div>
+                        {{else}}
+                            <ol>
+                                {{#each (compareRespuesta ../../respu pregunta._id) as |r|}}
+                                    <li class="my-1">
+                                        <div>
+                                            <input class="form-control" type="date" value="{{r}}" disabled>
+                                        </div>
+                                    </li>
+                                {{/each}}
+                            </ol>
+                        {{/if}}
+                    {{/if}}
+
+                    {{#if (equalString pregunta.tipoR "hora")}}
+                        <h5>Respuestas</h5>
+                        {{#if (isEmptyArray (compareRespuesta ../../respu pregunta._id))}}
+                                <div class="p-3 bg-light rounded">No hay respuestas aun</div>
+                        {{else}}
+                            <ol>
+                                {{#each (compareRespuesta ../../respu pregunta._id) as |r|}}
+                                    <li class="my-1">
+                                        <div>
+                                            <input class="form-control" type="time" value="{{r}}" disabled>
+                                        </div>
+                                    </li>
+                                {{/each}}
+                            </ol>
+                                
+                        {{/if}}
+                    {{/if}}
 
                     {{#if (equalString pregunta.tipoR "opcion-unica") }}
                     {{#each pregunta.respuestas as |respuesta|}}
@@ -55,9 +89,13 @@
                         <label for="req">{{ respuesta }}</label>
                     </div>
                     {{/each}}
-                    <div style="max-width: 450px; margin: 0 auto;">
-                        {{> chart options=(chart (respuestas (compareRespuesta ../../respu pregunta._id)) (typeChart) pregunta.title) id=(random 10) w="400" h="400"}}
-                    </div>
+                    {{#if (isEmptyArray (compareRespuesta ../../respu pregunta._id))}}
+                        <div class="p-3 bg-light rounded">No hay respuestas aun</div>
+                    {{else}}
+                        <div style="max-width: 450px; margin: 0 auto;">
+                            {{> chart options=(chart (respuestas (compareRespuesta ../../respu pregunta._id)) (typeChart) pregunta.title) id=(random 10) w="400" h="400"}}
+                        </div>
+                    {{/if}}
                     <div class="html2pdf__page-break"></div>
 
                     {{/if}}
@@ -72,38 +110,50 @@
 
                     </div>
                     {{/each}}
-                    <div style="max-width: 500px; margin:0 auto ;">
-                        {{> chart options=(chart (respuestas (compareRespuesta ../../respu pregunta._id)) (typeChart) pregunta.title ) id=(random 10) w="400" h="400"}}
-                    </div>
+                    {{#if (isEmptyArray (compareRespuesta ../../respu pregunta._id))}}
+                        <div class="p-3 bg-light rounded">No hay respuestas aun</div>
+                    {{else}}
+                        <div style="max-width: 500px; margin:0 auto ;">
+                            {{> chart options=(chart (respuestas (compareRespuesta ../../respu pregunta._id)) (typeChart) pregunta.title ) id=(random 10) w="400" h="400"}}
+                        </div>
+                    {{/if}}
                     <div class="html2pdf__page-break"></div>
 
                     {{/if}}
 
                     {{#if (equalString pregunta.tipoR "respuesta-corta") }}
                     <h5>Respuestas</h5>
-                    <ol>
-                        {{#each (compareRespuesta ../../respu pregunta._id) as |r|}}
-                            <li class="my-1">
-                                <div>
-                                    <input class="form-control" type="text" name="respuesta-{{pregunta._id}}"
-                                        value="{{ r }}" disabled>
-                                </div>
-                            </li>
-                        {{/each}}
-                    </ol>
+                    {{#if (isEmptyArray (compareRespuesta ../../respu pregunta._id))}}
+                        <div class="p-3 bg-light rounded">No hay respuestas aun</div>
+                    {{else}}
+                        <ol>
+                            {{#each (compareRespuesta ../../respu pregunta._id) as |r|}}
+                                <li class="my-1">
+                                    <div>
+                                        <input class="form-control" type="text" name="respuesta-{{pregunta._id}}"
+                                            value="{{ r }}" disabled>
+                                    </div>
+                                </li>
+                            {{/each}}
+                        </ol>
+                    {{/if}}
                     {{/if}}
 
                     {{#if (equalString pregunta.tipoR "respuesta-larga") }}
                     <h5>Respuestas</h5>
-                    <ol>
-                        {{#each (compareRespuesta ../../respu pregunta._id) as |r|}}
-                            <li class="my-1">
-                                <div>
-                                    <textarea class="form-control" type="text" name="respuesta-{{pregunta._id}}"disabled>{{r}}</textarea>
-                                </div>
-                            </li>
-                        {{/each}}
-                    </ol>
+                    {{#if (isEmptyArray (compareRespuesta ../../respu pregunta._id))}}
+                        <div class="p-3 bg-light rounded">No hay respuestas aun</div>
+                    {{else}}
+                        <ol>
+                            {{#each (compareRespuesta ../../respu pregunta._id) as |r|}}
+                                <li class="my-1">
+                                    <div>
+                                        <textarea class="form-control" type="text" name="respuesta-{{pregunta._id}}"disabled>{{r}}</textarea>
+                                    </div>
+                                </li>
+                            {{/each}}
+                        </ol>
+                    {{/if}}
                     {{/if}}
 
                 </div>

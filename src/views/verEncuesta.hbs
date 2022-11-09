@@ -26,6 +26,18 @@
                     <div class="my-3 rounded border p-3">
                         <h4>{{ pregunta.title }}</h4>
 
+                        {{#if (equalString pregunta.tipoR "fecha")}}
+                            <div>
+                                <input class="form-control" name="respuesta-{{pregunta._id}}" type="date">
+                            </div>
+                        {{/if}}
+
+                        {{#if (equalString pregunta.tipoR "hora")}}
+                            <div>
+                                <input class="form-control" name="respuesta-{{pregunta._id}}" type="time">
+                            </div>
+                        {{/if}}
+
                         {{#if (equalString pregunta.tipoR "opcion-unica") }}
                             {{#each pregunta.respuestas as |respuesta|}}
                                 <div>

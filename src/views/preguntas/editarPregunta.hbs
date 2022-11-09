@@ -42,34 +42,33 @@
             {{#if (equalString pregunta.tipoR "opcion-unica")}}
                 <div id="radio">
                     {{#each pregunta.respuestas as |respuesta|}}
-                        <div class="my-3 flex g-1">
+                    <div class="my-3 d-flex g-1">
                         <input type="radio" value="valor" name="respuesta" disabled />
-                        <input class="ml-3 p-2 border rounded shadow" type="text" name="respuestaText" value="{{ respuesta }}" placeholder="Valor del radiobutton" >
+                        <input class="form-control ms-3" type="text" name="respuestaText" value="{{ respuesta }}" placeholder="Valor del radiobutton" >
                     </div>
                     
                     {{/each}}
                     <!--div class="cursor-pointer inline-block px-3 py-2 bg-blue-500 text-white rounded shadow" onclick="resetRadio()"><button class="btn btn-primary btn-block">Reset</button></div-->
-                    <div class="px-3 py-2 ml-5 rounded shadow" onclick="insertRadio()"><button class="btn btn-primary btn-block">Agregar opción</button></div>        
+                    <div class="px-3 " onclick="insertRadio()"><button class="btn btn-primary btn-block">Agregar opción</button></div>        
                 </div>
             {{/if}}
             {{#if (equalString pregunta.tipoR "opcion-multiple")}}
                 <div id="check">
                     {{#each pregunta.respuestas as |respuesta|}}
-                        <div class="my-3 flex g-1">
+                    <div class="my-3 d-flex g-1">
                         <input type="checkbox" value="valor" name="respuesta" disabled />
-                        <input class="ml-3 p-2 border shadow" type="text" name="respuestaText" value="{{ respuesta }}" placeholder="Valor del checkbox" >
+                        <input class="form-control ms-3" type="text" name="respuestaText" value="{{ respuesta }}" placeholder="Valor del checkbox" >
                         <!--div class="cursor-pointer inline-block px-3 py-2 bg-blue-500 text-white rounded shadow" onclick="resetRadio2()">Reset</div-->
-                        <div class="px-3 py-2 ml-5 rounded shadow" onclick="insertRadio2()">Agregar</div>
                     </div>
-                    
-                    {{/each}}        
+                    {{/each}}    
+                    <div class="px-3 btn btn-success" onclick="insertRadio2()">Agregar</div>    
                 </div>
             {{/if}}
 
 
         </div>
 
-            <div class="form-group">
+            <div class="form-group mt-3">
                 <button class="btn btn-success btn-block" type="submit">
                     Guardar cambios
                 </button>
